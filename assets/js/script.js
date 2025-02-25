@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // currentTime = currentTime.replace(/am/g, 'AM').replace(/pm/g, 'PM');
 
         // Bold the EST time zone and the current time
-        const message = `kiara is working in the <strong>est</strong> time zone. <br>it is currently <strong>${currentTime}</strong>.`;
+        const message = `kiara is working in the <strong>est</strong> time zone. it is currently <strong>${currentTime}</strong>.`;
 
         document.getElementById('time-status').innerHTML = message;  // Use innerHTML to interpret the <strong> tags
     }

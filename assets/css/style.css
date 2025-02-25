@@ -146,6 +146,7 @@ nav ul li a:hover {
 
 /* Content Section */
 .content {
+    flex: 1;
     margin-left: 36%; /* Ensure the content shifts right of the sidebar */
     margin-top: 2%;
     display: flex;
@@ -180,11 +181,10 @@ nav ul li a:hover {
 
 /* Main Content Section */
 .main-content {
-    flex: 1;
     display: flex; /* Use flexbox to lay out the two columns side by side */
-    justify-content: flex-start; /* Ensures the columns have space between them */
-    gap: 0; /* Optional: Add space between the left and right columns */
-    height: 100%;
+    justify-content: space-between; /* Ensures the columns have space between them */
+    gap: 2%; /* Optional: Add space between the left and right columns */
+    height: 90%;
     width: 100%;
 }
 
@@ -193,8 +193,7 @@ nav ul li a:hover {
     flex: 1; /* Allow the left column to grow and take up available space */
     display: flex;
     flex-direction: column;
-    gap: 5%;
-    position: relative;
+    gap: 2%;
 }
 
 /* Right Column */
@@ -202,12 +201,12 @@ nav ul li a:hover {
     flex: 1; /* Allow the right column to grow */
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 2%;
 }
 
 /* Left Column (round box and updates) */
 .large-box {
-    width: 85%;
+    width: 100%;
     padding-bottom: 85%; /* Height is 30% of the width */
     background-color: #DECCBC; /* Light brown */
     border-radius: 5%;
@@ -219,8 +218,8 @@ nav ul li a:hover {
 }
 
 .update-box {
-    width: 85%; /* Use percentage for width */
-    height: 15%; /* Height set in percentage of screen size */
+    width: 100%; /* Use percentage for width */
+    height: 14%; /* Height set in percentage of screen size */
     margin-top: 2%; /* Adds 2% space between placeholder and updates */
     background-color: #AB9F94; /* Creamy yellow */
     border-radius: 8px;
@@ -233,8 +232,9 @@ nav ul li a:hover {
 /* Right Column 
 - Metric Box */
 .metric-box {
-    width: 20%;
-    padding-bottom: 20%; /* Height is 30% of the width */
+    flex: 1;
+    width: 95%;
+    padding-bottom: 37%; /* Height is 30% of the width */
     background-color: #CFBDB1; /* Muted taupe */
     border-radius: 8px;
     display: flex;
