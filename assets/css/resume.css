@@ -1,0 +1,281 @@
+/* Resume-specific styles */
+
+/* Resume Section */
+.resume-section {
+    flex: 1;
+    padding: 0px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 50px;
+    color: #333;
+    font-family: 'Public Sans', sans-serif;
+}
+
+/* Resume Header */
+.resume-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #181818;
+    margin-bottom: 10px;
+}
+
+.resume-section h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Job Titles */
+.resume-section .job h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.resume-section .job p {
+    font-size: 1rem;
+    color: #777;
+    margin: 5px 0 10px;
+}
+
+/* Job Descriptions */
+.resume-section .job ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.resume-section .job ul li {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Contact & Links */
+.resume-section .contact a {
+    color: #5c5c5c;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.resume-section .contact a:hover {
+    color: #1f1f1f;
+}
+
+/* Education Section */
+.resume-section .education h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.resume-section .education p {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0 10px;
+}
+
+/* Certifications Section */
+.resume-section .certifications p {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0 10px;
+}
+
+/* Skills Section */
+.resume-section .skills p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* About Section */
+.about p {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 10px;
+    text-align: justify;
+}
+
+/* Navigation Styling - Ensuring these don’t conflict with the sidebar */
+nav ul li a {
+    background-color: #F8F6F3; /* Keeping the color for the navigation link */
+    color: #333; /* Ensures consistency for text color */
+}
+
+/* Navigation Hover & Active */
+nav ul li a:hover {
+    background-color: #dad8d0;
+}
+
+nav ul li a.active {
+    background-color: #dad8d0; /* Keeping the background for the active link */
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    background: url('../images/background.jpg') no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+    position: fixed;
+    height: 100%;
+    padding-top: 40px;
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.308);
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+/* Keeping the existing sidebar profile color and layout */
+.profile-text h2, .profile-text h3 {
+    color: white;
+}
+
+/* Contact Button */
+.contact-btn {
+    width: 120px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    background-color: #F8F6F3;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.contact-btn:hover {
+    background-color: #e0e7f7;
+    font-style: italic;
+}
+
+/* Adjustments for the Sidebar Overlay */
+.sidebar::before {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Content Section */
+.content {
+    flex: 1;
+    margin-left: 0%;
+    display: flex;
+    flex-direction: column; /* Stack header and main content */
+    height: calc(100vh - 10%);
+    overflow: hidden;
+    text-align: center; /* Center text */
+    overflow-y:auto;
+    transition: margin-left 0.3s ease;
+}
+
+/* Resume Main Content */
+.main-content {
+    margin-left: 35%;
+    padding: 0px;
+    text-align: left;
+    flex-wrap: wrap;
+    width: 65%;
+}
+
+/* Ensure that any new sections are spaced well */
+.main-content .resume-section {
+    margin-top: 0px;
+}
+
+/* Job Experience Section */
+.experience .job {
+    margin-top: 30px;
+}
+
+/* Resume Titles and Subtitles */
+h2, h3, h4 {
+    font-family: 'Public Sans', sans-serif;
+    color: #2e2e2e;
+}
+
+h2 {
+    font-size: 1rem;
+    margin-top: 60px;
+}
+
+h3 {
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+h4 {
+    font-size: .75rem;
+    margin-top: 10px;
+}
+
+/* Lists and Bullet Points */
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+/* Links */
+.resume-section a {
+    text-decoration: none;
+    color: #5649a1;
+    transition: color 0.3s ease;
+}
+
+.resume-section :hover {
+    color: #639cbd;
+}
+
+/* Style the contact links in a consistent way */
+.contact a {
+    color: #5c5c5c;
+    font-size: 1rem;
+}
+
+.contact a:hover {
+    color: #1f1f1f;
+}
+
+/* Adjust the overall structure to ensure the résumé section starts below the title */
+.resume-section-container {
+    margin-top: 0%;
+}
+
+/* Styling the Resume title */
+#resume-title {
+    font-size: 2rem;
+    font-weight: normal;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Resume-specific styles (continue with your original styles) */
+.resume-section {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 6px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 0px;
+    color: #333;
+    font-family: 'Public Sans', sans-serif;
+}
+
+/* Rest of the resume section styles as before */
+.resume-section h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Job Titles */
+.resume-section .job h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.resume-section .job p {
+    font-size: 1rem;
+    color: #777;
+    margin: 5px 0 10px;
+}
+
+/* Continue other resume section styling as you prefer */
