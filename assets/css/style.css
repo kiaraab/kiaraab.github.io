@@ -1,4 +1,3 @@
-/* General Styles */
 body {
     font-family: 'Public Sans', sans-serif;
     margin: 0;
@@ -16,12 +15,25 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 65px;
+    padding: 2%;
     position: fixed;
-    height: 90%;
+    height: 100%;
     padding-top: 40px; /* Moves everything down */
-    box-shadow: 1px 0 10px rgb(0, 0, 0); /* Adds shadow to the right */
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.308); /* Adds shadow to the right */
     overflow-y:auto;
+    overflow-x:hidden;
+}
+
+/* Dark overlay for background */
+.sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* Black with 50% transparency */
+    z-index: -1; /* Ensure it stays behind the text */
 }
 
 /* Media query for smaller screens */
@@ -55,7 +67,7 @@ body {
     line-height: 1;
     margin: 0;
     padding: 0;
-    color: black;
+    color: white;
     font-weight: normal;
 }
 
@@ -75,20 +87,19 @@ body {
 
 /* About Section */
 .about {
-    text-align: center;
-    margin: 40px 0;
+    text-align: left;
+    margin: 10% ;
     color: black;
 }
 
 /* Navigation Links */
 nav ul {
     list-style: none;
-    padding: 0;
-    width: 100%
+    padding: 0 0;
 }
 
 nav ul li {
-    margin: 20px 0;
+    margin: 20px;
 }
 
 /* General Styles for Navigation Links */
@@ -100,14 +111,14 @@ nav ul li a {
     background-color: #F8F6F3;
     border-radius: 6px;
     margin-bottom: 10px;
-    width: 100%;
-    transition: background 0.3s ease;
+    width: 500%;
+    transition: background 0.5s ease;
     text-align: left;
 }
 
 /* Hover effect for general navigation links */
 nav ul li a:hover {
-    background-color: #F1F0E6;
+    background-color: #dad8d0;
 }
 
 /* Contact Me Button - unique styling */
@@ -130,19 +141,17 @@ nav ul li a:hover {
 /* Hover effect for Contact Me button */
 .contact-btn:hover {
     background-color: #e0e7f7;
-    font-weight: italic;
+    font-style: italic;
 }
 
 /* Content Section */
 .content {
-    margin-left: 300px; /* Ensure the content shifts right of the sidebar */
-    flex: 1;
+    margin-left: 36%; /* Ensure the content shifts right of the sidebar */
+    margin-top: 2%;
     display: flex;
     flex-direction: column; /* Stack header and main content */
-    padding: 20px;
-    height: 100vh;
-    align-items: center;
-    justify-content: center; /* Center content vertically */
+    height: calc(100vh - 10%);
+    overflow: hidden;
     text-align: center; /* Center text */
 }
 
@@ -159,22 +168,24 @@ nav ul li a:hover {
     font-size: 2.5rem;
     font-weight: bold;
     margin: 0;
-    color: #2F4F4F;
+    color: #181818;
 }
 
 /* Dynamic Subheader */
 #dashboard-header p {
     font-size: 1.2rem;
     margin: 0;
-    color: #6B8E23;
+    color: #000000;
 }
 
 /* Main Content Section */
 .main-content {
+    flex: 1;
     display: flex; /* Use flexbox to lay out the two columns side by side */
-    justify-content: space-between; /* Ensures the columns have space between them */
-    gap: 20px; /* Optional: Add space between the left and right columns */
-    padding-top: 20px; /* Add space from the header */
+    justify-content: flex-start; /* Ensures the columns have space between them */
+    gap: 0; /* Optional: Add space between the left and right columns */
+    height: 100%;
+    width: 100%;
 }
 
 /* Left Column */
@@ -182,7 +193,7 @@ nav ul li a:hover {
     flex: 1; /* Allow the left column to grow and take up available space */
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5%;
     position: relative;
 }
 
@@ -207,10 +218,10 @@ nav ul li a:hover {
     border: 1px solid black;
 }
 
-/* Latest Updates Box */
 .update-box {
-    width: 75%;
-    height: 150px; /* Fixed height */
+    width: 85%; /* Use percentage for width */
+    height: 15%; /* Height set in percentage of screen size */
+    margin-top: 2%; /* Adds 2% space between placeholder and updates */
     background-color: #AB9F94; /* Creamy yellow */
     border-radius: 8px;
     display: flex;
@@ -219,10 +230,11 @@ nav ul li a:hover {
     border: 1px solid black;
 }
 
-/* Right Column - Metric Box */
+/* Right Column 
+- Metric Box */
 .metric-box {
-    width: 30%;
-    padding-bottom: 30%; /* Height is 30% of the width */
+    width: 20%;
+    padding-bottom: 20%; /* Height is 30% of the width */
     background-color: #CFBDB1; /* Muted taupe */
     border-radius: 8px;
     display: flex;

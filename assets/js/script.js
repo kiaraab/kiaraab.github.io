@@ -1,18 +1,21 @@
-<script>
-// Function to update time and display it
-function updateTime() {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
+document.addEventListener("DOMContentLoaded", function() {
+    function updateTime() {
+        const timeZone = 'America/New_York'; // EST Time Zone
+        const options = { hour: '2-digit', minute: '2-digit', hour12: true };
+        let currentTime = new Date().toLocaleTimeString('en-US', { timeZone, ...options });
 
-    // Format time to hh:mm:ss
-    const timeString = `${hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+        // Convert AM/PM to lowercase
+        currentTime = currentTime.replace(/AM/g, 'am').replace(/PM/g, 'pm');
 
-    // Set the dynamic text in the paragraph
-    document.getElementById('current-time').innerText = `It is currently ${timeString} where Kiara lives.`;
-}
+        // Or to uppercase (uncomment to use)
+        // currentTime = currentTime.replace(/am/g, 'AM').replace(/pm/g, 'PM');
 
-// Update time every second
-setInterval(updateTime, 1000);
-</script>
+        // Bold the EST time zone and the current time
+        const message = `kiara is working in the <strong>est</strong> time zone. <br>it is currently <strong>${currentTime}</strong>.`;
+
+        document.getElementById('time-status').innerHTML = message;  // Use innerHTML to interpret the <strong> tags
+    }
+
+    // Update time every second
+    setInterval(updateTime, 1000);
+});
