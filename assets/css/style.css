@@ -1,0 +1,269 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Sidebar + content side by side */
+    height: 100vh;
+    background: #F8F6F3;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    width: 250px;
+    background: url('../images/background.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: fixed;
+    height: 100vh;
+    padding-top: 40px; /* Moves everything down */
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3); /* Adds shadow to the right */
+}
+
+/* Make text white on the sidebar */
+.sidebar .profile-text h2,
+.sidebar .profile-text h3,
+.sidebar .about p {
+    color: white;
+}
+
+/* Navigation Links (keeping them black) */
+nav ul li a {
+    color: black;
+}
+
+/* Profile Section (text only) */
+.profile-text h2,
+.profile-text h3 {
+    color: white; /* Ensure profile text is white */
+}
+
+/* About Section */
+.about p {
+    color: white; /* Ensure about text is white */
+}
+
+
+/* Profile Section */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Profile Image */
+.profile img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+/* Profile Text */
+.profile-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+.profile-text h2,
+.profile-text h3 {
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+/* Profile Name */
+.profile h2 {
+    margin-top: 10px;
+}
+
+/* About Section */
+.about {
+    text-align: center;
+    margin: 75px 0;
+    color: black;
+}
+
+/* Navigation Links */
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 20px 0; /* Increased margin for wider gap between links */
+}
+
+/* General Styles for Navigation Links */
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 10px;
+    background-color: #F8F6F3; /* Box color */
+    border-radius: 6px; /* Rounded edges */
+    margin-bottom: 10px;
+    width: 250px;
+    transition: background 0.3s ease;
+}
+
+/* Hover effect for general navigation links */
+nav ul li a:hover {
+    background-color: #F1F0E6;
+    border-radius: 6px;
+}
+
+/* Contact Me Button - unique styling */
+.contact-btn {
+    text-decoration: none;
+    color: black;
+    background-color: #F8F6F3; /* Box color */
+    border-radius: 12px; /* Round square */
+    margin-top: 300px; /* Space above button */
+    width: 100px; /* Adjust width based on content */
+    max-width: 150px; /* Limit the max width */
+    text-align: center;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: auto; /* Ensures it's centered */
+    margin-right: auto; /* Ensures it's centered */
+    display: block; /* Ensures it's a block-level element */
+}
+
+/* Hover effect for Contact Me button */
+.contact-btn:hover {
+    background-color: #e0e7f7; /* A darker shade */
+    font-weight: italic;
+}
+
+/* Main Content Area (for dashboard) */
+.content {
+    margin-left: 250px; /* Offset for the sidebar */
+    flex: 1;
+    display: flex;
+    justify-content: space-between; /* Creates two columns */
+    padding: 20px;
+    background: #F8F6F3;
+    height: 100vh;
+}
+
+/* Hero Section */
+.hero h1 {
+    font-size: 2.5rem;
+    color: black;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: black;
+}
+
+/* Adjustments for Portfolio Title */
+.profile-text h3 {
+    font-size: 16px;
+    font-weight: normal;
+    color: black;
+    margin: 0;
+}
+
+/* Extend the navigation box to the right of the sidebar */
+nav ul li a {
+    position: relative;
+    left: 20px;
+    z-index: 1;
+}
+
+/* Main Content Area */
+.content {
+    margin-left: 300px; /* Ensure the content shifts right of the sidebar */
+    flex: 1;
+    display: flex;
+    justify-content: space-between; /* Create two columns */
+    padding: 20px;
+    height: 100vh;
+}
+
+/* Left Column (round box and updates) */
+.left-column {
+    flex: 0 0 45%; /* Flex item, doesn't grow but can shrink */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative; /* Keeps it in line with other content */
+    z-index: 10; /* Ensures it stays on top */
+}
+
+/* Round box (large) */
+.large-box {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    background-color: #F8F6F3;
+    border-radius: 5%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Skinny box for updates */
+.update-box {
+    width: 100%;
+    height: 60px;
+    background-color: #F8F6F3;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Right Column (3 equal metric boxes) */
+.right-column {
+    flex: 0 0 50%; /* Flex item, doesn't grow but can shrink */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 50%;
+}
+
+/* Metric Box */
+.metric-box {
+    width: 100%;
+    max-width: 300px;
+    height: 150px;
+    background-color: #F8F6F3;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+/* Metric Box Title */
+.metric-box h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}
+
+/* Metric Box Caption */
+.metric-box p {
+    margin: 0;
+    font-size: 14px;
+    color: #777;
+}
