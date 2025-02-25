@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+        #music-player {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+        button {
+            background: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        input[type="range"] {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="music-player">
+        <button id="play-pause">▶</button>
+        <input type="range" id="seek-bar" value="0" min="0" step="1">
+        <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+    </div>
+
+    <audio id="bg-music" autoplay loop>
+        <source src="assets/music/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const audio = document.getElementById("bg-music");
+        const playPauseBtn = document.getElementById("play-pause");
+        const seekBar = document.getElementById("seek-bar");
+        const volumeControl = document.getElementById("volume");
+
+        // Check if music was previously paused
+        if (localStorage.getItem("musicPaused") === "true") {
+            audio.pause();
+            playPauseBtn.textContent = "▶";
+        }
+
+        // Play/Pause Toggle
+        playPauseBtn.addEventListener("click", function () {
+            if (audio.paused) {
+                audio.play();
+                playPauseBtn.textContent = "⏸";
+                localStorage.setItem("musicPaused", "false");
+            } else {
+                audio.pause();
+                playPauseBtn.textContent = "▶";
+                localStorage.setItem("musicPaused", "true");
+            }
+        });
+
+        // Seek Bar Functionality
+        audio.addEventListener("timeupdate", function () {
+            seekBar.max = audio.duration;
+            seekBar.value = audio.currentTime;
+        });
+
+        seekBar.addEventListener("input", function () {
+            audio.currentTime = seekBar.value;
+        });
+
+        // Volume Control
+        volumeControl.addEventListener("input", function () {
+            audio.volume = volumeControl.value;
+        });
+
+        // Store playback state
+        audio.onpause = () => localStorage.setItem("musicPaused", "true");
+        audio.onplay = () => localStorage.setItem("musicPaused", "false");
+    </script>
+
+</body>
+</html>
