@@ -1,11 +1,18 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const btn = document.querySelector(".btn");
+<script>
+// Function to update time and display it
+function updateTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
 
-    btn.addEventListener("mouseover", function() {
-        btn.style.backgroundColor = "#ff0055";
-    });
+    // Format time to hh:mm:ss
+    const timeString = `${hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
 
-    btn.addEventListener("mouseout", function() {
-        btn.style.backgroundColor = "#ff4d94";
-    });
-});
+    // Set the dynamic text in the paragraph
+    document.getElementById('current-time').innerText = `It is currently ${timeString} where Kiara lives.`;
+}
+
+// Update time every second
+setInterval(updateTime, 1000);
+</script>
