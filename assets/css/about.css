@@ -1,0 +1,76 @@
+/* about.css */
+
+.wiki-section {
+
+    line-height: 1.6;
+    overflow: auto;
+    text-align: left;
+    padding-right: 4%;
+}
+
+.wiki-section h1 {
+    font-size: 2.5em;
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 5px;
+}
+
+.wiki-section h2 {
+    font-size: 1.8em;
+}
+
+.wiki-section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.wiki-section a {
+    color: #0645ad;
+    text-decoration: none;
+}
+
+.wiki-section a:hover {
+    text-decoration: underline;
+}
+
+.infobox {
+    float: right;
+    width: 300px;
+    border: 1px solid #a2a9b1;
+    margin: 20px 0 20px 20px;
+    background-color: #f9f9f9;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.infobox-header {
+    background-color: #eaecf0;
+    text-align: center;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.infobox-content {
+    padding: 10px;
+}
+
+.infobox img {
+    max-width: 100%;
+    display: block;
+    margin: 10px auto;
+}
+
+.infobox table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.infobox th,
+.infobox td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.infobox th {
+    font-weight: bold;
+}

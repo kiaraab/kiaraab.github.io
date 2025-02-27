@@ -190,7 +190,7 @@ nav ul li a.active {
 }
 
 /* Main Content Section */
-.main-content {
+#dashboard {
     display: flex; /* Use flexbox to lay out the two columns side by side */
     justify-content: space-between; /* Ensures the columns have space between them */
     gap: 2%; /* Optional: Add space between the left and right columns */
