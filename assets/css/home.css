@@ -1,0 +1,187 @@
+/* src/pages/Home.css */
+
+.home-root {
+  background: #ffe5ec;
+  min-height: 100vh;
+  font-family: inherit;
+}
+
+.home-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 64px;
+  background: #ffe5ec;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  padding: 0 2rem;
+}
+
+.site-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.home-header nav a {
+  margin-left: 2rem;
+  text-transform: lowercase;
+  color: #222;
+  text-decoration: none;
+  font-size: 1.1rem;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.home-header nav a:hover {
+  opacity: 1;
+}
+
+.work-title {
+  margin-top: 96px;
+  margin-bottom: 24px;
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #222;
+  padding-left: 2rem;
+}
+
+.work-gallery {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 2rem 0 2rem 2rem;
+  gap: 2rem;
+  scroll-behavior: smooth;
+  position: relative;
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+}
+/* Hide scrollbar for Webkit browsers */
+.work-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.project-card {
+  flex: 0 0 340px;
+  height: 420px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  /* Add padding so title doesn't start at the edge */
+  padding: 18px 12px 0 18px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.project-card-overlay {
+  display: none; /* Remove the global overlay */
+}
+
+.project-thumb-area {
+  position: relative;
+  z-index: 2;
+  width: 180px;
+  min-width: 180px;
+  height: 180px;
+  min-height: 180px;
+  max-height: 180px;
+  display: flex;
+  align-items: flex-start;      /* Align to top */
+  justify-content: center;      /* Center horizontally */
+  border-radius: 10px 0 0 10px;
+  box-shadow: 1px 0 8px 0 rgba(0,0,0,0.03);
+  padding: 0 18px;
+  /* Overlay to keep left side normal brightness */
+  background: linear-gradient(to right, rgba(255,255,255,0.85) 80%, rgba(255,255,255,0) 100%);
+  backdrop-filter: none;
+}
+
+.project-thumb-title {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #222;
+  text-align: left;
+  text-shadow: 0 1px 4px rgba(255,255,255,0.2);
+  text-transform: capitalize;
+  line-height: 1.1;
+  padding: 0;
+  margin-top: ; /* Align with .project-info padding */
+}
+
+.project-info {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.2rem 1.2rem 1.2rem 1.2rem;
+  background: none;
+  color: #fff;
+  border-radius: 0 10px 10px 0;
+  min-width: 0;
+  gap: 0.7rem;
+  overflow: hidden;
+}
+.project-info::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(30,30,30,0.5); /* 50% dark overlay */
+  z-index: 0;
+  pointer-events: none;
+}
+.project-info > * {
+  position: relative;
+  z-index: 1;
+}
+
+.project-date {
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+.project-blurb {
+  font-size: 1.08rem;
+  color: #fff;
+  margin-bottom: auto;
+  line-height: 1.5;
+  font-weight: 400;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .project-card { height: 140px; }
+  .project-thumb-area {
+    width: 110px; min-width: 110px; height: 140px; min-height: 140px; max-height: 140px;
+    padding: 12px 8px 0 12px;
+  }
+  .project-thumb-title { font-size: 1.1rem; }
+}
+@media (max-width: 767px) {
+  .work-gallery { gap: 1rem; padding-left: 1rem; }
+  .project-card { flex-basis: 98vw; height: 90px; border-radius: 10px; }
+  .project-thumb-area {
+    width: 60px; min-width: 60px; height: 90px; min-height: 90px; max-height: 90px;
+    padding: 6px 4px 0 6px;
+  }
+  .project-info { padding: 0.7rem 0.7rem 0.7rem 0.7rem; }
+  .project-thumb-title { font-size: 0.7rem; }
+}

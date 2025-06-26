@@ -3,89 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiara Raab | portfolio</title>
     <link rel="icon" href="https://i.pinimg.com/736x/4e/4d/ce/4e4dce942c3a205ec94159040da642ed.jpg" type="image/png">
-    <title>Kiara Raab | portfolio </title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body {
+            background: #FFE5EC;
+            margin: 0;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            color: #222;
+        }
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 64px;
+            background: #fff; /* <-- Change this line to white */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            border-bottom: 1px solid #f3cdd7;
+            padding: 0 32px;
+        }
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: lowercase;
+        }
+        .nav-tabs {
+            display: flex;
+            gap: 32px;
+        }
+        .nav-tabs a {
+            text-decoration: none;
+            color: #222;
+            font-size: 1rem;
+            text-transform: lowercase;
+            font-weight: 500;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+        }
+        .nav-tabs a:hover,
+        .nav-tabs a.active {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        main {
+            margin-top: 80px;
+            padding: 0 0 48px 0;
+        }
+
+        /* --- Intro Section --- */
+        .intro-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1100px;
+            margin: 0 auto 36px auto;
+            padding: 48px 32px 32px 32px;
+            min-height: 340px;
+            gap: 32px;
+        }
+        .intro-left {
+            flex: 1 1 0;
+            max-width: 520px;
+        }
+        .intro-hi {
+            font-size: 2.7rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+        .intro-location {
+            font-size: 1.1rem;
+            color: #b07b8c;
+            margin-bottom: 18px;
+            font-weight: 500;
+        }
+        .intro-bio {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #333;
+        }
+        .intro-right {
+            flex: 1 1 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+        }
+        .intro-icon {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 16px 0 rgba(60,40,60,0.10);
+            border: 4px solid #f3cdd7;
+            background: #fff;
+        }
+        @media (max-width: 900px) {
+            .intro-section {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 32px 6vw 18px 6vw;
+                gap: 18px;
+            }
+            .intro-right {
+                width: 100%;
+                justify-content: flex-start;
+                margin-top: 18px;
+            }
+            .intro-icon {
+                width: 140px;
+                height: 140px;
+            }
+        }
+        @media (max-width: 600px) {
+            .intro-section {
+                padding: 18px 2vw 10px 2vw;
+            }
+            .intro-hi {
+                font-size: 2rem;
+            }
+            .intro-icon {
+                width: 90px;
+                height: 90px;
+            }
+        }
+
+        /* --- Projects --- */
+        .work-gallery-container {
+            position: relative;
+            width: 100vw;
+            overflow-x: unset;
+            overflow-y: unset;
+            white-space: normal;
+            padding-bottom: 24px;
+        }
+        .work-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            padding: 24px 32px;
+            min-height: unset;
+        }
+        .project-card {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            min-width: 0;
+            height: 180px;
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 2px 16px 0 rgba(60,40,60,0.07);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.18s cubic-bezier(.4,1.2,.4,1), box-shadow 0.18s;
+            border: 1px solid #f3cdd7;
+        }
+        .project-card:hover {
+            transform: scale(1.035);
+            box-shadow: 0 6px 32px 0 rgba(60,40,60,0.13);
+        }
+        .project-thumb {
+            width: 200px;
+            height: 100%;
+            object-fit: cover;
+            background: #f7f7f7;
+            flex-shrink: 0;
+        }
+        .project-info {
+            padding: 20px 18px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .project-date {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+        .project-blurb {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.4;
+            margin-bottom: auto;
+            min-height: 2.6em;
+        }
+        .scroll-hint {
+            display: none !important;
+        }
+        @media (max-width: 1023px) {
+            .work-gallery { gap: 20px; padding: 18px 12px; }
+            .project-card { height: 140px; }
+            .project-thumb { width: 110px; }
+        }
+        @media (max-width: 767px) {
+            .header { padding: 0 12px; height: 56px;}
+            .site-title { font-size: 1.1rem;}
+            .work-gallery { gap: 14px; padding: 14px 4vw;}
+            .project-card { height: 90px; }
+            .project-thumb { width: 60px; }
+            .project-info { padding: 8px 8px;}
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #f3cdd7;
+            color: #7a4c5c;
+            padding: 32px 0 24px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            margin-top: 32px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .footer-link-label {
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        .footer-link-value {
+            color: #7a4c5c;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        @media (max-width: 600px) {
+            footer { font-size: 1rem; padding: 22px 0 16px 0;}
+        }
+        .simple-footer {
+            background: #fff;
+            color: #222;
+            text-align: center;
+            font-size: 0.75rem; /* header is 1.5rem, so half */
+            height: 32px; /* header is 64px, so half */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-top: 1px solid #f3cdd7;
+            text-transform: lowercase;
+            margin-top: 48px;
+        }
+        .footer-link {
+            color: #222;
+            text-decoration: underline;
+            font-weight: 500;
+            text-transform: lowercase;
+        }
+        .footer-dot {
+            font-size: 1.2em;
+            margin: 0 6px;
+            color: #b07b8c;
+        }
+        @media (max-width: 600px) {
+            .simple-footer {
+                font-size: 0.55rem;
+                height: 24px;
+            }
+        }
+    </style>
 </head>
-
-<aside class="sidebar">
-    <div class="profile">
-        <a href="index.html">
-            <img src="assets/images/profile.jpg" alt="Kiara's Profile Picture" onload="this.style.opacity=1" style="opacity:0; transition: opacity 0.3s;">
-        </a>
-        <div class="profile-text">
-            <h2>Kiara Raab</h2>
-            <h3>the portfolio</h3>
-        </div>
-    </div>
-    <div class="about">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-            culpa qui officia deserunt mollit anim id est laborum.</p>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="/about.html">about me</a></li>
-            <li><a href="/projects.html">projects</a></li>
-            <li><a href="/resume.html">résumé</a></li>
-            <li><a class="contact-btn" href="mailto:raabkiara2@gmail.com">contact me</a></li>
-        </ul>
-    </nav>
-</aside>
-
-<!-- Main Content Area -->
-<main class="content">
-    <!-- Dashboard Header -->
-    <div id="dashboard-header">
-        <h1>dashboard</h1>
-        <!-- Replace your existing dashboard content with this -->
-        <div class="time-message">
-            <p id="time-status"></p>
-        </div>
-        </div>
-
-    <!-- Main Content Section -->
-    <section class="main-content" id="dashboard">
-        <!-- Left Column -->
-        <div class="left-column">
-            <!-- Large Round Box -->
-            <div class="large-box">
-                <h3>placeholder</h3>
+<body>
+    <header class="header">
+        <div class="site-title">kiara raab</div>
+        <nav class="nav-tabs">
+            <a href="/about.html">about</a>
+            <a href="/resume.html">résumé</a>
+        </nav>
+    </header>
+    <main>
+        <!-- Intro Section -->
+        <section class="intro-section">
+            <div class="intro-left">
+                <div class="intro-hi">hi, i'm Kiara</div>
+                <div class="intro-location">📍washington, dc</div>
+                <div class="intro-bio">
+                    <!-- Replace this with your exact PDF biography text -->
+                    I am a product designer passionate about crafting thoughtful, accessible, and delightful user experiences. With a background in both design and research, I thrive at the intersection of creativity and strategy—solving complex problems with empathy and curiosity. I love collaborating with cross-functional teams to bring ideas to life and make a positive impact.
+                </div>
             </div>
-
-            <!-- Update Box -->
-            <div class="update-box">
-                <p>Latest Updates...</p>
+            <div class="intro-right">
+                <!-- Replace the src with your preferred icon or photo -->
+                <img class="intro-icon" src="assets/images/profile.jpg" alt="Kiara Raab portrait">
             </div>
-        </div> <!-- End Left Column -->
+        </section>
 
-        <!-- Right Column -->
-        <div class="right-column">
-            <!-- Metric Box 1 -->
-            <div class="metric-box">
-                <h4>Metric 1</h4>
-                <p>Caption for Metric 1</p>
+        <!-- Projects Section -->
+        <section class="work-gallery-container">
+            <div class="work-gallery" id="workGallery">
+                <!-- JS will inject project cards here -->
+                <div class="project-card" onclick="location.href='/work/project-1.html'" style="background-image: url('assets/images/project1.jpg');">
+                  <div class="project-card-overlay"></div>
+                  <div class="project-thumb-area">
+                    <div class="project-thumb-title">wedding-wise ai</div>
+                  </div>
+                  <div class="project-info">
+                    <div class="project-date">date last modified: 06/26/2025</div>
+                    <div class="project-blurb">A short two-line blurb about project one goes here. It’s concise and clear.</div>
+                  </div>
+                </div>
             </div>
-
-            <!-- Metric Box 2 -->
-            <div class="metric-box">
-                <h4>Metric 2</h4>
-                <p>Caption for Metric 2</p>
-            </div>
-
-            <!-- Metric Box 3 -->
-            <div class="metric-box">
-                <h4>Metric 3</h4>
-                <p>Caption for Metric 3</p>
-            </div>
-        </div> <!-- End Right Column -->
-    </section> <!-- End Main Content Section -->
-</main>
-
-<script src="assets/js/script.js"></script>
+        </section>
+    </main>
+    <footer class="simple-footer">
+        <a href="mailto:raabkiara2@gmail.com" class="footer-link">message me</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://www.linkedin.com/in/kiaraab" target="_blank" rel="noopener" class="footer-link">linkedin</a>
+    </footer>
+    <script src="assets/js/Projects.js"></script>
+    <script src="assets/js/index.js"></script>
 </body>
 </html>
