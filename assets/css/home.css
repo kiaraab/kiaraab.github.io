@@ -70,7 +70,6 @@
 
 .project-card {
   flex: 0 0 340px;
-  height: 420px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 12px 0 rgba(0,0,0,0.07);
@@ -79,16 +78,20 @@
   align-items: stretch;
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
-  /* Add padding so title doesn't start at the edge */
-  padding: 18px 12px 0 18px;
+  border: 1px solid #f3cdd7;
+  width: 100%;
+  min-width: 0;
+  height: 180px;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .project-card-overlay {
-  display: none; /* Remove the global overlay */
+  display: none;
 }
 
 .project-thumb-area {
@@ -100,12 +103,11 @@
   min-height: 180px;
   max-height: 180px;
   display: flex;
-  align-items: flex-start;      /* Align to top */
-  justify-content: center;      /* Center horizontally */
+  align-items: flex-start;
+  justify-content: center;
   border-radius: 10px 0 0 10px;
   box-shadow: 1px 0 8px 0 rgba(0,0,0,0.03);
   padding: 0 18px;
-  /* Overlay to keep left side normal brightness */
   background: linear-gradient(to right, rgba(255,255,255,0.85) 80%, rgba(255,255,255,0) 100%);
   backdrop-filter: none;
 }
@@ -120,7 +122,7 @@
   text-transform: capitalize;
   line-height: 1.1;
   padding: 0;
-  margin-top: ; /* Align with .project-info padding */
+  margin-top: 1.2rem;
 }
 
 .project-info {
@@ -130,7 +132,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1.2rem 1.2rem 1.2rem 1.2rem;
+  padding: 1.2rem;
   background: none;
   color: #fff;
   border-radius: 0 10px 10px 0;
@@ -142,7 +144,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(30,30,30,0.5); /* 50% dark overlay */
+  background: rgba(30,30,30,0.5);
   z-index: 0;
   pointer-events: none;
 }
@@ -171,17 +173,17 @@
   .project-card { height: 140px; }
   .project-thumb-area {
     width: 110px; min-width: 110px; height: 140px; min-height: 140px; max-height: 140px;
-    padding: 12px 8px 0 12px;
+    padding: 0 12px;
   }
-  .project-thumb-title { font-size: 1.1rem; }
+  .project-thumb-title { font-size: 1.1rem; margin-top: 0.7rem; }
 }
 @media (max-width: 767px) {
   .work-gallery { gap: 1rem; padding-left: 1rem; }
   .project-card { flex-basis: 98vw; height: 90px; border-radius: 10px; }
   .project-thumb-area {
     width: 60px; min-width: 60px; height: 90px; min-height: 90px; max-height: 90px;
-    padding: 6px 4px 0 6px;
+    padding: 0 6px;
   }
-  .project-info { padding: 0.7rem 0.7rem 0.7rem 0.7rem; }
-  .project-thumb-title { font-size: 0.7rem; }
+  .project-info { padding: 0.7rem; }
+  .project-thumb-title { font-size: 0.7rem; margin-top: 0.3rem; }
 }

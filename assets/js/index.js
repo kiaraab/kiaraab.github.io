@@ -20,4 +20,3 @@ gallery.querySelectorAll('.project-card').forEach(card => {
     if (e.key === 'Enter' || e.key === ' ') card.click();
   });
 });
-});
