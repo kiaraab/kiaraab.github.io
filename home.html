@@ -150,63 +150,82 @@
         }
         .project-card {
             display: flex;
-            flex-direction: row;
             width: 100%;
             min-width: 0;
-            height: 180px;
-            background: #fff;
-            border-radius: 22px;
-            box-shadow: 0 2px 16px 0 rgba(60,40,60,0.07);
+            min-height: 180px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             overflow: hidden;
             cursor: pointer;
             transition: transform 0.18s cubic-bezier(.4,1.2,.4,1), box-shadow 0.18s;
-            border: 1px solid #f3cdd7;
         }
         .project-card:hover {
             transform: scale(1.035);
             box-shadow: 0 6px 32px 0 rgba(60,40,60,0.13);
         }
-        .project-thumb {
-            width: 200px;
-            height: 100%;
-            object-fit: cover;
-            background: #f7f7f7;
-            flex-shrink: 0;
+        .project-thumb-area {
+            width: 40%;
+            background: url('assets/images/paper-texture.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        .project-thumb-title {
+            font-family: 'Times New Roman', serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #222;
+            text-align: center;
+            padding: 0 8px;
         }
         .project-info {
+            position: relative;
             padding: 20px 18px;
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            background: url('assets/images/paper-texture.jpg') center/cover no-repeat;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
         }
+        .project-info::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        .project-info > * { position: relative; z-index: 1; }
         .project-date {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #e0e0e0;
+            margin-bottom: 0.7rem;
         }
         .project-blurb {
-            font-size: 1rem;
-            color: #555;
-            line-height: 1.4;
+            font-size: 1.15rem;
+            color: #fff;
+            line-height: 1.5;
             margin-bottom: auto;
-            min-height: 2.6em;
         }
         .scroll-hint {
             display: none !important;
         }
         @media (max-width: 1023px) {
             .work-gallery { gap: 20px; padding: 18px 12px; }
-            .project-card { height: 140px; }
-            .project-thumb { width: 110px; }
+            .project-card { min-height: 140px; }
+            .project-thumb-area { width: 35%; }
         }
         @media (max-width: 767px) {
             .header { padding: 0 12px; height: 56px;}
             .site-title { font-size: 1.1rem;}
             .work-gallery { gap: 14px; padding: 14px 4vw;}
-            .project-card { height: 90px; }
-            .project-thumb { width: 60px; }
-            .project-info { padding: 8px 8px;}
+            .project-card { min-height: 110px; }
+            .project-thumb-area { width: 40%; }
+            .project-info { padding: 8px; }
         }
 
         /* --- Footer --- */
@@ -296,15 +315,13 @@
         <!-- Projects Section -->
         <section class="work-gallery-container">
             <div class="work-gallery" id="workGallery">
-                <!-- JS will inject project cards here -->
-                <div class="project-card" onclick="location.href='/work/project-1.html'" style="background-image: url('assets/images/project1.jpg');">
-                  <div class="project-card-overlay"></div>
+                <div class="project-card" onclick="location.href='/work/project-1.html'">
                   <div class="project-thumb-area">
-                    <div class="project-thumb-title">wedding-wise ai</div>
+                    <div class="project-thumb-title">Wedding-Wise AI: Feature Roadmap for Bridal Teams</div>
                   </div>
                   <div class="project-info">
-                    <div class="project-date">date last modified: 06/26/2025</div>
-                    <div class="project-blurb">An AI-powered planning tool that simplifies wedding logistics and vendor research.</div>
+                    <div class="project-date">last modified: 06/28/2025</div>
+                    <div class="project-blurb">description coming soon...</div>
                   </div>
                 </div>
             </div>
@@ -315,7 +332,5 @@
         <span class="footer-dot">&middot;</span>
         <a href="https://www.linkedin.com/in/kiaraab" target="_blank" rel="noopener" class="footer-link">linkedin</a>
     </footer>
-    <script src="assets/js/Projects.js"></script>
-    <script src="assets/js/index.js"></script>
 </body>
 </html>
