@@ -110,7 +110,7 @@
 
 .project-thumb-title {
   font-family: 'Times New Roman', Times, serif;
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #222;
   text-align: left;
@@ -137,6 +137,8 @@
   min-width: 0;
   gap: 0.7rem;
   overflow: hidden;
+  text-align: left;
+  font-size: 0.97rem;
 }
 .project-info::before {
   content: "";
@@ -152,13 +154,13 @@
 }
 
 .project-date {
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: #e0e0e0;
   margin-bottom: 0.7rem;
   font-weight: 500;
 }
 .project-blurb {
-  font-size: 1.15rem;
+  font-size: 0.97rem;
   color: #fff;
   margin-bottom: auto;
   line-height: 1.5;

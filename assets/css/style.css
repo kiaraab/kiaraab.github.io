@@ -532,11 +532,3 @@ nav ul li a.active {
     min-width: 0;
 }
 
-/* Hide scrollbars globally (optional, comment out if not desired everywhere) */
-::-webkit-scrollbar {
-  display: none;
-}
-html {
-  scrollbar-width: none;
-}
-
