@@ -1,3 +1,4 @@
+// ...existing code from index.js...
 import { projects } from './Projects.js';
 
 const gallery = document.getElementById('workGallery');
