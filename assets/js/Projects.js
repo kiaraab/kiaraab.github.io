@@ -15,5 +15,12 @@ export const projects = [
     link: "/work/project-1.html",
     alt: "Project 1"
   },
+  {
+    title: "decision matrix widget",
+    blurb: "Score project ideas by cost, impact and effort.",
+    img: "assets/images/background.png",
+    link: "/work/decision-matrix.html",
+    alt: "Decision Matrix"
+  },
   // ...more projects
 ];
