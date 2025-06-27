@@ -1,0 +1,23 @@
+/* Styles for decision matrix widget */
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.matrix-table th,
+.matrix-table td {
+  padding: 8px;
+  text-align: center;
+}
+.matrix-table thead th {
+  background: #f0f0f0;
+  font-weight: bold;
+}
+.matrix-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+.matrix-table input[type=range] {
+  width: 100%;
+}
+.matrix-table .score {
+  font-weight: bold;
+}
