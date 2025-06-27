@@ -51,7 +51,7 @@ body::before {
 
 .site-title {
   font-size: 1.75rem;
-  font-weight: bold;
+  font-weight: normal; /* default, overridden inline on home page */
   letter-spacing: 0.05em;
   color: #b07b8c; /* Match location pink */
   text-transform: none;
@@ -69,13 +69,18 @@ body::before {
   text-transform: lowercase;
   font-weight: 500;
   opacity: 0.85;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.18s cubic-bezier(.4,2,.6,1), font-weight 0.18s;
 }
 
 .nav-tabs a:hover,
 .nav-tabs a.active {
   opacity: 1;
-  text-decoration: underline;
+  text-decoration: none;
+  transform: scale(1.08); /* expand on hover or active */
+}
+
+.nav-tabs a.active {
+  font-weight: bold;
 }
 
 /* --- Main Layout --- */

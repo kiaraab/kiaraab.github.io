@@ -9,11 +9,11 @@
 </head>
 <body>
     <header class="header">
-        <div class="site-title" onclick="window.location.href='index.html'">kiara raab</div>
+        <div class="site-title" style="font-weight: bold;" onclick="window.location.href='home.html'">kiara raab</div>
         <div class="header-right">
             <nav class="nav-tabs">
                 <a href="/about.html">about</a>
-                <a href="/resume.html" class="active">résumé</a>
+                <a href="/resume.html">résumé</a>
             </nav>
             <div class="header-info">
                 <div id="time-status"></div>
@@ -29,12 +29,14 @@
                 <div class="intro-hi">hi, i'm Kiara Raab</div>
                 <div class="intro-location">📍washington, dc <span id="location-diff"></span></div>
                 <div class="intro-bio">
-                    i am a product designer passionate about crafting thoughtful, accessible, and delightful user experiences. with a background in both design and research, i thrive at the intersection of creativity and strategy—solving complex problems with empathy and curiosity. i love collaborating with cross-functional teams to bring ideas to life and make a positive impact.
+                    i am a data scientist passionate about product management, research, and deployment.
+                    with a background in both design and research, i love collaborating with cross-functional teams to bring ideas to
+                    life and make a positive impact.
                 </div>
             </div>
           </div>
           <div class="intro-right">
-            <img class="intro-icon" src="assets/images/profile.jpg" alt="Kiara Raab portrait" onload="this.classList.add('loaded')">
+            <img class="intro-icon" src="assets/images/profile.jpg" alt="Kiara Raab portrait" loading="lazy" onload="this.classList.add('loaded')">
           </div>
         </section>
 
@@ -61,5 +63,6 @@
     <script src="assets/js/Projects.js"></script>
     <script src="assets/js/home.js"></script>
     <script src="assets/js/time-diff.js"></script>
+    <script src="assets/js/home-intro-type.js"></script>
 </body>
 </html>

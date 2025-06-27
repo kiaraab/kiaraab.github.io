@@ -16,18 +16,35 @@
   function updateLocationDiff() {
     const diff = getESTOffset();
     let text = '';
-    if (diff === 0) {
-      text = '(0hr diff.)';
-    } else if (diff > 0) {
-      text = `(+${diff}hr diff.)`;
+    // Get EST hour for emoji
+    const estNow = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+    const hour = estNow.getHours();
+    let emoji = '';
+    if (hour >= 6 && hour < 18) {
+      emoji = '☀️'; // Day
     } else {
-      text = `(${diff}hr diff.)`;
+      emoji = '🌙'; // Night
     }
-    const el = document.getElementById('location-diff');
-    if (el) el.textContent = text;
+    if (diff === 0) {
+      text = `${emoji} (0hr diff.)`;
+    } else if (diff > 0) {
+      text = `${emoji} (+${diff}hr diff.)`;
+    } else {
+      text = `${emoji} (${diff}hr diff.)`;
+    }
+    // Only update the first two #location-diff elements (header and intro)
+    const els = document.querySelectorAll('#location-diff');
+    els.forEach((el, idx) => {
+      if (idx === 0 || idx === 1) {
+        el.textContent = text;
+      } else {
+        el.textContent = '';
+      }
+    });
   }
 
   updateLocationDiff();
   // Optionally update every 10 minutes in case user leaves tab open
   setInterval(updateLocationDiff, 10 * 60 * 1000);
+})();
 })();
