@@ -1,7 +1,7 @@
 import { projects } from './Projects.js';
 
 // --- Begin nav-mobile.js logic ---
-document.addEventListener('DOMContentLoaded', function () {
+function initHomeScripts() {
     const hamburger = document.querySelector('.nav-hamburger');
     const navDropdown = document.getElementById('nav-dropdown');
     const siteTitle = document.querySelector('.site-title');
@@ -96,5 +96,11 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHomeScripts);
+} else {
+    initHomeScripts();
+}
 // --- End nav-mobile.js logic ---
