@@ -1,0 +1,68 @@
+/* Styles for the interactive timeline project */
+.project-section {
+    margin-top: 80px;
+    margin-bottom: 36px;
+}
+
+.project-box {
+    background: rgba(30, 30, 30, 0.92);
+    border-radius: 18px;
+    padding: 1.2rem 1rem;
+    box-shadow: 0 8px 40px 0 rgba(0,0,0,0.65);
+    width: 85vw;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.project-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+    color: #fff;
+    text-transform: lowercase;
+}
+
+.project-subtitle {
+    font-size: 1rem;
+    color: #b07b8c;
+    margin-bottom: 20px;
+    font-weight: 450;
+    text-transform: lowercase;
+}
+
+.timeline {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.timeline-node {
+    padding: 8px 14px;
+    background: #fff;
+    color: #222;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    user-select: none;
+    transition: background 0.2s, color 0.2s;
+    text-transform: lowercase;
+}
+
+.timeline-node.active {
+    background: #b07b8c;
+    color: #fff;
+}
+
+.timeline-details {
+    margin-top: 24px;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 10px;
+    line-height: 1.5;
+    text-align: left;
+    min-height: 60px;
+}

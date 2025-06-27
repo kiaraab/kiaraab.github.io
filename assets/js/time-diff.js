@@ -47,4 +47,3 @@
   // Optionally update every 10 minutes in case user leaves tab open
   setInterval(updateLocationDiff, 10 * 60 * 1000);
 })();
-})();
