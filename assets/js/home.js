@@ -74,6 +74,31 @@ function initHomeScripts() {
             });
         }
     }
+
+    // Insert contact modal for index page
+    fetch('/components/contact-form.html')
+        .then(r => r.text())
+        .then(html => {
+            document.body.insertAdjacentHTML('beforeend', html);
+
+            const contactModal = document.getElementById('contact-modal');
+            const contactClose = document.getElementById('contact-close');
+            function closeContact() {
+                contactModal.classList.remove('open');
+            }
+            if (contactClose) contactClose.addEventListener('click', closeContact);
+            if (contactModal) {
+                contactModal.addEventListener('click', e => {
+                    if (e.target === contactModal) closeContact();
+                });
+            }
+            document.querySelectorAll('a[href="/contact.html"]').forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    contactModal.classList.add('open');
+                });
+            });
+        });
     // ...existing code for project gallery below...
     const gallery = document.getElementById('workGallery');
     if (gallery) {

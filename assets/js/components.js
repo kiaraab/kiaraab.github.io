@@ -9,6 +9,30 @@ document.addEventListener('DOMContentLoaded', async function() {
     const footerHtml = await footerResponse.text();
     document.querySelector('#footer-placeholder').innerHTML = footerHtml;
 
+    // Load contact form modal
+    const contactResp = await fetch('/components/contact-form.html');
+    const contactHtml = await contactResp.text();
+    document.body.insertAdjacentHTML('beforeend', contactHtml);
+
+    // Setup contact modal interactions
+    const contactModal = document.getElementById('contact-modal');
+    const contactClose = document.getElementById('contact-close');
+    function closeContact() {
+        contactModal.classList.remove('open');
+    }
+    if (contactClose) contactClose.addEventListener('click', closeContact);
+    if (contactModal) {
+        contactModal.addEventListener('click', e => {
+            if (e.target === contactModal) closeContact();
+        });
+    }
+    document.querySelectorAll('a[href="/contact.html"]').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            contactModal.classList.add('open');
+        });
+    });
+
     // Set active nav item based on current page
     const currentPage = document.body.className.replace('-page', '');
     const activeLink = document.querySelector(`[data-page="${currentPage}"]`);

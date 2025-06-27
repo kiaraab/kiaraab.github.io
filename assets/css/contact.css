@@ -54,3 +54,44 @@
 .contact-form button:hover {
     background: #b995a1;
 }
+
+/* Modal styles */
+.contact-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease;
+    z-index: 400;
+}
+.contact-modal.open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+.contact-modal-content {
+    position: relative;
+    transform: scale(0.85);
+    opacity: 0;
+    transition: transform 0.22s cubic-bezier(.4,2,.6,1), opacity 0.22s;
+}
+.contact-modal.open .contact-modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+.contact-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+}
