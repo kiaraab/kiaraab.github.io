@@ -228,7 +228,7 @@ main {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.18s cubic-bezier(.4,1.2,.4,1), box-shadow 0.18s;
-  background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/paper-texture.jpg') center center/cover no-repeat;
+  background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/wedding-texture.jpg') center center/cover no-repeat;
   margin: 0 auto 0 auto;
   align-items: stretch;
   position: relative;
@@ -255,7 +255,7 @@ main {
   border-bottom-left-radius: 10px;
   box-shadow: 1px 0 8px 0 rgba(0,0,0,0.03);
   padding: 0 12px;
-  background: #fff url('../images/paper-texture.jpg') center center/cover no-repeat;
+  background: #fff url('../images/wedding-texture.jpg') center center/cover no-repeat;
 }
 
 .project-thumb-title {
@@ -281,7 +281,7 @@ main {
   flex-direction: column;
   justify-content: center;
   padding: 20px 18px;
-  background: url('../images/paper-texture.jpg') center/cover no-repeat;
+  background: url('../images/wedding-texture.jpg') center/cover no-repeat;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   color: #222;
@@ -620,6 +620,32 @@ main {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+/* Add override for project-2 card on home page */
+.project-card:first-child,
+.project-card:first-child .project-thumb-area,
+.project-card:first-child .project-info {
+  background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/paper-texture.jpg') center center/cover no-repeat !important;
+}
+.project-card:first-child .project-info {
+  background: url('../images/paper-texture.jpg') center/cover no-repeat !important;
+}
+.project-card:first-child .project-thumb-area {
+  background: #fff url('../images/paper-texture.jpg') center center/cover no-repeat !important;
+}
+
+/* Add override for project-1 card on home page (second card) */
+.project-card:nth-child(2),
+.project-card:nth-child(2) .project-thumb-area,
+.project-card:nth-child(2) .project-info {
+  background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/wedding-texture.jpg') center center/cover no-repeat !important;
+}
+.project-card:nth-child(2) .project-info {
+  background: url('../images/wedding-texture.jpg') center/cover no-repeat !important;
+}
+.project-card:nth-child(2) .project-thumb-area {
+  background: #fff url('../images/wedding-texture.jpg') center center/cover no-repeat !important;
 }
 
 

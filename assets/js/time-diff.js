@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function updateLocationDiff() {
+    // Only run on home page
+    if (!document.body.classList.contains('home-page')) return;
+
     const diff = getESTOffset();
     const estNow = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
     const hour = estNow.getHours();
@@ -43,4 +46,3 @@ document.addEventListener("DOMContentLoaded", function() {
 
   updateLocationDiff();
   setInterval(updateLocationDiff, 10 * 60 * 1000);
-});

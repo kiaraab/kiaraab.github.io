@@ -2,8 +2,8 @@
 import { projects } from './Projects.js';
 
 const gallery = document.getElementById('workGallery');
-gallery.innerHTML = projects.map(p => `
-  <div class="project-card" onclick="location.href='${p.link}'">
+gallery.innerHTML = projects.map((p, i) => `
+  <div class="project-card${i === 1 ? ' project-card-wedding' : ''}" onclick="location.href='${p.link}'">
     <div class="project-thumb-area">
       <div class="project-thumb-title">${p.title}</div>
     </div>
