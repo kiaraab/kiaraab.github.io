@@ -21,7 +21,7 @@ textarea {
 body {
   position: relative;
   min-height: 100vh;
-  background: url('../images/background.gif') center center/cover no-repeat fixed, #ffe5ec;
+  background: url('../../images/background.gif') center center/cover no-repeat fixed, #ffe5ec;
   display: flex;
   flex-direction: column;
 }
