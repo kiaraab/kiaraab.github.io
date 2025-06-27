@@ -9,11 +9,17 @@
 </head>
 <body>
     <header class="header">
-        <div class="site-title">kiara raab</div>
-        <nav class="nav-tabs">
-            <a href="/about.html">about</a>
-            <a href="/resume.html">résumé</a>
-        </nav>
+        <div class="site-title" onclick="window.location.href='index.html'">kiara raab</div>
+        <div class="header-right">
+            <nav class="nav-tabs">
+                <a href="/about.html">about</a>
+                <a href="/resume.html" class="active">résumé</a>
+            </nav>
+            <div class="header-info">
+                <div id="time-status"></div>
+                <div id="location-diff"></div>
+            </div>
+        </div>
     </header>
     <main>
         <!-- Intro Section -->

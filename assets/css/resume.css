@@ -1,12 +1,13 @@
 /* Resume Section - Full Page */
 .resume-paper {
-    background: #fff;
+    background: #fffffe; /* More yellowish white */
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
     width: 70%;
     max-width: 900px;
     font-family: 'Public Sans', sans-serif;
+    color: #222; /* Dark gray text */
 }
 
 /* Scroll Fix */
@@ -33,12 +34,30 @@ main.content {
     text-align: center; /* Changed to center */
 }
 
+/* Resume Header */
+.resume-header {
+    text-align: center;
+    margin-bottom: 18px;
+}
+.resume-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+    letter-spacing: 0.04em;
+}
+.resume-contact {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
 /* Section Headers */
 .content h2 {
     font-size: 1.3rem;
     margin-top: 20px;
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid #222; /* Match text color */
     padding-bottom: 5px;
+    color: #222; /* Dark gray */
 }
 
 /* Job & Education Sections */
@@ -51,69 +70,203 @@ main.content {
 
 .job h3{
     font-weight: normal;
+    color: #222; /* Dark gray for job titles */
 }
-/* Company Logos */
-.company-logo, .edu-logo{
-    width: 50px;
-    height: 50px;
+
+/* Resume Sections */
+.resume-section {
+    margin-bottom: 28px;
+}
+.section-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+    color: #222;
+    text-transform: uppercase;
+}
+
+/* Horizontal Rule in Resume Sections */
+.resume-section hr {
+    border: none;
+    border-top: 2px solid #222;
+    margin: 4px 0 16px 0;
+}
+
+/* Education and Experience Entries */
+.edu-entry, .exp-entry {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+/* Logo Columns for Education and Experience */
+.edu-logo-col, .exp-logo-col {
+    flex: 0 0 54px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-right: 16px;
+}
+
+/* Logos */
+.edu-logo, .company-logo {
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     object-fit: cover;
-    margin-top: 5px;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.10);
 }
 
-/* Align all text to the left */
-.resume-paper h2, 
-.resume-paper h3, 
-.resume-paper h4, 
-.date,
-.resume-paper ul {
-    text-align: left;
+/* Details Columns for Education and Experience */
+.edu-details-col, .exp-details-col {
+    flex: 1 1 0;
 }
 
-/* Job Dates */
-.date {
+/* Rows within Education and Experience Entries */
+.edu-row, .exp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* GPA and Dates */
+.edu-gpa, .exp-dates {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #444;
+    white-space: nowrap;
+    margin-left: 16px;
+}
+
+/* Subtitles for Education and Experience */
+.edu-sub, .exp-company {
+    font-weight: 500;
+}
+
+/* Courses List */
+.edu-courses {
+    font-size: 0.98rem;
+    color: #666;
+}
+
+/* Experience Location */
+.exp-location {
     font-style: italic;
-    color: #555;
-    margin-bottom: 5px;
+    font-weight: 400;
+    margin-left: 2px;
 }
 
-/* List Styling */
-.resume-paper ul {
+/* Experience Details List */
+.exp-details-col ul {
+    margin: 8px 0 0 0;
     padding-left: 20px;
+}
+.exp-details-col li {
+    margin-bottom: 3px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Certifications */
+.certifications {
+    margin-top: 8px;
+    color: #222;
+}
+.certifications p {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+}
+.certifications b {
+    display: inline;
+    margin-left: 0;
+    margin-top: 0;
+    font-weight: 600;
+    padding-left: 0;
 }
 
 /* Links */
 .resume-paper a {
-    color: #d63384;
+    color: #b995a1; /* Match site title color */
     text-decoration: none;
 }
 
 .resume-paper a:hover {
-    color: #b0226f;
+    color: #b995a1; /* Match site title color */
 }
 
 /* PDF Download Button */
 .pdf-download {
     text-align: center;
     margin-top: 40px;
-    margin-top: 50px;
 }
-
 .pdf-download a {
-    background-color: #d63384;
+    background-color: #b995a1;
     color: #fff;
-    padding: 20px 15px;
+    padding: 14px 18px;
     border-radius: 6px;
     text-decoration: none;
     font-size: 1rem;
     transition: background 0.3s;
     box-shadow: 0px 0px 4px rgb(0, 0, 0);
 }
-
 .pdf-download a:hover {
-    background-color: #b40e61;
+    background-color: #b995a1;
 }
 
-.certifications {
-    text-align: left;
+/* Paragraphs */
+.resume-paper p {
+    color: #222; /* Paragraph text dark gray */
+}
+
+/* Override specific section colors if needed */
+.resume-paper .some-specific-section {
+    color: #fff; /* Ensure text is white in specific sections */
+}
+
+/* Site title styles (match project-1.css) */
+.site-title {
+    transition: transform 0.18s cubic-bezier(.4,2,.6,1), background 0.18s, color 0.18s;
+    cursor: pointer;
+}
+
+.site-title:hover {
+    transform: scale(1.06);
+    color: #b995a1;
+    box-shadow: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 700px) {
+    .edu-entry, .exp-entry {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .edu-logo-col, .exp-logo-col {
+        margin-bottom: 8px;
+    }
+    .edu-row, .exp-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .edu-gpa, .exp-dates {
+        margin-left: 0;
+        margin-top: 2px;
+    }
+}
+
+.exp-details-col li,
+.resume-paper p,
+.certifications p,
+.edu-courses {
+    font-size: 10pt;
+}
+
+.skills-list {
+    display: inline;
+    padding-left: 0;
+    margin-bottom: 0;
 }
