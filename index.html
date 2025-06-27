@@ -5,16 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kiara Raab | portfolio</title>
     <link rel="icon" href="https://i.pinimg.com/736x/4e/4d/ce/4e4dce942c3a205ec94159040da642ed.jpg" type="image/png">
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/nav-mobile.css">
 </head>
-<body class="home-page">
+<body class="index-page">
     <header class="header">
-        <div class="site-title" style="font-weight: bold;" onclick="window.location.href='home.html'">kiara raab</div>
-        <div class="header-right">
-            <nav class="nav-tabs">
-                <a href="/about.html">about</a>
-                <a href="/resume.html">résumé</a>
+        <div class="site-title" style="font-weight: bold; position: relative; display: flex; align-items: center;">
+            kiara raab
+            <button class="nav-hamburger" aria-label="Open navigation" aria-controls="nav-dropdown" aria-expanded="false" style="margin-left: 12px;">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+            <nav id="nav-dropdown" class="nav-dropdown" aria-hidden="true">
+                <ul class="nav-dropdown-list">
+                    <li><a href="/about.html">about</a></li>
+                    <li><a href="/resume.html">résumé</a></li>
+                    <!-- Add more links here as needed -->
+                </ul>
             </nav>
+        </div>
+        <div class="header-right">
             <div class="header-info">
                 <div id="time-status"></div>
             </div>
@@ -44,20 +55,20 @@
             <div class="work-gallery" id="workGallery">
                 <div class="project-card" onclick="location.href='/work/project-2.html'">
                   <div class="project-thumb-area">
-                    <div class="project-thumb-title">interactive timeline</div>
-                  </div>
-                  <div class="project-info">
-                    <div class="project-date">last modified: 06.28.2025</div>
-                    <div class="project-blurb">explore my experience year by year in a clickable timeline.</div>
-                  </div>
-                </div>
-                <div class="project-card" onclick="location.href='/work/project-1.html'">
-                  <div class="project-thumb-area">
                     <div class="project-thumb-title">wedding-wise ai<br>feature roadmap for bridal teams</div>
                   </div>
                   <div class="project-info">
                     <div class="project-date">last modified: 06.26.2025</div>
                     <div class="project-blurb">description coming soon...</div>
+                  </div>
+                </div>
+                <div class="project-card" onclick="location.href='/work/decision-matrix.html'">
+                  <div class="project-thumb-area">
+                    <div class="project-thumb-title">decision matrix widget</div>
+                  </div>
+                  <div class="project-info">
+                    <div class="project-date">last modified: 06.28.2025</div>
+                    <div class="project-blurb">score project ideas by cost, impact &amp; effort.</div>
                   </div>
                 </div>
             </div>
@@ -68,10 +79,9 @@
         <span class="footer-dot">&middot;</span>
         <a href="https://www.linkedin.com/in/kiaraab" target="_blank" rel="noopener" class="footer-link">linkedin</a>
     </footer>
-    <script src="assets/js/Projects.js"></script>
-    <script src="assets/js/home.js"></script>
+    <script type="module" src="assets/js/index.js"></script>
     <script src="assets/js/time-diff.js"></script>
     <script src="assets/js/home-intro-type.js"></script>
+    <script type="module" src="assets/js/home.js"></script>
 </body>
-</html>
 </html>

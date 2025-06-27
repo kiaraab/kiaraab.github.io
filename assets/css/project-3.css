@@ -63,11 +63,11 @@
 .matrix-table .score {
   font-weight: bold;
   color: #fff;
-  background: #b07b8c;
+  background: none; /* Remove background color */
   border-radius: 12px;
   padding: 7px 0;
   font-size: 1.15rem;
-  box-shadow: 0 1px 8px 0 rgba(176,123,140,0.10);
+  box-shadow: none; /* Remove box shadow */
   width: 32px;
   min-width: 32px;
   max-width: 32px;
@@ -79,52 +79,52 @@
 
 .matrix-table input[type=range] {
   width: 100%;
-  accent-color: #b07b8c;
+  accent-color: initial; /* Remove accent color */
   background: transparent;
   margin: 0;
   height: 2.5em;
   cursor: pointer;
-  transition: accent-color 0.2s;
+  transition: none;
   padding: 0;
 }
 
 /* Chrome, Safari, Edge */
 .matrix-table input[type=range]::-webkit-slider-thumb {
-  background: #b07b8c;
-  border: 2px solid #fff;
+  background: #fff; /* Neutral thumb */
+  border: 2px solid #b07b8c;
   border-radius: 50%;
   width: 18px;
   height: 18px;
-  box-shadow: 0 2px 8px rgba(176,123,140,0.15);
+  box-shadow: none;
   cursor: pointer;
   margin-top: -6px;
 }
 .matrix-table input[type=range]::-webkit-slider-runnable-track {
   height: 6px;
-  background: #b07b8c;
+  background: transparent; /* Remove track color */
   border-radius: 3px;
 }
 
 /* Firefox */
 .matrix-table input[type=range]::-moz-range-thumb {
-  background: #b07b8c;
-  border: 2px solid #fff;
+  background: #fff;
+  border: 2px solid #b07b8c;
   border-radius: 50%;
   width: 18px;
   height: 18px;
-  box-shadow: 0 2px 8px rgba(176,123,140,0.15);
+  box-shadow: none;
   cursor: pointer;
 }
 .matrix-table input[type=range]::-moz-range-track {
   height: 6px;
-  background: #b07b8c;
+  background: transparent; /* Remove track color */
   border-radius: 3px;
 }
 
 /* IE/Edge */
 .matrix-table input[type=range]::-ms-thumb {
-  background: #b07b8c;
-  border: 2px solid #fff;
+  background: #fff;
+  border: 2px solid #b07b8c;
   border-radius: 50%;
   width: 18px;
   height: 18px;
@@ -132,7 +132,7 @@
 }
 .matrix-table input[type=range]::-ms-fill-lower,
 .matrix-table input[type=range]::-ms-fill-upper {
-  background: #b07b8c;
+  background: transparent; /* Remove track color */
   border-radius: 3px;
 }
 

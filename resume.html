@@ -9,14 +9,24 @@
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/resume.css">
 </head>
-<body>
+<body class="resume-page">
     <header class="header">
-        <div class="site-title" onclick="window.location.href='home.html'">kiara raab</div>
-        <div class="header-right">
-            <nav class="nav-tabs">
-                <a href="/about.html">about</a>
-                <a href="/resume.html" class="active"><strong>résumé</strong></a>
+        <div class="site-title" style="font-weight: bold; position: relative; display: flex; align-items: center;">
+            kiara raab
+            <button class="nav-hamburger" aria-label="Open navigation" aria-controls="nav-dropdown" aria-expanded="false" style="margin-left: 12px;">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+            <nav id="nav-dropdown" class="nav-dropdown" aria-hidden="true">
+                <ul class="nav-dropdown-list">
+                    <li><a href="/about.html">about</a></li>
+                    <li><a href="/resume.html" class="active">résumé</a></li>
+                    <!-- Add more links here as needed -->
+                </ul>
             </nav>
+        </div>
+        <div class="header-right">
             <div class="header-info">
                 <div id="time-status"></div>
             </div>
@@ -219,5 +229,6 @@
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/time-diff.js"></script>
+    <script type="module" src="assets/js/home.js"></script>
 </body>
 </html>

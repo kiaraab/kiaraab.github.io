@@ -11,8 +11,8 @@ Then visit `http://localhost:8000` in your browser.
 
 ## Project Structure
 
-- `home.html` - Main landing page introducing Kiara
+- `index.html` - Main landing page introducing Kiara
 - `resume.html` - Detailed résumé with a PDF download link
 - `assets/` - Stylesheets, images, JavaScript, and other resources
 
-Open `home.html` to explore the site in your browser.
+Open `index.html` to explore the site in your browser.

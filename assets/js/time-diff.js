@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function updateLocationDiff() {
-    // Only run on home page
-    if (!document.body.classList.contains('home-page')) return;
+    // Only run on index page
+    if (!document.body.classList.contains('index-page')) return;
 
     const diff = getESTOffset();
     const estNow = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
@@ -48,8 +48,5 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   updateLocationDiff();
-  setInterval(updateLocationDiff, 10 * 60 * 1000);
-})();
-  // Optionally update every 10 minutes in case user leaves tab open
   setInterval(updateLocationDiff, 10 * 60 * 1000);
 })();
