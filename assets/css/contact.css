@@ -54,3 +54,43 @@
 .contact-form button:hover {
     background: #b995a1;
 }
+
+.contact-popup-overlay {
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.contact-popup-modal {
+    background: rgba(30, 30, 30, 0.97);
+    border-radius: 14px;
+    box-shadow: 0 8px 40px 0 rgba(0,0,0,0.65);
+    padding: 2.2rem 1.5rem;
+    max-width: 420px;
+    width: 95vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-popup-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #b07b8c;
+    font-size: 1.7rem;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.18s;
+}
+.contact-popup-close:hover {
+    color: #fff;
+}

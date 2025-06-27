@@ -49,4 +49,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
   updateLocationDiff();
   setInterval(updateLocationDiff, 10 * 60 * 1000);
-})();
+});
