@@ -1,0 +1,103 @@
+/* Project 1 page specific styles. Header/footer are styled by home.css */
+
+/* Optional: tweak intro-section for project page if needed */
+.intro-section {
+    /* ...existing code from home.css applies... */
+    margin-top: 80px;
+    margin-bottom: 36px;
+}
+
+.intro-box {
+    /* ...existing code from home.css applies... */
+    background: rgba(30, 30, 30, 0.92);
+    border-radius: 18px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 40px 0 rgba(0,0,0,0.65);
+}
+
+.intro-hi {
+    font-size: 2.7rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+}
+
+.intro-location {
+    font-size: 1.1rem;
+    color: #b07b8c;
+    margin-bottom: 18px;
+    font-weight: 500;
+}
+
+.intro-bio {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #fff;
+}
+
+/* Site title styles */
+.site-title {
+    transition: transform 0.18s cubic-bezier(.4,2,.6,1), background 0.18s, color 0.18s;
+    cursor: pointer;
+    /* If your home.css sets a background, you may want to reset it here */
+}
+
+.site-title:hover {
+    transform: scale(1.06);
+    color: #b995a1;
+    box-shadow: none;
+}
+
+/* Project section styles */
+.project-section {
+    margin-top: 80px;
+    margin-bottom: 36px;
+}
+
+.project-box {
+    background: rgba(30, 30, 30, 0.92);
+    border-radius: 18px;
+    padding: 1.2rem 1rem;      /* Reduced padding */
+    box-shadow: 0 8px 40px 0 rgba(0,0,0,0.65);
+    width: 85vw;         /* 85% of the viewport width */
+    max-width: 900px;    /* Optional: limit max width for large screens */
+    margin: 0 auto;            /* Center the card */
+}
+
+.project-title {
+    font-size: 2rem;           /* Smaller title */
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+}
+
+.project-subtitle {
+    font-size: 1rem;           /* Smaller subtitle */
+    color: #b07b8c;
+    margin-bottom: 14px;
+    font-weight: 500;
+}
+
+.project-bio {
+    font-size: 1rem;           /* Smaller bio */
+    line-height: 1.5;
+    color: #fff;
+}
+
+/* Responsive tweaks if needed */
+@media (max-width: 900px) {
+    .intro-section {
+        padding: 32px 6vw 18px 6vw;
+        gap: 18px;
+    }
+    .intro-box {
+        padding: 1.5rem 1rem;
+    }
+    .project-section {
+        padding: 32px 6vw 18px 6vw;
+        gap: 18px;
+    }
+    .project-box {
+        padding: 1.5rem 1rem;
+    }
+}
