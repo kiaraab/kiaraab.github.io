@@ -66,7 +66,7 @@
 
 .project-title {
     font-size: 2rem;           /* Smaller title */
-    font-weight: 800;
+    font-weight: 600;
     margin-bottom: 10px;
     letter-spacing: -0.01em;
 }
@@ -75,7 +75,7 @@
     font-size: 1rem;           /* Smaller subtitle */
     color: #b07b8c;
     margin-bottom: 14px;
-    font-weight: 500;
+    font-weight: 450;
 }
 
 .project-bio {

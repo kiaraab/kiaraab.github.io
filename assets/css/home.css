@@ -213,7 +213,7 @@ main {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.18s cubic-bezier(.4,1.2,.4,1), box-shadow 0.18s;
-  background: #fff url('../images/paper-texture.jpg') center center/cover no-repeat;
+  background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/paper-texture.jpg') center center/cover no-repeat;
   margin: 0 auto 0 auto;
   align-items: stretch;
   position: relative;
