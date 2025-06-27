@@ -42,7 +42,14 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
       console.warn('location-diff-intro element not found');
     }
+    // Only update the #location-diff in the intro section (home page)
+    const el = document.querySelector('.intro-location #location-diff');
+    if (el) el.textContent = text;
   }
 
   updateLocationDiff();
   setInterval(updateLocationDiff, 10 * 60 * 1000);
+})();
+  // Optionally update every 10 minutes in case user leaves tab open
+  setInterval(updateLocationDiff, 10 * 60 * 1000);
+})();
