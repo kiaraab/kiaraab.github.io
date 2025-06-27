@@ -1,23 +1,11 @@
-/* src/pages/Home.css */
-
-.home-root {
-  background: #ffe5ec;
-  min-height: 100vh;
-  font-family: inherit;
-}
-
-.home-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 64px;
-  background: #ffe5ec;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 10;
-  padding: 0 2rem;
+/* --- Base Styles --- */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 body,
@@ -25,33 +13,169 @@ input,
 button,
 select,
 textarea {
-  font-size: 14px; /* Reduce base font size by ~2pt (was 16px) */
+  font-size: 14px;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: #fff;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background: url('../images/background.gif') center center/cover no-repeat fixed, #ffe5ec;
+  display: flex;
+  flex-direction: column;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+
+/* --- Header --- */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  border-bottom: 1px solid #f3cdd7;
+  padding: 0 32px;
 }
 
 .site-title {
-  font-size: 1.75rem; /* Slightly smaller */
+  font-size: 1.75rem;
   font-weight: bold;
-  text-transform: none; /* Remove lowercase, allow proper case for name */
   letter-spacing: 0.05em;
+  color: #b07b8c; /* Match location pink */
+  text-transform: none;
 }
 
-.home-header nav a {
-  margin-left: 2rem;
-  text-transform: lowercase;
-  color: #222;
+.nav-tabs {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-tabs a {
   text-decoration: none;
-  font-size: 1.1rem;
-  opacity: 0.8;
+  color: #222;
+  font-size: 1rem;
+  text-transform: lowercase;
+  font-weight: 500;
+  opacity: 0.85;
   transition: opacity 0.2s;
 }
-.home-header nav a:hover {
+
+.nav-tabs a:hover,
+.nav-tabs a.active {
   opacity: 1;
+  text-decoration: underline;
+}
+
+/* --- Main Layout --- */
+main {
+  margin-top: 80px;
+  padding: 0 0 48px 0;
+  flex: 1 0 auto;
+}
+
+/* --- Intro Section --- */
+.intro-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto 36px auto;
+  padding: 48px 32px 32px 32px;
+  min-height: 340px;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.intro-box {
+  background: rgba(30, 30, 30, 0.90);
+  border-radius: 18px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.65); /* Even darker black shadow */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0; /* No gap needed inside box since only text */
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.intro-left {
+  flex: 1 1 0;
+  max-width: 520px;
+}
+
+.intro-hi {
+  font-size: 2.7rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.intro-location {
+  font-size: 1.1rem;
+  color: #b07b8c;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.intro-bio {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #fff;
+}
+
+.intro-right {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  margin-left: 32px;
+}
+
+.intro-icon {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.65) !important; /* Even darker black shadow */
+  background: #fff;
+  display: block;
+  aspect-ratio: 1 / 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.intro-icon.loaded {
+  opacity: 1;
+}
+
+/* --- Projects Section --- */
+.work-gallery-container {
+  position: relative;
+  width: 100vw;
+  padding-bottom: 24px;
 }
 
 .work-title {
   margin-top: 96px;
   margin-bottom: 24px;
-  font-size: 1.1rem; /* Smaller, minimal */
+  font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   color: #222;
@@ -62,76 +186,76 @@ textarea {
 .work-gallery {
   display: flex;
   flex-direction: column;
-  align-items: center;    /* Center cards horizontally */
+  align-items: center;
+  gap: 32px;
+  padding: 24px 32px;
+  min-height: unset;
+  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  padding: 2rem 0 2rem 2rem;
-  gap: 2rem;
   scroll-behavior: smooth;
-  position: relative;
-  width: 100%;         /* Make sure parent is 100% */
-  /* Hide scrollbar for Firefox */
   scrollbar-width: none;
 }
-/* Hide scrollbar for Webkit browsers */
+
 .work-gallery::-webkit-scrollbar {
   display: none;
 }
 
 .project-card {
-  width: 100%;         /* Always 100% of .work-gallery's width */
-  max-width: 1200px;    /* Change this value to control card width */
-  min-width: 220px;
-  margin: 0 auto 0 auto; /* Center horizontally if not using align-items */
-  background: #fff url('../images/paper-texture.jpg') center center/cover no-repeat;
-  border-radius: 1px;
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.07);
   display: flex;
-  flex-direction: row;
+  width: 60%;
+  min-width: 320px;      /* Ensure reasonable min width on small screens */
+  max-width: 1100px;
+  min-height: 180px;
+  border-radius: 10px;
+  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.01) !important;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.18s cubic-bezier(.4,1.2,.4,1), box-shadow 0.18s;
+  background: #fff url('../images/paper-texture.jpg') center center/cover no-repeat;
+  margin: 0 auto 0 auto;
   align-items: stretch;
   position: relative;
-  overflow: hidden;
-  height: 40px; /* Half the previous 80px */
-  margin-bottom: 0;
-  cursor: pointer;
-  transition: transform 0.18s, box-shadow 0.18s;
+  height: auto;
 }
 
-.project-card-overlay {
-  display: none;
+.project-card:hover {
+  transform: scale(1.035);
+  box-shadow: 0 6px 32px 0 rgba(60,40,60,0.13);
 }
 
 .project-thumb-area {
   position: relative;
   z-index: 2;
-  width: 20%;        /* 20% of the project card width */
-  min-width: 0;      /* Allow to shrink */
-  max-width: 20%;    /* Prevent growing beyond 20% */
-  flex: 0 0 20%;     /* Flex-basis for flex layout */
-  height: 100%;
+  width: 20%;
+  min-width: 0;
+  max-width: 20%;
+  flex: 0 0 20%;
+  height: auto;                /* Let the area fit content height */
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  border-radius: 10px 0 0 10px;
+  align-items: center;         /* Vertically center content */
+  justify-content: flex-start; /* Align content to the left horizontally */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   box-shadow: 1px 0 8px 0 rgba(0,0,0,0.03);
   padding: 0 12px;
   background: #fff url('../images/paper-texture.jpg') center center/cover no-repeat;
-  backdrop-filter: none;
 }
 
 .project-thumb-title {
-  font-size: 15pt !important; /* Directly set font size in points, easily changeable */
-  font-weight: 400 !important;
-  color: #444;
-  text-align: left !important;
-  margin-top: 0.7rem;
-  padding-left: 0;
-  width: 100%;
+  font-family: 'Times New Roman', serif;
+  font-size: 1.5rem;
+  color: black;
+  text-align: left;
+  padding: 0 8px;
   white-space: pre-line;
-  font-style: normal !important;
-  font-variant: normal !important;
-  letter-spacing: normal !important;
+  width: 100%;                /* Take full width of thumb area */
+  display: flex;               /* Make the title a flex container */
+  align-items: center;         /* Vertically center text inside */
+  justify-content: flex-start; /* Left align text */
+  height: 100%;                /* Fill the parent height */
+  margin: 0;                   /* Remove any default margin */
 }
 
 .project-info {
@@ -141,266 +265,188 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2.2rem 2rem 2.2rem 2rem;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #fff;
-  border-radius: 0 10px 10px 0;
+  padding: 20px 18px;
+  background: url('../images/paper-texture.jpg') center/cover no-repeat;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #222;
   min-width: 0;
   gap: 0.7rem;
   overflow: hidden;
   text-align: left;
   font-size: 0.8rem;
 }
+
 .project-info::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
-  background: rgba(30,30,30,0.55);
+  background: rgba(0,0,0,0.55);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   z-index: 0;
   pointer-events: none;
 }
+
 .project-info > * {
   position: relative;
   z-index: 1;
 }
 
 .project-date {
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: #e0e0e0;
   margin-bottom: 0.7rem;
   font-weight: 500;
   text-transform: lowercase;
 }
+
 .project-blurb {
-  font-size: 0.8rem;
-  color: #fff;
-  margin-bottom: auto;
+  font-size: 1.15rem;
+  color: #fff !important;
   line-height: 1.5;
+  margin-bottom: auto;
   font-weight: 400;
   text-shadow: 0 1px 4px rgba(0,0,0,0.18);
   text-transform: lowercase;
 }
 
-/* Responsive */
+.scroll-hint {
+  display: none !important;
+}
+
+/* --- Footer --- */
+.simple-footer {
+  background: #fff;
+  color: #222;
+  text-align: center;
+  font-size: 0.7rem;
+  height: 5vh; /* 5% of viewport height */
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-top: 1px solid #f3cdd7;
+  text-transform: lowercase;
+  margin-top: 24px;
+  box-sizing: border-box;
+  width: 100vw;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.footer-link {
+  color: #222;
+  text-decoration: underline;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+
+.footer-dot {
+  font-size: 1.2em;
+  margin: 0 6px;
+  color: #b07b8c;
+}
+
+/* Prevent horizontal scroll for main layout and gallery */
+main, .work-gallery-container, .work-gallery, .project-card {
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* For single project, prevent gallery from stretching horizontally */
+.work-gallery {
+  flex-direction: column;
+  align-items: center;
+  white-space: normal;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  gap: 32px;
+  padding: 24px 16px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1200px) {
+  .intro-section, .work-gallery {
+    max-width: 100vw;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 @media (max-width: 1023px) {
-  .project-card { height: 140px; }
-  .project-thumb-area {
-    width: 110px; min-width: 110px; padding: 0 12px;
+  .project-card {
+    width: 90vw;
+    min-width: 0;
+    max-width: 100vw;
   }
-  .project-thumb-title { font-size: 1.1rem; margin-top: 0.7rem; }
+  .project-card { min-height: 140px; }
+  .project-thumb-area { width: 35%; max-width: 35%; flex: 0 0 35%; }
+  .work-gallery { gap: 20px; padding: 18px 12px; }
+  .intro-section { padding: 32px 6vw 18px 6vw; gap: 18px; }
+  .intro-icon { width: 140px; height: 140px; }
 }
+
+@media (max-width: 900px) {
+  .intro-section {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 6vw 18px 6vw;
+    gap: 18px;
+  }
+  .intro-box {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    margin-bottom: 18px;
+  }
+  .intro-right {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
 @media (max-width: 767px) {
-  .work-gallery { gap: 1rem; padding-left: 1rem; }
-  .project-card { flex-basis: 98vw; height: 90px; border-radius: 10px; }
-  .project-thumb-area {
-    width: 60px; min-width: 60px; padding: 0 6px;
+  .header { padding: 0 12px; height: 56px;}
+  .site-title { font-size: 1.1rem;}
+  .work-gallery { gap: 14px; padding: 14px 4vw;}
+  .project-card {
+    width: 98vw;
+    min-width: 0;
+    max-width: 100vw;
   }
-  .project-info { padding: 0.7rem; }
-  .project-thumb-title { font-size: 0.7rem; margin-top: 0.3rem; }
+  .project-card { min-height: 110px; }
+  .project-thumb-area { width: 40%; max-width: 40%; flex: 0 0 40%; }
+  .project-info { padding: 8px; }
+  .intro-section { padding: 18px 2vw 10px 2vw; }
+  .intro-hi { font-size: 2rem; }
+  .intro-icon { width: 90px; height: 90px; }
 }
-/* Styles migrated from home-page.css */
-        body {
-            background: #FFE5EC;
-            margin: 0;
-            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-            color: #222;
-        }
-        .header {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 64px;
-            background: #fff; /* <-- Change this line to white */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 100;
-            border-bottom: 1px solid #f3cdd7;
-            padding: 0 32px;
-        }
-        .site-title {
-            font-size: 1.75rem; /* Slightly smaller */
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            text-transform: lowercase;
-        }
-        .nav-tabs {
-            display: flex;
-            gap: 32px;
-        }
-        .nav-tabs a {
-            text-decoration: none;
-            color: #222;
-            font-size: 1rem;
-            text-transform: lowercase;
-            font-weight: 500;
-            opacity: 0.85;
-            transition: opacity 0.2s;
-        }
-        .nav-tabs a:hover,
-        .nav-tabs a.active {
-            opacity: 1;
-            text-decoration: underline;
-        }
-        main {
-            margin-top: 80px;
-            padding: 0 0 48px 0;
-        }
 
-        /* --- Intro Section --- */
-        .intro-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            max-width: 1100px;
-            margin: 0 auto 36px auto;
-            padding: 48px 32px 32px 32px;
-            min-height: 340px;
-            gap: 32px;
-        }
-        .intro-left {
-            flex: 1 1 0;
-            max-width: 520px;
-        }
-        .intro-hi {
-            font-size: 2.7rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            letter-spacing: -0.01em;
-        }
-        .intro-location {
-            font-size: 1.1rem;
-            color: #b07b8c;
-            margin-bottom: 18px;
-            font-weight: 500;
-        }
-        .intro-bio {
-            font-size: 1.15rem;
-            line-height: 1.6;
-            color: #333;
-        }
-        .intro-right {
-            flex: 1 1 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 180px;
-        }
-        .intro-icon {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 2px 16px 0 rgba(60,40,60,0.10);
-            border: 4px solid #f3cdd7;
-            background: #fff;
-            display: block;
-            aspect-ratio: 1 / 1;
-            /* Optional fade-in effect */
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .intro-icon.loaded {
-            opacity: 1;
-        }
-        @media (max-width: 900px) {
-            .intro-section {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 32px 6vw 18px 6vw;
-                gap: 18px;
-            }
-            .intro-right {
-                width: 100%;
-                justify-content: flex-start;
-                margin-top: 18px;
-            }
-            .intro-icon {
-                width: 140px;
-                height: 140px;
-            }
-        }
-        @media (max-width: 600px) {
-            .intro-section {
-                padding: 18px 2vw 10px 2vw;
-            }
-            .intro-hi {
-                font-size: 2rem;
-            }
-            .intro-icon {
-                width: 90px;
-                height: 90px;
-            }
-        }
+@media (max-width: 600px) {
+  .simple-footer { font-size: 0.55rem; height: 5vh; min-height: 18px; max-height: 32px; }
+  .intro-section { padding: 18px 2vw 10px 2vw; }
+  .intro-hi { font-size: 2rem; }
+  .intro-icon { width: 90px; height: 90px; }
+}
 
-        /* --- Projects --- */
-        .work-gallery-container {
-            position: relative;
-            width: 100vw;
-            overflow-x: unset;
-            overflow-y: unset;
-            white-space: normal;
-            padding-bottom: 24px;
-        }
-        .work-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-            padding: 24px 32px;
-            min-height: unset;
-        }
-        .project-card {
-            display: flex;
-            width: 100%;
-            min-width: 0;
-            min-height: 180px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.18s cubic-bezier(.4,1.2,.4,1), box-shadow 0.18s;
-        }
-        .project-card:hover {
-            transform: scale(1.035);
-            box-shadow: 0 6px 32px 0 rgba(60,40,60,0.13);
-        }
-        .project-thumb-area {
-            width: 40%;
-            background: url('assets/images/paper-texture.jpg') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-        }
-        .project-thumb-title {
-            font-family: 'Times New Roman', serif;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #222;
-            text-align: center;
-            padding: 0 8px;
-        }
-        .project-info {
-            position: relative;
-            padding: 20px 18px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: url('assets/images/paper-texture.jpg') center/cover no-repeat;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
-        .project-info::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.55);
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
+/* --- Utility: Remove unwanted borders/shadows --- */
+.intro-icon::before,
+.intro-icon::after,
+.project-card::before,
+.project-card::after {
+  box-shadow: none !important;
+  background: none !important;
+  filter: none !important;
+}
         .project-info > * { position: relative; z-index: 1; }
         .project-date {
             font-size: 1rem;
@@ -491,4 +537,74 @@ textarea {
         }
             }
         }
+
+        /* Remove white border from profile image */
+        .intro-icon {
+          /* ...existing code... */
+          /* border: 4px solid #fff !important; */ /* Remove this line */
+          box-shadow: 0 8px 40px 0 rgba(0,0,0,0.65) !important; /* Even darker black shadow */
+          /* ...existing code... */
+        }
+
+        /* Remove white border from project card */
+        .project-card {
+          /* ...existing code... */
+          /* border: 1px solid #fff !important; */ /* Remove this line */
+          box-shadow: 0 8px 40px 0 rgba(0,0,0,0.65) !important; /* Even darker black shadow */
+          /* ...existing code... */
+        }
+
+        /* Remove forced border-color override */
+        .intro-icon,
+        .project-card {
+          box-shadow: 0 8px 40px 0 rgba(0,0,0,0.20) !important;
+          /* border-color: #fff !important; */ /* Remove this line */
+        }
+
+        /* If you still see pink, check for filter: drop-shadow or ::after/::before pseudo-elements with pink backgrounds or shadows. Force remove: */
+        .intro-icon::before,
+        .intro-icon::after,
+        .project-card::before,
+        .project-card::after {
+          box-shadow: none !important;
+          background: none !important;
+          filter: none !important;
+        }
+
+        body {
+  position: relative;
+  background: url('../images/background.gif') center center/cover no-repeat fixed, #ffe5ec;
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: #fff; /* Default text color to white */
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: rgba(0,0,0,0.2); /* 20% black overlay */
+  pointer-events: none;
+}
+
+/* Ensure footer stays at the bottom even with little content */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.simple-footer {
+  flex-shrink: 0;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 
