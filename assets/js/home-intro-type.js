@@ -16,4 +16,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
     typeNext();
+    // Do NOT touch .intro-location or #location-diff-intro here!
 });

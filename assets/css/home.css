@@ -132,10 +132,20 @@ main {
 }
 
 .intro-location {
+  display: inline;
+  white-space: normal;
   font-size: 1.1rem;
   color: #b07b8c;
   margin-bottom: 18px;
   font-weight: 500;
+}
+
+#location-diff-intro {
+  display: inline;
+  white-space: nowrap;
+  margin-left: 0;
+  color: #b07b8c;
+  font-size: 1em;
 }
 
 .intro-bio {
