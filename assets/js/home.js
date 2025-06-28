@@ -104,28 +104,3 @@ if (document.readyState === 'loading') {
     initHomeScripts();
 }
 // --- End nav-mobile.js logic ---
-            <div class="project-thumb-area">
-              <div class="project-thumb-title">${p.title}</div>
-            </div>
-            <div class="project-info" style="background-image: url('${p.img}');">
-              <div class="project-date">date last modified: 06/26/2025</div>
-              <div class="project-blurb">${p.blurb}</div>
-            </div>
-          </div>
-        `).join('');
-        // Optional: keyboard accessibility
-        gallery.querySelectorAll('.project-card').forEach(card => {
-            card.tabIndex = 0;
-            card.addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') card.click();
-            });
-        });
-    }
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHomeScripts);
-} else {
-    initHomeScripts();
-}
-// --- End nav-mobile.js logic ---

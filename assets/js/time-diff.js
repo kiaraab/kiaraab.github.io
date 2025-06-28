@@ -44,9 +44,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     // Only update the #location-diff in the intro section (home page)
     const el = document.querySelector('.intro-location #location-diff');
-    if (el) el.textContent = text;
+    if (el) el.textContent = introText;
   }
 
   updateLocationDiff();
   setInterval(updateLocationDiff, 10 * 60 * 1000);
-})();
+});
