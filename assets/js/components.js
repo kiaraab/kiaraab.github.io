@@ -173,9 +173,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             document.body.classList.add('dark');
             document.body.style.background = "url('/assets/images/background.gif') center center/cover no-repeat fixed, #ffe5ec";
         }
-        const toggleBtn = document.getElementById('theme-toggle');
-        if (toggleBtn) {
-            toggleBtn.textContent = theme === 'light' ? '🌞' : '🌙';
+        const toggleInput = document.getElementById('theme-toggle');
+        if (toggleInput && toggleInput.type === 'checkbox') {
+            toggleInput.checked = theme === 'light';
         }
     }
     function getPreferredTheme() {
@@ -189,12 +189,20 @@ document.addEventListener('DOMContentLoaded', async function() {
         let theme = getPreferredTheme();
         applyTheme(theme);
         if (themeToggle) {
-            themeToggle.textContent = theme === 'light' ? '🌞' : '🌙';
-            themeToggle.onclick = function() {
-                theme = document.body.classList.contains('light') ? 'dark' : 'light';
-                localStorage.setItem('theme', theme);
-                applyTheme(theme);
-            };
+            if (themeToggle.type === 'checkbox') {
+                themeToggle.checked = theme === 'light';
+                themeToggle.addEventListener('change', function() {
+                    theme = this.checked ? 'light' : 'dark';
+                    localStorage.setItem('theme', theme);
+                    applyTheme(theme);
+                });
+            } else {
+                themeToggle.onclick = function() {
+                    theme = document.body.classList.contains('light') ? 'dark' : 'light';
+                    localStorage.setItem('theme', theme);
+                    applyTheme(theme);
+                };
+            }
         }
     }
     // Run after header is loaded
