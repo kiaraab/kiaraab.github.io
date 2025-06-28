@@ -49,9 +49,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     // --- Add this block for form submission ---
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        // Submit on Shift+Enter
+        // Submit on Ctrl+Enter
         contactForm.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && e.shiftKey) {
+            if (e.key === 'Enter' && e.ctrlKey) {
                 e.preventDefault();
                 contactForm.requestSubmit();
             }
@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                     headers: { "Content-Type": "text/plain" }
                 });
                 if (response.ok) {
-                    closeContact();
-                    window.location.href = "/thanks.html";
+                    // Show thanks message in place of form
+                    contactForm.innerHTML = `<div style="padding:2rem 0;text-align:center;font-size:1.2rem;color:#b07b8c;">thanks!</div>`;
                 } else {
                     alert("There was a problem sending your message. Please try again later.");
                 }
