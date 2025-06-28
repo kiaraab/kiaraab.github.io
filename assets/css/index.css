@@ -48,7 +48,7 @@ body::before {
   --bg-main: #18161a;
   --bg-card: rgba(30,30,30,0.90);
   --text-main: #fff;
-  --text-accent: #b07b8c;
+  --text-accent: #f55e8e; /* updated pink */
   --bg-footer: rgba(255,255,255,0.60);
   --bg-header: rgba(255,255,255,0.75);
   --bg-floral: url('/assets/images/background.gif') center center/cover no-repeat fixed, #ffe5ec;
@@ -65,7 +65,7 @@ body.light {
   --bg-main: #fff;
   --bg-card: rgba(255,255,255,0.92);
   --text-main: #222;
-  --text-accent: #b07b8c;
+  --text-accent: #f55e8e; /* updated pink */
   --bg-footer: rgba(255,255,255,0.85);
   --bg-header: rgba(255,255,255,0.92);
   --bg-floral: url('/assets/images/lightmode.gif') center center/cover no-repeat fixed, #fff;
@@ -103,7 +103,7 @@ body.light textarea {
   font-size: 1.75rem;
   font-weight: normal; /* default, overridden inline on home page */
   letter-spacing: 0.05em;
-  color: #b07b8c; /* Match location pink */
+  color: #f55e8e; /* updated pink */
   text-transform: none;
   cursor: pointer; /* <-- Add this line */
   font-family: 'Playfair Display', serif;
@@ -216,7 +216,7 @@ main {
   display: inline;
   white-space: normal;
   font-size: 1.1rem;
-  color: #b07b8c;
+  color: #f55e8e;
   margin-bottom: 18px;
   font-weight: 500;
   font-family: 'Inter', 'Space Grotesk', Arial, sans-serif;
@@ -659,11 +659,10 @@ main, .work-gallery-container, .work-gallery, .project-card {
 button,
 input[type="button"],
 input[type="submit"],
-.theme-switch,
 .nav-hamburger,
 .footer-link,
 .contact-form button {
-  background: #444 !important; /* dark grey for dark mode */
+  background: #f55e8e !important;
   color: #fff !important;
   border: none;
   border-radius: 6px;
@@ -672,23 +671,18 @@ input[type="submit"],
   transition: background 0.18s, color 0.18s, transform 0.18s;
 }
 
-/* Light mode: override to light grey and dark text */
+/* Light mode: override to light pink and dark text */
 body.light button,
 body.light input[type="button"],
 body.light input[type="submit"],
-body.light .theme-switch,
 body.light .nav-hamburger,
 body.light .footer-link,
 body.light .contact-form button {
-  background: #e5e5e5 !important;
-  color: #222 !important;
+  background: #ffe5ec !important;
+  color: #f55e8e !important;
 }
 
-body.light .theme-switch .slider {
-  background: #e5e5e5;
-}
-
-/* Theme toggle specific overrides */
+/* --- Theme toggle switch: no background in any mode --- */
 .theme-switch {
   position: absolute;
   top: 14px;
@@ -707,11 +701,11 @@ body.light .theme-switch .slider {
 .theme-switch .slider {
   width: 44px;
   height: 24px;
-  background: #444;
   border-radius: 34px;
   position: relative;
   cursor: pointer;
   transition: background 0.18s;
+  background: #f55e8e !important;
 }
 
 .theme-switch .slider::before {
@@ -727,7 +721,7 @@ body.light .theme-switch .slider {
 }
 
 input#theme-toggle:checked + .slider {
-  background: #b07b8c;
+  background: #f55e8e !important;
 }
 
 input#theme-toggle:checked + .slider::before {
@@ -797,8 +791,9 @@ input[type="submit"]:focus,
   outline: none;
   text-decoration: none;
   opacity: 1 !important;
+  outline: none;
+  text-decoration: none;
+  opacity: 1 !important;
 }
-
-/* ...existing code... */
 
 
