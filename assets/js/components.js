@@ -29,6 +29,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.querySelectorAll('a[href="/contact.html"]').forEach(link => {
         link.addEventListener('click', e => {
             e.preventDefault();
+            const content = contactModal.querySelector('.contact-modal-content');
+            if (content) {
+                content.classList.add('pop');
+                content.addEventListener('animationend', () => {
+                    content.classList.remove('pop');
+                }, { once: true });
+            }
             contactModal.classList.add('open');
         });
     });

@@ -95,3 +95,14 @@
     cursor: pointer;
     line-height: 1;
 }
+
+/* Pop animation when opening */
+.contact-modal-content.pop {
+    animation: contact-pop 0.22s cubic-bezier(.4,2,.6,1);
+}
+
+@keyframes contact-pop {
+    0% { transform: scale(0.85); }
+    50% { transform: scale(0.75); }
+    100% { transform: scale(1); }
+}
