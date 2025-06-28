@@ -95,3 +95,14 @@
     cursor: pointer;
     line-height: 1;
 }
+
+@media (max-width: 600px) {
+  .contact-main {
+    margin-top: 40px;
+    padding: 32px 12px;
+  }
+  .contact-form {
+    padding: 1.2rem;
+  }
+}
+

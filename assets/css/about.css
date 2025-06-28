@@ -193,3 +193,20 @@
   border-radius: 8px;
   transition: width 1.2s cubic-bezier(.4,2,.6,1);
 }
+@media (max-width: 600px) {
+  .about-hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-hero-img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 12px;
+  }
+  .about-stats {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+}
+
