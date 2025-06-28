@@ -38,6 +38,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const introEl = document.getElementById('location-diff-intro');
     if (introEl) {
       introEl.textContent = introText;
+      if (diff === 0) {
+        introEl.classList.add('no-diff');
+      } else {
+        introEl.classList.remove('no-diff');
+      }
       console.log('location-diff-intro updated:', introText);
     } else {
       console.warn('location-diff-intro element not found');

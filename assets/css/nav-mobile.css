@@ -20,7 +20,7 @@
 .hamburger-bar {
     width: 26px;
     height: 3px;
-    background: #b07b8c;
+    background: #ffe5ec;
     margin: 3px 0;
     border-radius: 2px;
     transition: all 0.25s;
@@ -70,7 +70,7 @@
     display: block;
     padding: 12px 24px;
     font-size: 1.1rem;
-    color: #b07b8c;
+    color: var(--text-accent);
     text-decoration: none;
     font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
     font-weight: bold;
@@ -80,7 +80,7 @@
     border-radius: 6px;
 }
 .mobile-nav-list a:hover {
-    background: #ffe5ec;
+    background: var(--text-accent);
     color: #222;
 }
 
@@ -92,7 +92,7 @@
 .hamburger-bar {
     width: 22px;
     height: 3px;
-    background: #b07b8c;
+    background: #ffe5ec;
     margin: 3px 0;
     border-radius: 2px;
     transition: all 0.25s;
@@ -137,7 +137,7 @@
     display: block;
     padding: 12px 24px;
     font-size: 1.1rem;
-    color: #b07b8c;
+    color: var(--text-accent);
     text-decoration: none;
     font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
     font-weight: bold;
@@ -147,7 +147,7 @@
     border-radius: 6px;
 }
 .nav-dropdown-list a:hover {
-    background: #ffe5ec;
+    background: var(--text-accent);
     color: #222;
 }
 
