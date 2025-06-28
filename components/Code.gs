@@ -1,37 +1,100 @@
 /**
- * Responds to HTTP POST requests
- * @param {Object} e - The event object from the POST request
- * @returns {Object} - A JSON object with a success message
+ * Utility functions for handling contact form submissions.
  */
-function doPost(e) {
+
+/**
+ * Handles the logic for storing the form submission and sending emails.
+ * @param {string} name Name of the user
+ * @param {string} email Email address of the user
+ * @param {string} message Message from the user
+ * @param {Date} [timestamp=new Date()] Timestamp for the submission
+ */
+function handleSubmission(name, email, message, timestamp) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var params = JSON.parse(e.postData.contents);
+  sheet.appendRow([timestamp || new Date(), name, email, message]);
 
-  // Append data to sheet
-  sheet.appendRow([new Date(), params.name, params.email, params.message]);
-
-  // Send confirmation emails
-  var userEmail = params.email;
-  var userName = params.name;
-  var userMsg = params.message;
   var adminEmail = "raabkiara2@gmail.com"; // <-- change to your email
 
   var subject = "Thank you for contacting Kiara Raab!";
-  var body = "Hi " + userName + ",\n\nThank you for reaching out! I have received your message:\n\n\"" + userMsg + "\"\n\nI'll get back to you as soon as I can.\n\nBest,\nKiara Raab";
+  var body = "Hi " + name + ",\n\nThank you for reaching out! I have received your message:\n\n\"" + message + "\"\n\nI'll get back to you as soon as I can.\n\nBest,\nKiara Raab";
 
-  // Email to user
-  MailApp.sendEmail(userEmail, subject, body);
+  MailApp.sendEmail(email, subject, body);
 
-  // Email to admin
-  var adminBody = "New contact form submission:\n\nName: " + userName + "\nEmail: " + userEmail + "\nMessage:\n" + userMsg;
+  var adminBody = "New contact form submission:\n\nName: " + name + "\nEmail: " + email + "\nMessage:\n" + message;
   MailApp.sendEmail(adminEmail, "New Contact Form Submission", adminBody);
+}
+
+/**
+ * Web app entry point for POST requests from the website form.
+ * @param {Object} e The event object
+ * @returns {ContentService.TextOutput}
+ */
+function doPost(e) {
+  // Ensure the onFormSubmit trigger exists in case the spreadsheet
+  // hasn't been opened yet. This lets web form submissions create
+  // the trigger automatically.
+  ensureFormTrigger();
+
+  var params = JSON.parse(e.postData.contents);
+  handleSubmission(params.name, params.email, params.message, new Date());
 
   return ContentService
-    .createTextOutput(JSON.stringify({result: "success"}))
+    .createTextOutput(JSON.stringify({ result: "success" }))
     .setMimeType(ContentService.MimeType.JSON)
     .setHeader("Access-Control-Allow-Origin", "*")
     .setHeader("Access-Control-Allow-Methods", "POST, OPTIONS")
     .setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
+/**
+ * Triggered when a Google Form linked to this spreadsheet is submitted.
+ * The trigger must be installed manually via setupTrigger().
+ * @param {GoogleAppsScript.Events.FormsOnFormSubmit} e Event object
+ */
+function onFormSubmit(e) {
+  var values = e.namedValues || {};
+  var name = (values.name || values.Name || [])[0] || e.values[1];
+  var email = (values.email || values.Email || [])[0] || e.values[2];
+  var message = (values.message || values.Message || [])[0] || e.values[3];
+  handleSubmission(name, email, message, new Date());
+}
+
+/**
+ * Helper to install the onFormSubmit trigger. Run once manually.
+ */
+function setupTrigger() {
+  ScriptApp.newTrigger("onFormSubmit")
+    .forSpreadsheet(SpreadsheetApp.getActive())
+    .onFormSubmit()
+    .create();
+}
+
+/**
+ * Ensure the onFormSubmit trigger is installed. Called on spreadsheet open.
+ */
+function ensureFormTrigger() {
+  var triggers = ScriptApp.getProjectTriggers();
+  var exists = triggers.some(function (t) {
+    return t.getHandlerFunction() === "onFormSubmit";
+  });
+  if (!exists) {
+    setupTrigger();
+  }
+}
+
+/**
+ * When the spreadsheet is opened, verify the submission trigger exists.
+ */
+function onOpen() {
+  ensureFormTrigger();
+}
+
+/**
+ * When the Apps Script project is installed (e.g. as a trigger),
+ * also ensure the submission trigger exists.
+ */
+function onInstall(e) {
+  onOpen(e);
 }
 
 /**
