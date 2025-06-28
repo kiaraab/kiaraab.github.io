@@ -9,8 +9,10 @@
  * @param {string} message Message from the user
  * @param {Date} [timestamp=new Date()] Timestamp for the submission
  */
+var SPREADSHEET_ID = 'PASTE_SPREADSHEET_ID'; // Replace with your Google Sheet ID
+
 function handleSubmission(name, email, message, timestamp) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getActiveSheet();
   sheet.appendRow([timestamp || new Date(), name, email, message]);
 
   var adminEmail = "raabkiara2@gmail.com"; // <-- change to your email
@@ -59,7 +61,7 @@ function onFormSubmit(e) {
  */
 function setupTrigger() {
   ScriptApp.newTrigger("onFormSubmit")
-    .forSpreadsheet(SpreadsheetApp.getActive())
+    .forSpreadsheet(SpreadsheetApp.openById(SPREADSHEET_ID))
     .onFormSubmit()
     .create();
 }
