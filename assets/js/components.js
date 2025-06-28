@@ -49,6 +49,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     // --- Add this block for form submission ---
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
+        // Submit on Shift+Enter
+        contactForm.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.shiftKey) {
+                e.preventDefault();
+                contactForm.requestSubmit();
+            }
+        });
+
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
