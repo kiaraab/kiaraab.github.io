@@ -48,7 +48,7 @@ body::before {
   --bg-main: #18161a;
   --bg-card: rgba(30,30,30,0.90);
   --text-main: #fff;
-  --text-accent: #f55e8e; /* updated pink */
+  --text-accent: #ffe5ec; /* accent for dark mode */
   --bg-footer: rgba(255,255,255,0.60);
   --bg-header: rgba(255,255,255,0.75);
   --bg-floral: url('/assets/images/background.gif') center center/cover no-repeat fixed, #ffe5ec;
@@ -65,7 +65,7 @@ body.light {
   --bg-main: #fff;
   --bg-card: rgba(255,255,255,0.92);
   --text-main: #222;
-  --text-accent: #f55e8e; /* updated pink */
+  --text-accent: #803c5a; /* accent for light mode */
   --bg-footer: rgba(255,255,255,0.85);
   --bg-header: rgba(255,255,255,0.92);
   --bg-floral: url('/assets/images/lightmode.gif') center center/cover no-repeat fixed, #fff;
@@ -103,7 +103,7 @@ body.light textarea {
   font-size: 1.75rem;
   font-weight: normal; /* default, overridden inline on home page */
   letter-spacing: 0.05em;
-  color: #f55e8e; /* updated pink */
+  color: var(--text-accent);
   text-transform: none;
   cursor: pointer; /* <-- Add this line */
   font-family: 'Playfair Display', serif;
@@ -216,7 +216,7 @@ main {
   display: inline;
   white-space: normal;
   font-size: 1.1rem;
-  color: #f55e8e;
+  color: var(--text-accent);
   margin-bottom: 18px;
   font-weight: 500;
   font-family: 'Inter', 'Space Grotesk', Arial, sans-serif;
@@ -226,8 +226,12 @@ main {
   display: inline;
   white-space: nowrap;
   margin-left: 0;
-  color: #b07b8c;
+  color: var(--text-accent);
   font-size: 1em;
+}
+
+#location-diff-intro.no-diff {
+  color: #ffe5ec;
 }
 
 .intro-bio {
@@ -466,8 +470,8 @@ main {
 
 .footer-link:hover,
 .footer-link:focus {
-  background: #ffe5ec;
-  color: #222;
+  background: var(--text-accent);
+  color: #fff;
   outline: none;
   text-decoration: none; /* Ensure no underline on hover/focus */
 }
@@ -636,7 +640,7 @@ main, .work-gallery-container, .work-gallery, .project-card {
 
 .take-me-home-btn {
   background: rgba(255,255,255,0.85);
-  color: #b07b8c;
+  color: var(--text-accent);
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
@@ -650,7 +654,7 @@ main, .work-gallery-container, .work-gallery, .project-card {
 }
 .take-me-home-btn:hover,
 .take-me-home-btn:focus {
-  background: #b07b8c;
+  background: var(--text-accent);
   color: #fff;
   text-decoration: none;
 }
@@ -662,8 +666,8 @@ input[type="submit"],
 .nav-hamburger,
 .footer-link,
 .contact-form button {
-  background: #f55e8e !important;
-  color: #fff !important;
+  background: transparent !important;
+  color: var(--text-accent) !important;
   border: none;
   border-radius: 6px;
   box-shadow: none;
@@ -678,8 +682,8 @@ body.light input[type="submit"],
 body.light .nav-hamburger,
 body.light .footer-link,
 body.light .contact-form button {
-  background: #ffe5ec !important;
-  color: #f55e8e !important;
+  background: transparent !important;
+  color: var(--text-accent) !important;
 }
 
 /* --- Theme toggle switch: no background in any mode --- */
@@ -705,7 +709,7 @@ body.light .contact-form button {
   position: relative;
   cursor: pointer;
   transition: background 0.18s;
-  background: #f55e8e !important;
+  background: var(--text-accent) !important;
 }
 
 .theme-switch .slider::before {
@@ -721,7 +725,7 @@ body.light .contact-form button {
 }
 
 input#theme-toggle:checked + .slider {
-  background: #f55e8e !important;
+  background: var(--text-accent) !important;
 }
 
 input#theme-toggle:checked + .slider::before {
@@ -786,7 +790,7 @@ input[type="submit"]:focus,
 .footer-link:focus,
 .contact-form button:hover,
 .contact-form button:focus {
-  background: #b07b8c !important;
+  background: var(--text-accent) !important;
   color: #fff !important;
   outline: none;
   text-decoration: none;
