@@ -311,10 +311,11 @@ main {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s cubic-bezier(.4,2,.6,1);
-  background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/wedding-texture.jpg') center center/cover no-repeat;
   margin: 0 auto 0 auto;
   align-items: stretch;
-  position: relative;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   height: auto;
 }
 
@@ -338,8 +339,7 @@ main {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   box-shadow: 1px 0 8px 0 rgba(0,0,0,0.03);
-  padding: 0 12px;
-  background: #fff url('../images/wedding-texture.jpg') center center/cover no-repeat;
+  background: transparent;
 }
 
 .project-thumb-title {
@@ -365,8 +365,7 @@ main {
   flex-direction: column;
   justify-content: center;
   padding: 20px 18px;
-  background: url('../images/wedding-texture.jpg') center/cover no-repeat;
-  border-top-right-radius: 10px;
+  background: transparent;
   border-bottom-right-radius: 10px;
   color: #222;
   min-width: 0;
@@ -566,43 +565,22 @@ main, .work-gallery-container, .work-gallery, .project-card {
   filter: none !important;
 }
 
-/* Add override for project-2 card on home page */
 .project-card:first-child,
 .project-card:first-child .project-thumb-area,
 .project-card:first-child .project-info {
-  background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/paper-texture.jpg') center center/cover no-repeat !important;
-}
-.project-card:first-child .project-info {
-  background: url('../images/paper-texture.jpg') center/cover no-repeat !important;
-}
-.project-card:first-child .project-thumb-area {
-  background: #fff url('../images/paper-texture.jpg') center center/cover no-repeat !important;
+  background: var(--bg-card) !important;
 }
 
-/* Add override for project-1 card on home page (second card) */
 .project-card:nth-child(2),
 .project-card:nth-child(2) .project-thumb-area,
 .project-card:nth-child(2) .project-info {
-  background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/wedding-texture.jpg') center center/cover no-repeat !important;
-}
-.project-card:nth-child(2) .project-info {
-  background: url('../images/wedding-texture.jpg') center/cover no-repeat !important;
-}
-.project-card:nth-child(2) .project-thumb-area {
-  background: #fff url('../images/wedding-texture.jpg') center center/cover no-repeat !important;
+  background: var(--bg-card) !important;
 }
 
-/* Add override for decision matrix widget card (third card) */
 .project-card:nth-child(3),
 .project-card:nth-child(3) .project-thumb-area,
 .project-card:nth-child(3) .project-info {
-  background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/paper-texture.jpg') center center/cover no-repeat !important;
-}
-.project-card:nth-child(3) .project-info {
-  background: url('../images/paper-texture.jpg') center/cover no-repeat !important;
-}
-.project-card:nth-child(3) .project-thumb-area {
-  background: #fff url('../images/paper-texture.jpg') center center/cover no-repeat !important;
+  background: var(--bg-card) !important;
 }
 
 /* Fix: Prevent lowercasing from any parent on .intro-hi */
@@ -659,7 +637,6 @@ main, .work-gallery-container, .work-gallery, .project-card {
 button,
 input[type="button"],
 input[type="submit"],
-.theme-toggle,
 .nav-hamburger,
 .footer-link,
 .contact-form button {
@@ -676,7 +653,6 @@ input[type="submit"],
 body.light button,
 body.light input[type="button"],
 body.light input[type="submit"],
-body.light .theme-toggle,
 body.light .nav-hamburger,
 body.light .footer-link,
 body.light .contact-form button {
@@ -685,17 +661,51 @@ body.light .contact-form button {
 }
 
 /* Theme toggle specific overrides */
-.theme-toggle {
+.theme-switch {
   position: absolute;
   top: 14px;
   right: 24px;
   z-index: 200;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--text-accent) !important;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch .slider {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background: #444;
+  border-radius: 34px;
+  transition: background 0.18s;
+}
+
+.theme-switch .slider::before {
+  content: "";
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  top: 2px;
+  background: #fff;
   border-radius: 50%;
-  padding: 6px 10px;
-  outline: none;
+  transition: transform 0.18s;
+}
+
+body.light .theme-switch .slider {
+  background: #e5e5e5;
+}
+
+.theme-switch input:checked + .slider {
+  background: var(--text-accent);
+}
+
+.theme-switch input:checked + .slider::before {
+  transform: translateX(20px);
 }
 
 /* Hamburger icon button (nav-mobile) */
@@ -748,8 +758,6 @@ input[type="button"]:hover,
 input[type="button"]:focus,
 input[type="submit"]:hover,
 input[type="submit"]:focus,
-.theme-toggle:hover,
-.theme-toggle:focus,
 .nav-hamburger:hover,
 .nav-hamburger:focus,
 .footer-link:hover,

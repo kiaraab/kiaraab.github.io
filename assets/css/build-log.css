@@ -1,0 +1,38 @@
+.build-log-main {
+  padding: 80px 4vw 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.log-title {
+  font-size: 2rem;
+  text-transform: lowercase;
+  color: var(--text-main);
+}
+
+.log-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.log-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  color: var(--text-main);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+.log-card-date {
+  font-weight: 600;
+  color: var(--text-accent);
+  margin-bottom: 0.3rem;
+  text-transform: lowercase;
+}
