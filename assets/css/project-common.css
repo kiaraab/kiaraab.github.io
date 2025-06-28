@@ -1,0 +1,39 @@
+/* Common layout for individual project pages */
+.project-section {
+    display: flex;
+    justify-content: center;
+    padding: 80px 4vw 36px;
+}
+
+.project-box {
+    background: rgba(30,30,30,0.90);
+    border-radius: 18px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.65);
+    width: 85vw;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.project-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+    color: #fff;
+    text-transform: lowercase;
+}
+
+.project-subtitle {
+    font-size: 1rem;
+    color: #b07b8c;
+    margin-bottom: 14px;
+    font-weight: 450;
+    text-transform: lowercase;
+}
+
+.project-bio {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #fff;
+}
