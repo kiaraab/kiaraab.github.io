@@ -5,9 +5,20 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.querySelector('#header-placeholder').innerHTML = headerHtml;
 
     // Load footer
-    const footerResponse = await fetch('/components/footer.html');
-    const footerHtml = await footerResponse.text();
-    document.querySelector('#footer-placeholder').innerHTML = footerHtml;
+    try {
+        const footerResponse = await fetch('/components/footer.html');
+        if (!footerResponse.ok) throw new Error('Footer fetch failed');
+        const footerHtml = await footerResponse.text();
+        const footerPlaceholder = document.querySelector('#footer-placeholder');
+        if (footerPlaceholder) {
+            footerPlaceholder.innerHTML = footerHtml;
+            console.log('Footer loaded:', footerHtml);
+        } else {
+            console.warn('Footer placeholder not found in DOM');
+        }
+    } catch (err) {
+        console.error('Footer could not be loaded:', err);
+    }
 
     // Load contact form modal
     const contactResp = await fetch('/components/contact-form.html');

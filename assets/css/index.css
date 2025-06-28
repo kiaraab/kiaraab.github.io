@@ -87,6 +87,21 @@ body::before {
   font-weight: bold;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.nav-hamburger {
+  margin-left: 8px !important;
+}
+
+.nav-dropdown {
+  left: 0;
+  top: 110%;
+}
+
 /* --- Main Layout --- */
 main {
   margin-top: 80px;
@@ -504,6 +519,23 @@ main, .work-gallery-container, .work-gallery, .project-card {
 .intro-left .intro-hi,
 .intro-hi {
   text-transform: none !important;
+}
+
+.header, .header-left {
+  overflow: visible !important;
+}
+
+#footer-placeholder {
+  width: 100vw;
+  min-height: 40px;
+  display: block;
+  z-index: 10;
+  position: relative;
+}
+
+.simple-footer {
+  position: relative;
+  z-index: 20;
 }
 
 

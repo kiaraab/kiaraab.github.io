@@ -10,7 +10,7 @@
     border-radius: 8px;
     cursor: pointer;
     padding: 0;
-    margin-left: 18px;
+    margin-left: 8px !important; /* Closer to site title */
     z-index: 120;
     position: relative;
     box-shadow: none; /* Remove box shadow */
@@ -108,7 +108,8 @@
     transform: translateY(-12px) scale(0.95);
     position: absolute;
     top: 110%;
-    left: 0;
+    left: 0; /* Align with site title */
+    right: auto; /* Ensure it doesn't stretch to the right */
     min-width: 120px;
     background: #fff;
     border: none; /* <-- Remove border */
@@ -148,4 +149,14 @@
 .nav-dropdown-list a:hover {
     background: #ffe5ec;
     color: #222;
+}
+
+/* Header left positioning */
+.header-left {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.header, .header-left {
+    overflow: visible !important;
 }
