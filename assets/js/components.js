@@ -26,12 +26,44 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (e.target === contactModal) closeContact();
         });
     }
-    document.querySelectorAll('a[href="/contact.html"]').forEach(link => {
-        link.addEventListener('click', e => {
+    // Use the button to open the modal
+    const openBtn = document.getElementById('contact-popup-btn');
+    if (openBtn) {
+        openBtn.addEventListener('click', function(e) {
             e.preventDefault();
             contactModal.classList.add('open');
         });
-    });
+    }
+
+    // --- Add this block for form submission ---
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = {
+                name: form.name.value,
+                email: form.email.value,
+                message: form.message.value
+            };
+            const endpoint = "https://script.google.com/macros/s/AKfycbzbLHbtwquvY96A4eWUUnanKhuft2SsGDW7Phv0j9cg9LwZXrcvMWOc-2OenKDdYRo/exec";
+            try {
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: { "Content-Type": "text/plain" }
+                });
+                if (response.ok) {
+                    closeContact();
+                    window.location.href = "/thanks.html";
+                } else {
+                    alert("There was a problem sending your message. Please try again later.");
+                }
+            } catch (err) {
+                alert("There was a problem sending your message. Please try again later.");
+            }
+        });
+    }
 
     // Set active nav item based on current page
     const currentPage = document.body.className.replace('-page', '');

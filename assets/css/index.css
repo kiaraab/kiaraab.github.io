@@ -133,6 +133,7 @@ main {
   font-weight: 800;
   margin-bottom: 10px;
   letter-spacing: -0.01em;
+  text-transform: none !important; /* Force normal casing */
 }
 
 .intro-location {
@@ -491,6 +492,18 @@ main, .work-gallery-container, .work-gallery, .project-card {
 }
 .project-card:nth-child(2) .project-thumb-area {
   background: #fff url('../images/wedding-texture.jpg') center center/cover no-repeat !important;
+}
+
+/* Fix: Prevent lowercasing from any parent on .intro-hi */
+.intro-hi, .intro-hi * {
+  text-transform: none !important;
+}
+
+/* Force intro-hi to never lowercase, regardless of parent */
+.intro-box .intro-left .intro-hi,
+.intro-left .intro-hi,
+.intro-hi {
+  text-transform: none !important;
 }
 
 
