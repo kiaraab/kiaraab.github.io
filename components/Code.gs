@@ -65,6 +65,26 @@ function setupTrigger() {
 }
 
 /**
+ * Ensure the onFormSubmit trigger is installed. Called on spreadsheet open.
+ */
+function ensureFormTrigger() {
+  var triggers = ScriptApp.getProjectTriggers();
+  var exists = triggers.some(function (t) {
+    return t.getHandlerFunction() === "onFormSubmit";
+  });
+  if (!exists) {
+    setupTrigger();
+  }
+}
+
+/**
+ * When the spreadsheet is opened, verify the submission trigger exists.
+ */
+function onOpen() {
+  ensureFormTrigger();
+}
+
+/**
  * Responds to HTTP OPTIONS requests (preflight requests)
  * @param {Object} e - The event object from the OPTIONS request
  * @returns {Object} - An empty JSON object

@@ -16,3 +16,10 @@ Then visit `http://localhost:8000` in your browser.
 - `assets/` - Stylesheets, images, JavaScript, and other resources
 
 Open `index.html` to explore the site in your browser.
+
+## Google Apps Script
+
+`components/Code.gs` handles saving contact form submissions to a spreadsheet
+and sending confirmation emails. The script installs an `onFormSubmit`
+trigger when the spreadsheet is opened. If the trigger is missing, run
+`setupTrigger()` from the Apps Script editor.
