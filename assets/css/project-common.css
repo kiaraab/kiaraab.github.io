@@ -37,3 +37,13 @@
     line-height: 1.5;
     color: #fff;
 }
+
+.site-title {
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), background 0.18s, color 0.18s;
+  cursor: pointer;
+}
+.site-title:hover {
+  transform: scale(1.06);
+  color: #b995a1;
+  box-shadow: none;
+}

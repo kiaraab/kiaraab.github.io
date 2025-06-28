@@ -29,12 +29,31 @@ document.addEventListener('DOMContentLoaded', async function() {
     const contactModal = document.getElementById('contact-modal');
     const contactClose = document.getElementById('contact-close');
     function closeContact() {
-        contactModal.classList.remove('open');
+        if (!contactModal) return;
+        contactModal.style.transition = 'opacity 0.18s cubic-bezier(.4,2,.6,1)';
+        contactModal.style.opacity = '0';
+        setTimeout(() => {
+            contactModal.classList.remove('open');
+            contactModal.style.transition = '';
+            contactModal.style.opacity = '';
+        }, 180);
     }
     if (contactClose) contactClose.addEventListener('click', closeContact);
     if (contactModal) {
         contactModal.addEventListener('click', e => {
             if (e.target === contactModal) closeContact();
+        });
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (contactModal.classList.contains('open') && e.key === 'Escape') {
+                closeContact();
+            }
+        });
+        // Reset opacity instantly when opening
+        contactModal.addEventListener('transitionend', function() {
+            if (contactModal.classList.contains('open')) {
+                contactModal.style.opacity = '1';
+            }
         });
     }
     // Use the button to open the modal
@@ -46,9 +65,39 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
 
+    // Toast utility
+    function showToast(message) {
+        let toast = document.createElement('div');
+        toast.textContent = message;
+        toast.style.position = 'fixed';
+        toast.style.bottom = '32px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.background = '#b07b8c';
+        toast.style.color = '#fff';
+        toast.style.padding = '1rem 2.2rem';
+        toast.style.borderRadius = '8px';
+        toast.style.fontSize = '1.1rem';
+        toast.style.boxShadow = '0 4px 24px rgba(176,123,140,0.13)';
+        toast.style.zIndex = '9999';
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.4s cubic-bezier(.4,2,.6,1)';
+        document.body.appendChild(toast);
+        setTimeout(() => { toast.style.opacity = '1'; }, 10);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 400);
+        }, 2200);
+    }
+
     // --- Add this block for form submission ---
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
+        // Autofill test data for development
+        contactForm.name.value = "Test User";
+        contactForm.email.value = "test@example.com";
+        contactForm.message.value = "This is a test message.";
+
         // Submit on Ctrl+Enter
         contactForm.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && e.ctrlKey) {
@@ -60,11 +109,29 @@ document.addEventListener('DOMContentLoaded', async function() {
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
-            const data = {
-                name: form.name.value,
-                email: form.email.value,
-                message: form.message.value
-            };
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const message = form.message.value.trim();
+
+            // Real validation
+            if (!name) {
+                showToast("Please enter your name.");
+                form.name.focus();
+                return;
+            }
+            // Simple email regex
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast("Please enter a valid email.");
+                form.email.focus();
+                return;
+            }
+            if (!message) {
+                showToast("Please enter a message.");
+                form.message.focus();
+                return;
+            }
+
+            const data = { name, email, message };
             const endpoint = "https://script.google.com/macros/s/AKfycbzbLHbtwquvY96A4eWUUnanKhuft2SsGDW7Phv0j9cg9LwZXrcvMWOc-2OenKDdYRo/exec";
             try {
                 const response = await fetch(endpoint, {
@@ -73,13 +140,14 @@ document.addEventListener('DOMContentLoaded', async function() {
                     headers: { "Content-Type": "text/plain" }
                 });
                 if (response.ok) {
-                    // Show thanks message in place of form
-                    contactForm.innerHTML = `<div style="padding:2rem 0;text-align:center;font-size:1.2rem;color:#b07b8c;">thanks!</div>`;
+                    // Auto-close modal and show toast
+                    closeContact();
+                    showToast("Thanks for your message!");
                 } else {
-                    alert("There was a problem sending your message. Please try again later.");
+                    showToast("There was a problem sending your message.");
                 }
             } catch (err) {
-                alert("There was a problem sending your message. Please try again later.");
+                showToast("There was a problem sending your message.");
             }
         });
     }
@@ -93,4 +161,42 @@ document.addEventListener('DOMContentLoaded', async function() {
     requestAnimationFrame(() => {
         import('/assets/js/home.js');
     });
+
+    // Theme toggle logic
+    function applyTheme(theme) {
+        // Remove both classes first to ensure a clean toggle
+        document.body.classList.remove('light', 'dark');
+        if (theme === 'light') {
+            document.body.classList.add('light');
+            document.body.style.background = "url('/assets/images/lightmode.gif') center center/cover no-repeat fixed, #fff";
+        } else {
+            document.body.classList.add('dark');
+            document.body.style.background = "url('/assets/images/background.gif') center center/cover no-repeat fixed, #ffe5ec";
+        }
+        const toggleBtn = document.getElementById('theme-toggle');
+        if (toggleBtn) {
+            toggleBtn.textContent = theme === 'light' ? '🌞' : '🌙';
+        }
+    }
+    function getPreferredTheme() {
+        if (localStorage.getItem('theme')) return localStorage.getItem('theme');
+        if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+        return 'dark';
+    }
+    // Wait for header to be loaded before binding toggle
+    function setupThemeToggle() {
+        const themeToggle = document.getElementById('theme-toggle');
+        let theme = getPreferredTheme();
+        applyTheme(theme);
+        if (themeToggle) {
+            themeToggle.textContent = theme === 'light' ? '🌞' : '🌙';
+            themeToggle.onclick = function() {
+                theme = document.body.classList.contains('light') ? 'dark' : 'light';
+                localStorage.setItem('theme', theme);
+                applyTheme(theme);
+            };
+        }
+    }
+    // Run after header is loaded
+    setTimeout(setupThemeToggle, 0);
 });

@@ -210,3 +210,22 @@
   }
 }
 
+/* Stylish, ARIA-friendly toast message (shared style for about page if needed) */
+.toast-message {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #b07b8c;
+  color: #fff;
+  padding: 1rem 2.2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 24px rgba(176,123,140,0.13);
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(.4,2,.6,1);
+  outline: none;
+  pointer-events: auto;
+}
+

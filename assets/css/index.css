@@ -1,5 +1,6 @@
 /* Add Google Fonts import at the very top */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400,700&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('/assets/css/nav-mobile.css');
 
 /* --- Base Styles --- */
 html, body {
@@ -9,6 +10,10 @@ html, body {
   overflow-x: hidden;
   max-width: 100vw;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body,
@@ -38,12 +43,52 @@ body::before {
   pointer-events: none;
 }
 
+/* --- Theme Variables --- */
+:root {
+  --bg-main: #18161a;
+  --bg-card: rgba(30,30,30,0.90);
+  --text-main: #fff;
+  --text-accent: #b07b8c;
+  --bg-footer: rgba(255,255,255,0.60);
+  --bg-header: rgba(255,255,255,0.75);
+  --bg-floral: url('/assets/images/background.gif') center center/cover no-repeat fixed, #ffe5ec;
+}
+
+body {
+  /* ...existing code... */
+  background: var(--bg-floral);
+  color: var(--text-main);
+}
+
+/* Light mode overrides */
+body.light {
+  --bg-main: #fff;
+  --bg-card: rgba(255,255,255,0.92);
+  --text-main: #222;
+  --text-accent: #b07b8c;
+  --bg-footer: rgba(255,255,255,0.85);
+  --bg-header: rgba(255,255,255,0.92);
+  --bg-floral: url('/assets/images/lightmode.gif') center center/cover no-repeat fixed, #fff;
+}
+
+body.light,
+body.light input,
+body.light button,
+body.light select,
+body.light textarea {
+  color: var(--text-main);
+  background: var(--bg-floral);
+}
+
 /* --- Header --- */
 .header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
+  position: fixed; /* changed from sticky */
+  top: 0;
+  left: 0; right: 0;
   height: 64px;
-  background: #fff;
+  background: rgba(255,255,255,0.75); /* semi-transparent */
+  backdrop-filter: blur(20px); /* blur effect */
+  -webkit-backdrop-filter: blur(4px); /* Safari support */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,6 +96,7 @@ body::before {
   border-bottom: 1px solid #f3cdd7;
   padding: 0 32px;
   font-family: 'Playfair Display', 'Inter', 'Space Grotesk', Arial, sans-serif;
+  transition: background 0.22s, backdrop-filter 0.22s;
 }
 
 .site-title {
@@ -61,6 +107,13 @@ body::before {
   text-transform: none;
   cursor: pointer; /* <-- Add this line */
   font-family: 'Playfair Display', serif;
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), background 0.18s, color 0.18s;
+}
+
+.site-title:hover {
+  transform: scale(1.06);
+  color: #b995a1;
+  box-shadow: none;
 }
 
 .nav-tabs {
@@ -156,6 +209,7 @@ main {
   letter-spacing: -0.01em;
   text-transform: none !important; /* Force normal casing */
   font-family: 'Playfair Display', serif;
+  color: #fff !important;
 }
 
 .intro-location {
@@ -256,7 +310,7 @@ main {
   box-shadow: 0 8px 40px 0 rgba(0,0,0,0.01) !important;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.18s cubic-bezier(.4,1.2,.4,1), box-shadow 0.18s;
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s cubic-bezier(.4,2,.6,1);
   background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/wedding-texture.jpg') center center/cover no-repeat;
   margin: 0 auto 0 auto;
   align-items: stretch;
@@ -264,9 +318,10 @@ main {
   height: auto;
 }
 
-.project-card:hover {
-  transform: scale(1.035);
-  box-shadow: 0 6px 32px 0 rgba(60,40,60,0.13);
+.project-card:hover,
+.project-card:focus-within {
+  transform: scale(1.035) translateY(-4px);
+  box-shadow: 0 10px 32px 0 rgba(60,40,60,0.18);
 }
 
 .project-thumb-area {
@@ -359,11 +414,13 @@ main {
 
 /* --- Footer --- */
 .simple-footer {
-  background: #fff;
+  background: rgba(255,255,255,0.60); /* semi-transparent */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(4px);
   color: #222;
   text-align: center;
   font-size: 0.7rem;
-  height: 5vh; /* 5% of viewport height */
+  height: 5vh;
   line-height: 1;
   padding: 0;
   display: flex;
@@ -382,19 +439,37 @@ main {
   left: 0;
   right: 0;
   font-family: 'Inter', 'Space Grotesk', Arial, sans-serif;
+  transition: background 0.22s, backdrop-filter 0.22s;
 }
 
+/* Footer links: no underline, elegant look */
 .footer-link {
   color: #222;
-  text-decoration: underline;
+  text-decoration: none; /* Remove underline */
   font-weight: 500;
   text-transform: lowercase;
+  display: inline-flex;
+  align-items: center;
+  height: 32px; /* Match button height */
+  line-height: 1;
+  padding: 0 10px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  transition: background 0.18s, color 0.18s;
+  /* Remove default button border/background for consistency */
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
 }
 
-.footer-dot {
-  font-size: 1.2em;
-  margin: 0 6px;
-  color: #b07b8c;
+.footer-link:hover,
+.footer-link:focus {
+  background: #ffe5ec;
+  color: #222;
+  outline: none;
+  text-decoration: none; /* Ensure no underline on hover/focus */
 }
 
 /* Prevent horizontal scroll for main layout and gallery */
@@ -517,6 +592,19 @@ main, .work-gallery-container, .work-gallery, .project-card {
   background: #fff url('../images/wedding-texture.jpg') center center/cover no-repeat !important;
 }
 
+/* Add override for decision matrix widget card (third card) */
+.project-card:nth-child(3),
+.project-card:nth-child(3) .project-thumb-area,
+.project-card:nth-child(3) .project-info {
+  background: linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.50)), #fff url('../images/paper-texture.jpg') center center/cover no-repeat !important;
+}
+.project-card:nth-child(3) .project-info {
+  background: url('../images/paper-texture.jpg') center/cover no-repeat !important;
+}
+.project-card:nth-child(3) .project-thumb-area {
+  background: #fff url('../images/paper-texture.jpg') center center/cover no-repeat !important;
+}
+
 /* Fix: Prevent lowercasing from any parent on .intro-hi */
 .intro-hi, .intro-hi * {
   text-transform: none !important;
@@ -545,5 +633,136 @@ main, .work-gallery-container, .work-gallery, .project-card {
   position: relative;
   z-index: 20;
 }
+
+.take-me-home-btn {
+  background: rgba(255,255,255,0.85);
+  color: #b07b8c;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-family: 'Inter', 'Space Grotesk', Arial, sans-serif;
+  font-weight: bold;
+  padding: 0.8em 2em;
+  text-decoration: none;
+  box-shadow: 0 2px 12px rgba(176,123,140,0.08);
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+}
+.take-me-home-btn:hover,
+.take-me-home-btn:focus {
+  background: #b07b8c;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* --- Button Defaults: All buttons are solid dark grey in dark mode, light grey in light mode --- */
+button,
+input[type="button"],
+input[type="submit"],
+.theme-toggle,
+.nav-hamburger,
+.footer-link,
+.contact-form button {
+  background: #444 !important; /* dark grey for dark mode */
+  color: #fff !important;
+  border: none;
+  border-radius: 6px;
+  box-shadow: none;
+  opacity: 1 !important;
+  transition: background 0.18s, color 0.18s, transform 0.18s;
+}
+
+/* Light mode: override to light grey and dark text */
+body.light button,
+body.light input[type="button"],
+body.light input[type="submit"],
+body.light .theme-toggle,
+body.light .nav-hamburger,
+body.light .footer-link,
+body.light .contact-form button {
+  background: #e5e5e5 !important;
+  color: #222 !important;
+}
+
+/* Theme toggle specific overrides */
+.theme-toggle {
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  z-index: 200;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-accent) !important;
+  border-radius: 50%;
+  padding: 6px 10px;
+  outline: none;
+}
+
+/* Hamburger icon button (nav-mobile) */
+.nav-hamburger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  margin-left: 8px !important;
+  z-index: 120;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: none;
+  border: none;
+  transition: background 0.18s, transform 0.18s cubic-bezier(.4,2,.6,1);
+}
+
+/* Footer/message buttons */
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  line-height: 1;
+  padding: 0 10px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  font-weight: 500;
+  text-transform: lowercase;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  vertical-align: middle;
+  border: none;
+  opacity: 1 !important;
+  transition: background 0.18s, color 0.18s;
+}
+
+/* Contact form button */
+.contact-form button {
+  align-self: flex-start;
+  box-shadow: none !important;
+}
+
+/* Hover/focus states */
+button:hover,
+button:focus,
+input[type="button"]:hover,
+input[type="button"]:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+.theme-toggle:hover,
+.theme-toggle:focus,
+.nav-hamburger:hover,
+.nav-hamburger:focus,
+.footer-link:hover,
+.footer-link:focus,
+.contact-form button:hover,
+.contact-form button:focus {
+  background: #b07b8c !important;
+  color: #fff !important;
+  outline: none;
+  text-decoration: none;
+  opacity: 1 !important;
+}
+
+/* ...existing code... */
 
 

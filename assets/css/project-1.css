@@ -37,15 +37,14 @@
 
 /* Site title styles */
 .site-title {
-    transition: transform 0.18s cubic-bezier(.4,2,.6,1), background 0.18s, color 0.18s;
-    cursor: pointer;
-    /* If your home.css sets a background, you may want to reset it here */
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), background 0.18s, color 0.18s;
+  cursor: pointer;
 }
 
 .site-title:hover {
-    transform: scale(1.06);
-    color: #b995a1;
-    box-shadow: none;
+  transform: scale(1.06);
+  color: #b995a1;
+  box-shadow: none;
 }
 
 /* Project section styles */

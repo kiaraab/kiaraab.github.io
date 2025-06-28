@@ -10,7 +10,7 @@ export const projects = [
   },
   {
     title: "wedding-wise ai",
-    blurb: "A short two-line blurb about project one goes here. It’s concise and clear.",
+    blurb: "a short feature roadmap.",
     img: "assets/images/wedding-texture.jpg", // project-1 uses wedding-texture
     link: "/work/project-1.html",
     alt: "Project 1"
