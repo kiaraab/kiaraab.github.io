@@ -659,7 +659,7 @@ main, .work-gallery-container, .work-gallery, .project-card {
 button,
 input[type="button"],
 input[type="submit"],
-.theme-toggle,
+.theme-switch,
 .nav-hamburger,
 .footer-link,
 .contact-form button {
@@ -676,7 +676,7 @@ input[type="submit"],
 body.light button,
 body.light input[type="button"],
 body.light input[type="submit"],
-body.light .theme-toggle,
+body.light .theme-switch,
 body.light .nav-hamburger,
 body.light .footer-link,
 body.light .contact-form button {
@@ -684,18 +684,54 @@ body.light .contact-form button {
   color: #222 !important;
 }
 
+body.light .theme-switch .slider {
+  background: #e5e5e5;
+}
+
 /* Theme toggle specific overrides */
-.theme-toggle {
+.theme-switch {
   position: absolute;
   top: 14px;
   right: 24px;
   z-index: 200;
-  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch .slider {
+  width: 44px;
+  height: 24px;
+  background: #444;
+  border-radius: 34px;
+  position: relative;
   cursor: pointer;
-  color: var(--text-accent) !important;
+  transition: background 0.18s;
+}
+
+.theme-switch .slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
   border-radius: 50%;
-  padding: 6px 10px;
-  outline: none;
+  transition: transform 0.18s;
+}
+
+input#theme-toggle:checked + .slider {
+  background: #b07b8c;
+}
+
+input#theme-toggle:checked + .slider::before {
+  transform: translateX(20px);
 }
 
 /* Hamburger icon button (nav-mobile) */
@@ -748,8 +784,8 @@ input[type="button"]:hover,
 input[type="button"]:focus,
 input[type="submit"]:hover,
 input[type="submit"]:focus,
-.theme-toggle:hover,
-.theme-toggle:focus,
+.theme-switch .slider:hover,
+.theme-switch .slider:focus,
 .nav-hamburger:hover,
 .nav-hamburger:focus,
 .footer-link:hover,

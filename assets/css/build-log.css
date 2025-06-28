@@ -1,0 +1,35 @@
+/* build-log.css */
+.log-container {
+  max-width: 800px;
+  margin: 80px auto 48px;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.log-title {
+  font-size: 2rem;
+  color: #b07b8c;
+  text-align: center;
+  text-transform: lowercase;
+  font-family: 'Playfair Display', serif;
+}
+.changelog {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.log-card {
+  background: var(--bg-card);
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+}
+.log-date {
+  font-size: 0.9rem;
+  color: var(--text-accent);
+}
