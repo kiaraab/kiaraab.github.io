@@ -75,35 +75,35 @@ function initHomeScripts() {
         }
     }
 
-    // Insert contact modal for index page
-    fetch('/components/contact-form.html')
-        .then(r => r.text())
-        .then(html => {
-            document.body.insertAdjacentHTML('beforeend', html);
-
-            const contactModal = document.getElementById('contact-modal');
-            const contactClose = document.getElementById('contact-close');
-            function closeContact() {
-                contactModal.classList.remove('open');
-            }
-            if (contactClose) contactClose.addEventListener('click', closeContact);
-            if (contactModal) {
-                contactModal.addEventListener('click', e => {
-                    if (e.target === contactModal) closeContact();
-                });
-            }
-            document.querySelectorAll('a[href="/contact.html"]').forEach(link => {
-                link.addEventListener('click', e => {
-                    e.preventDefault();
-                    contactModal.classList.add('open');
-                });
-            });
-        });
-    // ...existing code for project gallery below...
     const gallery = document.getElementById('workGallery');
     if (gallery) {
         gallery.innerHTML = projects.map((p, i) => `
           <div class="project-card${i === 1 ? ' project-card-wedding' : ''}" onclick="location.href='${p.link}'">
+            <div class="project-thumb-area">
+              <div class="project-thumb-title">${p.title}</div>
+            </div>
+            <div class="project-info" style="background-image: url('${p.img}');">
+              <div class="project-date">date last modified: 06/26/2025</div>
+              <div class="project-blurb">${p.blurb}</div>
+            </div>
+          </div>
+        `).join('');
+        // Optional: keyboard accessibility
+        gallery.querySelectorAll('.project-card').forEach(card => {
+            card.tabIndex = 0;
+            card.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') card.click();
+            });
+        });
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHomeScripts);
+} else {
+    initHomeScripts();
+}
+// --- End nav-mobile.js logic ---
             <div class="project-thumb-area">
               <div class="project-thumb-title">${p.title}</div>
             </div>
