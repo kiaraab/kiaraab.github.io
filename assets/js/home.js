@@ -83,7 +83,7 @@ function initHomeScripts() {
               <div class="project-thumb-title">${p.title}</div>
             </div>
             <div class="project-info" style="background-image: url('${p.img}');">
-              <div class="project-date">date last modified: 06/26/2025</div>
+              <div class="project-date">Case Study</div>
               <div class="project-blurb">${p.blurb}</div>
             </div>
           </div>

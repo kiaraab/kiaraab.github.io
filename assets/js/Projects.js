@@ -2,25 +2,25 @@
 
 export const projects = [
   {
-    title: "interactive timeline",
-    blurb: "Explore my experience year by year in a clickable timeline.",
-    img: "assets/images/paper-texture.jpg", // changed from background.jpg
+    title: "Year-By-Year Career Timeline",
+    blurb: "Interactive timeline showcasing 5+ years of data science experience. Built with vanilla JS and responsive design.",
+    img: "assets/images/paper-texture.jpg",
     link: "/work/project-2.html",
     alt: "Interactive Timeline"
   },
   {
-    title: "wedding-wise ai",
-    blurb: "a short feature roadmap.",
-    img: "assets/images/wedding-texture.jpg", // project-1 uses wedding-texture
+    title: "Feature Roadmap for Wedding Planning AI",
+    blurb: "Product strategy and feature prioritization for AI-powered wedding planning platform. Includes market analysis and user personas.",
+    img: "assets/images/wedding-texture.jpg",
     link: "/work/project-1.html",
-    alt: "Project 1"
+    alt: "Wedding Planning AI Roadmap"
   },
   {
-    title: "decision matrix widget",
-    blurb: "Score project ideas by cost, impact and effort.",
+    title: "Cost-Impact-Effort Scoring Tool",
+    blurb: "Interactive decision matrix for project prioritization. Features weighted scoring, localStorage persistence, and responsive design.",
     img: "assets/images/background.png",
     link: "/work/decision-matrix.html",
-    alt: "Decision Matrix"
+    alt: "Decision Matrix Tool"
   },
   // ...more projects
 ];
