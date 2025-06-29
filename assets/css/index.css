@@ -29,7 +29,8 @@ textarea {
 body {
   position: relative;
   min-height: 100vh;
-  background: url('/assets/images/background.gif') center center/cover no-repeat fixed, #ffe5ec;
+  background: var(--bg-floral); /* Using CSS variable instead of direct URL */
+  color: var(--text-main); /* Using CSS variable for consistency */
   display: flex;
   flex-direction: column;
 }
@@ -39,46 +40,23 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.1);
   pointer-events: none;
 }
 
-/* --- Theme Variables --- */
+/* --- CSS Variables --- */
 :root {
   --bg-main: #18161a;
   --bg-card: rgba(30,30,30,0.90);
   --text-main: #fff;
-  --text-accent: #ffe5ec; /* accent for dark mode */
-  --bg-footer: rgba(255,255,255,0.60);
-  --bg-header: rgba(255,255,255,0.75);
-  --bg-floral: url('/assets/images/background.gif') center center/cover no-repeat fixed, #ffe5ec;
+  --text-accent: #af1658; /* Updated to match site title */
+  --text-accent-dark: #af1658; /* Updated to match site title */
+  --bg-footer: rgba(255,255,255,0.65);
+  --bg-header: rgba(255,255,255,0.65);
+  --bg-floral: url('/assets/images/background.gif') center center/cover no-repeat fixed, #000;
 }
 
-body {
-  /* ...existing code... */
-  background: var(--bg-floral);
-  color: var(--text-main);
-}
-
-/* Light mode overrides */
-body.light {
-  --bg-main: #fff;
-  --bg-card: rgba(255,255,255,0.92);
-  --text-main: #222;
-  --text-accent: #803c5a; /* accent for light mode */
-  --bg-footer: rgba(255,255,255,0.85);
-  --bg-header: rgba(255,255,255,0.92);
-  --bg-floral: url('/assets/images/lightmode.gif') center center/cover no-repeat fixed, #fff;
-}
-
-body.light,
-body.light input,
-body.light button,
-body.light select,
-body.light textarea {
-  color: var(--text-main);
-  background: var(--bg-floral);
-}
+/* Body styles consolidated above */
 
 /* --- Header --- */
 .header {
@@ -86,24 +64,25 @@ body.light textarea {
   top: 0;
   left: 0; right: 0;
   height: 64px;
-  background: rgba(255,255,255,0.75); /* semi-transparent */
+  background: rgba(255,255,255,0.65); /* reduced opacity for glassmorphism */
   backdrop-filter: blur(20px); /* blur effect */
-  -webkit-backdrop-filter: blur(4px); /* Safari support */
+  -webkit-backdrop-filter: blur(20px); /* Safari support */
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 100;
-  border-bottom: 1px solid #f3cdd7;
+  border-bottom: 1px solid #e8b3c7; /* Updated to match pink theme - lighter version of #af1658 */
   padding: 0 32px;
   font-family: 'Playfair Display', 'Inter', 'Space Grotesk', Arial, sans-serif;
   transition: background 0.22s, backdrop-filter 0.22s;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.4); /* darker shadow */
 }
 
 .site-title {
   font-size: 1.75rem;
   font-weight: normal; /* default, overridden inline on home page */
   letter-spacing: 0.05em;
-  color: var(--text-accent);
+  color: #af1658; /* darker pink color */
   text-transform: none;
   cursor: pointer; /* <-- Add this line */
   font-family: 'Playfair Display', serif;
@@ -111,8 +90,7 @@ body.light textarea {
 }
 
 .site-title:hover {
-  transform: scale(1.06);
-  color: #b995a1;
+  transform: scale(1.15);
   box-shadow: none;
 }
 
@@ -151,9 +129,7 @@ body.light textarea {
   position: relative;
 }
 
-.nav-hamburger {
-  margin-left: 8px !important;
-}
+
 
 .nav-dropdown {
   left: 0;
@@ -231,7 +207,7 @@ main {
 }
 
 #location-diff-intro.no-diff {
-  color: #ffe5ec;
+  color: var(--text-accent);
 }
 
 .intro-bio {
@@ -274,28 +250,18 @@ main {
   padding-bottom: 24px;
 }
 
-.work-title {
-  margin-top: 96px;
-  margin-bottom: 24px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: #222;
-  padding-left: 0rem;
-  text-transform: lowercase;
-}
-
 .work-gallery {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 32px;
-  padding: 24px 32px;
+  padding: 24px 16px; /* Updated from 24px 32px for consistency */
   min-height: unset;
   width: 100%;
-  overflow-x: auto;
+  max-width: 100vw; /* Added for consistency */
+  overflow-x: hidden; /* Updated from auto for consistency */
   overflow-y: hidden;
-  white-space: nowrap;
+  white-space: normal; /* Updated from nowrap for consistency */
   scroll-behavior: smooth;
   scrollbar-width: none;
 }
@@ -418,39 +384,35 @@ main {
 
 /* --- Footer --- */
 .simple-footer {
-  background: rgba(255,255,255,0.60); /* semi-transparent */
+  background: rgba(255,255,255,0.85); /* increased opacity for better visibility */
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(4px);
-  color: #222;
+  -webkit-backdrop-filter: blur(20px);
+  color: #000; /* much darker for better visibility */
   text-align: center;
   font-size: 0.7rem;
-  height: 5vh;
-  line-height: 1;
-  padding: 0;
+  min-height: 48px; /* Use min-height instead of fixed height */
+  line-height: 1.2;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border-top: 1px solid #f3cdd7;
+  border-top: 1px solid #e8b3c7; /* Updated to match pink theme - lighter version of #af1658 */
   text-transform: lowercase;
-  margin-top: 24px;
+  margin-top: 0; /* Remove top margin to connect with CTA */
   box-sizing: border-box;
-  width: 100vw;
-  overflow: hidden;
-  flex-shrink: 0;
+  width: 100%;
   position: relative;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  z-index: 20; /* Consolidated from duplicate rule */
   font-family: 'Inter', 'Space Grotesk', Arial, sans-serif;
   transition: background 0.22s, backdrop-filter 0.22s;
+  box-shadow: 0 -6px 24px rgba(0,0,0,0.4); /* darker shadow */
 }
 
-/* Footer links: no underline, elegant look */
 .footer-link {
-  color: #222;
+  color: #252525 !important; /* much darker for better visibility - override button defaults */
   text-decoration: none; /* Remove underline */
-  font-weight: 500;
+  font-weight: 600; /* increased font weight for better visibility */
   text-transform: lowercase;
   display: inline-flex;
   align-items: center;
@@ -466,15 +428,19 @@ main {
   font-family: inherit;
   font-size: inherit;
   cursor: pointer;
+  vertical-align: middle;
+  opacity: 1 !important;
 }
 
 .footer-link:hover,
 .footer-link:focus {
-  background: var(--text-accent);
-  color: #fff;
+  background: rgba(250, 250, 250, 0.74) !important; /* subtle dark grey background */
+  color: #252525 !important; /* keep same text color */
   outline: none;
   text-decoration: none; /* Ensure no underline on hover/focus */
 }
+
+
 
 /* Prevent horizontal scroll for main layout and gallery */
 main, .work-gallery-container, .work-gallery, .project-card {
@@ -483,17 +449,7 @@ main, .work-gallery-container, .work-gallery, .project-card {
   overflow-x: hidden;
 }
 
-/* For single project, prevent gallery from stretching horizontally */
-.work-gallery {
-  flex-direction: column;
-  align-items: center;
-  white-space: normal;
-  overflow-x: hidden;
-  width: 100%;
-  max-width: 100vw;
-  gap: 32px;
-  padding: 24px 16px;
-}
+/* For single project, prevent gallery from stretching horizontally - properties consolidated above */
 
 /* --- Responsive --- */
 @media (max-width: 1200px) {
@@ -555,9 +511,7 @@ main, .work-gallery-container, .work-gallery, .project-card {
 
 @media (max-width: 600px) {
   .simple-footer { font-size: 0.55rem; height: 5vh; min-height: 18px; max-height: 32px; }
-  .intro-section { padding: 18px 2vw 10px 2vw; }
-  .intro-hi { font-size: 2rem; }
-  .intro-icon { width: 90px; height: 90px; }
+  /* Consolidated with @media (max-width: 767px) rules above */
 }
 
 /* --- Utility: Remove unwanted borders/shadows --- */
@@ -609,15 +563,11 @@ main, .work-gallery-container, .work-gallery, .project-card {
   background: #fff url('../images/paper-texture.jpg') center center/cover no-repeat !important;
 }
 
-/* Fix: Prevent lowercasing from any parent on .intro-hi */
-.intro-hi, .intro-hi * {
-  text-transform: none !important;
-}
-
-/* Force intro-hi to never lowercase, regardless of parent */
+/* Fix: Prevent lowercasing from any parent on .intro-hi - consolidated */
+.intro-hi,
+.intro-hi *,
 .intro-box .intro-left .intro-hi,
-.intro-left .intro-hi,
-.intro-hi {
+.intro-left .intro-hi {
   text-transform: none !important;
 }
 
@@ -633,10 +583,7 @@ main, .work-gallery-container, .work-gallery, .project-card {
   position: relative;
 }
 
-.simple-footer {
-  position: relative;
-  z-index: 20;
-}
+/* Simple footer z-index consolidated above */
 
 .take-me-home-btn {
   background: rgba(255,255,255,0.85);
@@ -648,7 +595,7 @@ main, .work-gallery-container, .work-gallery, .project-card {
   font-weight: bold;
   padding: 0.8em 2em;
   text-decoration: none;
-  box-shadow: 0 2px 12px rgba(176,123,140,0.08);
+  box-shadow: 0 2px 12px rgba(175,22,88,0.08); /* Updated to match pink theme - rgba version of #af1658 */
   transition: background 0.18s, color 0.18s;
   cursor: pointer;
 }
@@ -659,15 +606,12 @@ main, .work-gallery-container, .work-gallery, .project-card {
   text-decoration: none;
 }
 
-/* --- Button Defaults: All buttons are solid dark grey in dark mode, light grey in light mode --- */
+/* --- Button Defaults --- */
 button,
 input[type="button"],
-input[type="submit"],
-.nav-hamburger,
-.footer-link,
-.contact-form button {
+input[type="submit"] {
   background: transparent !important;
-  color: var(--text-accent) !important;
+  color: var(--text-accent-dark) !important;
   border: none;
   border-radius: 6px;
   box-shadow: none;
@@ -675,104 +619,34 @@ input[type="submit"],
   transition: background 0.18s, color 0.18s, transform 0.18s;
 }
 
-/* Light mode: override to light pink and dark text */
-body.light button,
-body.light input[type="button"],
-body.light input[type="submit"],
-body.light .nav-hamburger,
-body.light .footer-link,
-body.light .contact-form button {
-  background: transparent !important;
-  color: var(--text-accent) !important;
-}
-
-/* --- Theme toggle switch: no background in any mode --- */
-.theme-switch {
-  position: absolute;
-  top: 14px;
-  right: 24px;
-  z-index: 200;
-  display: inline-flex;
-  align-items: center;
-}
-
-.theme-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.theme-switch .slider {
-  width: 44px;
-  height: 24px;
-  border-radius: 34px;
-  position: relative;
-  cursor: pointer;
-  transition: background 0.18s;
-  background: var(--text-accent) !important;
-}
-
-.theme-switch .slider::before {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  left: 3px;
-  top: 3px;
-  background: #fff;
-  border-radius: 50%;
-  transition: transform 0.18s;
-}
-
-input#theme-toggle:checked + .slider {
-  background: var(--text-accent) !important;
-}
-
-input#theme-toggle:checked + .slider::before {
-  transform: translateX(20px);
-}
-
-/* Hamburger icon button (nav-mobile) */
+/* Nav hamburger - consolidated styles */
 .nav-hamburger {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 38px;
-  height: 38px;
-  margin-left: 8px !important;
-  z-index: 120;
-  position: relative;
-  border-radius: 8px;
-  box-shadow: none;
+  background: transparent !important;
+  color: var(--text-accent-dark) !important;
   border: none;
-  transition: background 0.18s, transform 0.18s cubic-bezier(.4,2,.6,1);
-}
-
-/* Footer/message buttons */
-.footer-link {
-  display: inline-flex;
-  align-items: center;
-  height: 32px;
-  line-height: 1;
-  padding: 0 10px;
-  box-sizing: border-box;
   border-radius: 6px;
-  font-weight: 500;
-  text-transform: lowercase;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: pointer;
-  vertical-align: middle;
-  border: none;
+  box-shadow: none;
   opacity: 1 !important;
-  transition: background 0.18s, color 0.18s;
+  margin-left: 8px !important;
 }
 
-/* Contact form button */
+/* Nav hamburger hover - no background change */
+.nav-hamburger:hover,
+.nav-hamburger:focus {
+  background: transparent !important;
+  color: var(--text-accent-dark) !important;
+}
+
+/* Contact form button - consolidated styles */
 .contact-form button {
-  align-self: flex-start;
+  background: transparent !important;
+  color: var(--text-accent-dark) !important;
+  border: none;
+  border-radius: 6px;
   box-shadow: none !important;
+  opacity: 1 !important;
+  transition: background 0.18s, color 0.18s, transform 0.18s;
+  align-self: flex-start;
 }
 
 /* Hover/focus states */
@@ -782,19 +656,10 @@ input[type="button"]:hover,
 input[type="button"]:focus,
 input[type="submit"]:hover,
 input[type="submit"]:focus,
-.theme-switch .slider:hover,
-.theme-switch .slider:focus,
-.nav-hamburger:hover,
-.nav-hamburger:focus,
-.footer-link:hover,
-.footer-link:focus,
 .contact-form button:hover,
 .contact-form button:focus {
-  background: var(--text-accent) !important;
+  background: var(--text-accent-dark) !important;
   color: #fff !important;
-  outline: none;
-  text-decoration: none;
-  opacity: 1 !important;
   outline: none;
   text-decoration: none;
   opacity: 1 !important;

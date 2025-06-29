@@ -3,7 +3,7 @@
 .project-box {
   background: rgba(30, 30, 30, 0.92);
   border-radius: 18px;
-  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.65);
+  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.8);
   padding: 2.2rem 1.5rem;
   max-width: 900px;
   margin: 0 auto;
@@ -58,6 +58,33 @@
   text-align: left;
   min-width: 110px;
   text-transform: lowercase;
+}
+
+/* Style for project name input fields */
+.matrix-table .project-name {
+  background: transparent;
+  border: none;
+  color: #b07b8c;
+  font-weight: 600;
+  font-size: 1.08rem;
+  text-transform: lowercase;
+  padding: 4px 0;
+  width: 100%;
+  outline: none;
+  font-family: inherit;
+}
+
+.matrix-table .project-name::placeholder {
+  color: rgba(176, 123, 140, 0.7);
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+.matrix-table .project-name:focus {
+  color: #fff;
+  background: rgba(176, 123, 140, 0.1);
+  border-radius: 4px;
+  padding: 4px 6px;
 }
 
 .matrix-table .score {

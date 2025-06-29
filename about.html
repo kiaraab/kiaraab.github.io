@@ -3,79 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Kiara Raab | about</title>
+    <title>Kiara Raab | About</title>
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩷</text></svg>"
     />
-    <link rel="stylesheet" href="assets/css/home.css">
-    <link rel="stylesheet" href="assets/css/about.css">
     <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/contact.css">
     <link rel="stylesheet" href="assets/css/nav-mobile.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
 </head>
 <body class="about-page">
     <div id="header-placeholder"></div>
+    
     <main class="about-main">
         <!-- Hero Section -->
-        <section class="about-hero">
-            <div class="about-hero-content">
-                <img class="about-hero-img" src="assets/images/profile.jpg" alt="Kiara Raab">
-                <div>
-                    <h1 class="about-title">kiara raab</h1>
-                    <div class="about-subtitle">data scientist & aspiring product manager</div>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number" data-count="5">0</span>
-                            <span class="stat-label">years in data</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number" data-count="12">0</span>
-                            <span class="stat-label">projects shipped</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number" data-count="3000">0</span>
-                            <span class="stat-label">cups of coffee</span>
-                        </div>
+        <section class="hero" id="hero">
+            <div class="hero__container">
+                <div class="hero__content">
+                    <h1 class="hero__name">Kiara Raab</h1>
+                    <p class="hero__tagline">Building thoughtful products for humans.</p>
+                    <div class="hero__intro">
+                        <p>I'm a data scientist transitioning into product management. I've worked with Fortune 500 companies to design responsible AI frameworks, but I've always loved building things that <em>reach people</em>, not just analyze them. My sweet spot is where user empathy meets systems thinking.</p>
                     </div>
                 </div>
+                <figure class="hero__image">
+                    <img src="assets/images/profile.jpg" alt="Kiara Raab" class="hero__photo">
+                </figure>
             </div>
         </section>
 
-        <!-- Story Sections -->
-        <section class="about-section">
-            <h2 class="about-section-title">early life & education</h2>
-            <p>Kiara studied Information Science at the University of Maryland, where she discovered her love for data, design, and research.</p>
-            <div class="skills">
-                <div class="skill">
-                    <span>Python</span>
-                    <div class="skill-bar" data-skill="90"><div class="skill-bar-fill"></div></div>
-                </div>
-                <div class="skill">
-                    <span>R</span>
-                    <div class="skill-bar" data-skill="80"><div class="skill-bar-fill"></div></div>
-                </div>
-                <div class="skill">
-                    <span>SQL</span>
-                    <div class="skill-bar" data-skill="85"><div class="skill-bar-fill"></div></div>
+        <!-- Journey Timeline -->
+        <section class="journey" id="journey">
+            <div class="journey__container">
+                <h2 class="journey__title">my journey</h2>
+                <div class="timeline">
+                    <article class="timeline__item" data-aos="fade-up">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content">
+                            <figure class="timeline__photo">
+                                <img src="assets/images/germany-iowa.jpg" alt="Early childhood in Germany and Iowa" class="photo--taped">
+                            </figure>
+                            <div class="timeline__text">
+                                <h3 class="timeline__heading">born in germany, raised in iowa</h3>
+                                <p class="timeline__description">Moved to Maryland at 14, bringing a unique perspective shaped by different cultures and places that taught me adaptability from an early age.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="timeline__item" data-aos="fade-up">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content">
+                            <figure class="timeline__photo">
+                                <img src="assets/images/high-school-graduation.jpg" alt="High school graduation with finance certificate" class="photo--taped">
+                            </figure>
+                            <div class="timeline__text">
+                                <h3 class="timeline__heading">graduated high school with finance certificate</h3>
+                                <p class="timeline__description">Earned a Certificate of Finance from AOF, sparking my interest in how data and systems drive business decisions.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="timeline__item" data-aos="fade-up">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content">
+                            <figure class="timeline__photo">
+                                <img src="assets/images/umd-logo.png" alt="University of Maryland graduation" class="photo--taped">
+                            </figure>
+                            <div class="timeline__text">
+                                <h3 class="timeline__heading">attended umd (2019–2022)</h3>
+                                <p class="timeline__description">Finished B.S. in Information Science in 3 years, where I discovered my passion for understanding how people interact with technology and data.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="timeline__item" data-aos="fade-up">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content">
+                            <figure class="timeline__photo">
+                                <img src="assets/images/pwc-logo.png" alt="Working at PwC as data scientist" class="photo--taped">
+                            </figure>
+                            <div class="timeline__text">
+                                <h3 class="timeline__heading">worked as a data scientist at pwc</h3>
+                                <p class="timeline__description">Led Responsible AI and firmwide governance initiatives, learning to translate complex analytics into business value and stakeholder impact.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="timeline__item" data-aos="fade-up">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content">
+                            <figure class="timeline__photo">
+                                <img src="assets/images/consulting-clients.jpg" alt="Consulting for Fortune 400 clients" class="photo--taped">
+                            </figure>
+                            <div class="timeline__text">
+                                <h3 class="timeline__heading">consulted for fortune 400 clients</h3>
+                                <p class="timeline__description">Scaled frameworks and designed internal tooling, understanding how technology decisions impact real business outcomes at enterprise scale.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="timeline__item" data-aos="fade-up">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content">
+                            <figure class="timeline__photo">
+                                <img src="assets/images/gatech-logo.png" alt="Georgia Tech M.S. Analytics program" class="photo--taped">
+                            </figure>
+                            <div class="timeline__text">
+                                <h3 class="timeline__heading">started m.s. in analytics at georgia tech</h3>
+                                <p class="timeline__description">2023–present: Deepening my technical foundation while exploring how analytics can drive product strategy and user-centered decisions. Currently taking digital marketing to bridge data insights with compelling user experiences.</p>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <section class="about-section">
-            <h2 class="about-section-title">career & achievements</h2>
-            <p>Kiara currently works as a Data Science Associate at PwC, building analytics solutions and collaborating with cross-functional teams.</p>
-            <p>She’s passionate about product management, research, and deploying impactful solutions.</p>
+        <!-- Product Values -->
+        <section class="values" id="values">
+            <div class="values__container">
+                <h2 class="values__title">what i believe as a pm</h2>
+                <div class="values__grid">
+                    <article class="value-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="value-card__icon">📊</div>
+                        <h3 class="value-card__title">outcomes > outputs</h3>
+                        <p class="value-card__description">Success isn't measured by features shipped, but by problems solved and lives improved.</p>
+                    </article>
+
+                    <article class="value-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="value-card__icon">💝</div>
+                        <h3 class="value-card__title">build with empathy</h3>
+                        <p class="value-card__description">Understanding user pain points isn't just research—it's the foundation of great products.</p>
+                    </article>
+
+                    <article class="value-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="value-card__icon">⚡</div>
+                        <h3 class="value-card__title">start small, iterate fast</h3>
+                        <p class="value-card__description">MVP isn't about cutting corners—it's about learning quickly and building the right thing.</p>
+                    </article>
+
+                    <article class="value-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="value-card__icon">✨</div>
+                        <h3 class="value-card__title">add polish, not perfectionism</h3>
+                        <p class="value-card__description">Great products feel intentional and refined, but perfect is the enemy of shipped.</p>
+                    </article>
+                </div>
+            </div>
         </section>
 
-        <section class="about-section">
-            <h2 class="about-section-title">personal life</h2>
-            <p>Outside of work, Kiara enjoys exploring coffee blends, vintage keyboards, and creative side projects.</p>
+        <!-- Personal Touches -->
+        <section class="personal" id="personal">
+            <div class="personal__container">
+                <h2 class="personal__title">fun facts about me</h2>
+                <div class="personal__grid">
+                    <article class="personal-fact" data-aos="fade-up" data-aos-delay="0">
+                        <div class="personal-fact__emoji">💅🏼</div>
+                        <p class="personal-fact__text">I host themed girls nights with detailed planning (and spreadsheets included)</p>
+                    </article>
+
+                    <article class="personal-fact" data-aos="fade-up" data-aos-delay="100">
+                        <div class="personal-fact__emoji">🩷</div>
+                        <p class="personal-fact__text">I decorate all my projects with a signature pop of pink</p>
+                    </article>
+
+                    <article class="personal-fact" data-aos="fade-up" data-aos-delay="200">
+                        <div class="personal-fact__emoji">👑</div>
+                        <p class="personal-fact__text">I'm a cat mom to a [now] old lady I adopted when I was 12</p>
+                    </article>
+
+                    <article class="personal-fact" data-aos="fade-up" data-aos-delay="300">
+                        <div class="personal-fact__emoji">📈</div>
+                        <p class="personal-fact__text">I'm passionate about helping others explore career paths with confidence</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta" id="cta">
+            <div class="cta__container">
+                <h2 class="cta__title">want to build something together?</h2>
+                <button id="cta-contact-btn" class="cta__button">let's talk</button>
+            </div>
         </section>
     </main>
+
     <div id="footer-placeholder"></div>
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script src="assets/js/components.js"></script>
-    <script src="assets/js/time-diff.js"></script>
-    <!-- Do NOT include home.js directly here -->
+    <script src="assets/js/about.js"></script>
 </body>
 </html>

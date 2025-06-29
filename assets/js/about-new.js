@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add staggered animation delays to value cards
     valueCards.forEach((card, index) => {
-        card.style.transitionDelay = `${index * 80}ms`;
+        card.style.transitionDelay = `${index * 100}ms`;
     });
 
     // Add staggered animation delays to personal facts
@@ -87,40 +87,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tagline) {
         const text = tagline.textContent;
         tagline.textContent = '';
-        
-        // Create a span for the text and cursor
-        const textSpan = document.createElement('span');
-        const cursorSpan = document.createElement('span');
-        cursorSpan.textContent = '|';
-        cursorSpan.style.color = 'var(--primary-color, #af1658)';
-        cursorSpan.style.animation = 'blink 1s infinite';
-        
-        // Add blinking cursor animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes blink {
-                0%, 50% { opacity: 1; }
-                51%, 100% { opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        tagline.appendChild(textSpan);
-        tagline.appendChild(cursorSpan);
+        tagline.style.borderRight = '2px solid var(--primary-color, #af1658)';
         
         let i = 0;
-        const typeSpeed = 80;
+        const typeSpeed = 50;
         
         function typeWriter() {
             if (i < text.length) {
-                textSpan.textContent += text.charAt(i);
+                tagline.textContent += text.charAt(i);
                 i++;
                 setTimeout(typeWriter, typeSpeed);
             } else {
                 // Remove cursor after typing is complete
                 setTimeout(() => {
-                    cursorSpan.remove();
-                }, 1500);
+                    tagline.style.borderRight = 'none';
+                }, 1000);
             }
         }
         

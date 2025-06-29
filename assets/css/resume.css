@@ -16,7 +16,8 @@ main.content {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    overflow-y:auto;
+    padding: 100px 20px 40px; /* Add top padding for fixed header, bottom padding for footer */
+    min-height: calc(100vh - 64px); /* Ensure it takes full height minus header */
 }
 
 /* Resume Title */
@@ -199,32 +200,11 @@ main.content {
     text-decoration: underline;
 }
 
-/* Nav tabs: underline only on hover or active, expand on hover, bold if active */
-.nav-tabs a {
-    text-decoration: none;
-    color: #222;
-    font-size: 1rem;
-    text-transform: lowercase;
-    font-weight: 500;
-    opacity: 0.85;
-    transition: opacity 0.2s, transform 0.18s cubic-bezier(.4,2,.6,1), font-weight 0.18s;
-}
-
-.nav-tabs a:hover,
-.nav-tabs a.active {
-    opacity: 1;
-    text-decoration: none;
-    transform: scale(1.08); /* expand on hover or active */
-}
-
-.nav-tabs a.active {
-    font-weight: bold;
-}
-
 /* PDF Download Button */
 .pdf-download {
     text-align: center;
-    margin-top: 40px;
+    margin: 40px 0 20px 0;
+    width: 100%;
 }
 .pdf-download a {
     background-color: #b995a1;
@@ -235,9 +215,11 @@ main.content {
     font-size: 1rem;
     transition: background 0.3s;
     box-shadow: 0px 0px 4px rgb(0, 0, 0);
+    display: inline-block;
 }
 .pdf-download a:hover {
-    background-color: #b995a1;
+    background-color: #a08390;
+    text-decoration: none;
 }
 
 /* Paragraphs */
@@ -280,18 +262,11 @@ main.content {
     z-index: 100;
     border-bottom: 1px solid #f3cdd7;
     padding: 0 32px; /* Match home.css exactly */
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
 }
 
 .header-right {
     display: flex;
-    align-items: center;
-    height: 100%;
-    margin-left: 0; /* Remove any margin that pushes it left */
-}
-
-.nav-tabs {
-    display: flex;
-    gap: 32px;
     align-items: center;
     height: 100%;
     margin-left: 0; /* Remove any margin that pushes it left */
@@ -303,6 +278,37 @@ main.content {
     justify-content: center;
     height: 100%;
     margin-left: 18px;
+}
+
+/* Hide time status on resume page */
+.resume-page #time-status,
+.resume-page .header-info {
+    display: none !important;
+}
+
+/* Ensure header-right doesn't take space when empty */
+.resume-page .header-right {
+    display: none;
+}
+
+/* Resume page specific body styling */
+.resume-page {
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.resume-page html,
+.resume-page body {
+    overflow-x: hidden;
+    height: 100%;
+}
+
+/* Footer positioning for resume page */
+.resume-page .simple-footer {
+    position: relative;
+    margin-top: auto;
+    margin-bottom: 0;
+    background: #fff;
+    border-top: 1px solid #f3cdd7;
 }
 
 /* Responsive Adjustments */

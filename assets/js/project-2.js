@@ -30,6 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'M.S. Analytics & PwC',
             subtitle: 'Georgia Tech',
             details: 'Started the M.S. Analytics program at Georgia Tech while continuing at PwC. Balanced work and graduate studies, focusing on advanced analytics and leadership.'
+        },
+        {
+            year: '2024',
+            title: 'Advanced Analytics & Leadership',
+            subtitle: 'Georgia Tech & PwC',
+            details: 'Continued graduate studies while taking on more leadership responsibilities at PwC. Focused on advanced machine learning techniques and strategic analytics.'
+        },
+        {
+            year: '2025',
+            title: 'M.S. Graduation & Career Growth',
+            subtitle: 'Georgia Tech & Beyond',
+            details: 'Completing M.S. Analytics program and exploring new opportunities in data science leadership. Focused on innovative analytics solutions and strategic career development.'
         }
     ];
 
@@ -65,6 +77,23 @@ document.addEventListener('DOMContentLoaded', () => {
         nodesContainer.appendChild(node);
     });
 
+    // Fix timeline line width to match nodes container
+    function adjustTimelineLineWidth() {
+        const timelineLine = timeline.querySelector('.timeline-line');
+        const nodesRect = nodesContainer.getBoundingClientRect();
+        const scrollAreaRect = scrollArea.getBoundingClientRect();
+        const scrollLeft = scrollArea.scrollLeft;
+        
+        // Calculate the full width needed for the line
+        const nodesWidth = nodesContainer.scrollWidth;
+        timelineLine.style.width = `${nodesWidth}px`;
+        timelineLine.style.left = '0';
+        timelineLine.style.right = 'auto';
+    }
+
+    // Adjust line width after nodes are added
+    setTimeout(adjustTimelineLineWidth, 0);
+
     function selectNode(idx) {
         nodesContainer.querySelectorAll('.timeline-node').forEach(n => n.classList.remove('active'));
         const node = nodesContainer.children[idx];
@@ -89,4 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timeline.querySelector('.timeline-scroll-btn.right').onclick = () => {
         scrollArea.scrollBy({ left: 200, behavior: 'smooth' });
     };
+
+    // Adjust line width on window resize
+    window.addEventListener('resize', adjustTimelineLineWidth);
 });

@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cost = row.querySelector('.cost');
     const impact = row.querySelector('.impact');
     const effort = row.querySelector('.effort');
-    // Use the span inside .score-cell
-    const scoreCell = row.querySelector('.score-cell .score');
+    // Fix: Use the .score cell directly
+    const scoreCell = row.querySelector('.score');
 
     function update() {
       const c = Number(cost.value);
