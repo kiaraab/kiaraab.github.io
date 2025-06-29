@@ -1,232 +1,458 @@
-/* Decision Matrix Widget - Modern, clean, matches site aesthetic */
+/* Decision Matrix Widget - Modern Card-Based Design */
 
 .project-box {
   background: rgba(30, 30, 30, 0.92);
   border-radius: 18px;
   box-shadow: 0 8px 40px 0 rgba(0,0,0,0.8);
   padding: 2.2rem 1.5rem;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-.matrix-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: rgba(255,255,255,0.08);
-  border-radius: 14px;
-  overflow: hidden;
-  margin-top: 18px;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+/* Intro Section */
+.matrix-intro {
+  margin: 1.5rem 0 2rem 0;
+  padding: 1.2rem;
+  background: rgba(176, 123, 140, 0.08);
+  border-radius: 12px;
+  border-left: 4px solid #b07b8c;
 }
 
-.matrix-table thead th {
-  background: rgba(176, 123, 140, 0.18); /* subtle pink */
+.matrix-intro p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Controls Section */
+.matrix-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.weighting-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.toggle-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .slider {
+  background-color: #b07b8c;
+}
+
+.toggle-switch input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.toggle-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Reset Button */
+.reset-btn {
+  background: linear-gradient(135deg, #b07b8c, #af1658);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(175, 22, 88, 0.3);
+}
+
+/* Info Tooltips */
+.info-tooltip {
+  cursor: help;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.info-tooltip:hover {
+  opacity: 1;
+}
+
+/* Matrix Container */
+.matrix-container {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Header */
+.matrix-header {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 0.8fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background: rgba(176, 123, 140, 0.15);
+  border-radius: 10px;
+  font-weight: 500;
   color: #fff;
-  font-weight: 400; /* Less bold */
-  font-size: 1.02rem;
-  padding: 14px 8px;
-  border-bottom: 2px solid #b07b8c;
+  font-size: 0.9rem;
   text-transform: lowercase;
   letter-spacing: 0.01em;
+}
+
+.header-item {
   text-align: center;
 }
 
-.matrix-table tbody tr {
-  transition: background 0.18s;
-}
-
-.matrix-table tbody tr:nth-child(even) {
-  background: rgba(255,255,255,0.04);
-}
-.matrix-table tbody tr:nth-child(odd) {
-  background: rgba(255,255,255,0.01);
-}
-
-.matrix-table td {
-  padding: 12px 8px;
-  color: #fff;
-  font-size: 1.08rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  vertical-align: middle;
-}
-
-.matrix-table td:first-child {
-  font-weight: 600;
-  color: #b07b8c;
+.project-header {
   text-align: left;
-  min-width: 110px;
-  text-transform: lowercase;
 }
 
-/* Style for project name input fields */
-.matrix-table .project-name {
+.slider-header {
+  position: relative;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.3rem;
+}
+
+/* Project Cards - Matrix specific styling */
+.matrix-container .project-card {
+  display: grid !important;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 0.8fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  background: rgba(40, 40, 40, 0.85) !important;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  width: 100% !important;
+  min-width: auto !important;
+  max-width: none !important;
+  min-height: auto !important;
+  cursor: default !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
+.matrix-container .project-card:hover {
+  background: rgba(176, 123, 140, 0.15) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+  border-color: rgba(176, 123, 140, 0.4);
+}
+
+/* Project Name Input */
+.project-name-container {
+  position: relative;
+}
+
+.project-name {
   background: transparent;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #b07b8c;
   font-weight: 600;
-  font-size: 1.08rem;
+  font-size: 1rem;
   text-transform: lowercase;
-  padding: 4px 0;
+  padding: 0.6rem;
   width: 100%;
+  border-radius: 6px;
   outline: none;
   font-family: inherit;
+  transition: all 0.3s ease;
 }
 
-.matrix-table .project-name::placeholder {
-  color: rgba(176, 123, 140, 0.7);
-  font-weight: 600;
-  text-transform: lowercase;
+.project-name::placeholder {
+  color: rgba(176, 123, 140, 0.6);
+  font-weight: 500;
 }
 
-.matrix-table .project-name:focus {
+.project-name:focus {
   color: #fff;
   background: rgba(176, 123, 140, 0.1);
-  border-radius: 4px;
-  padding: 4px 6px;
+  border-color: #b07b8c;
+  box-shadow: 0 0 0 2px rgba(176, 123, 140, 0.2);
 }
 
-.matrix-table .score {
-  font-weight: bold;
-  color: #fff;
-  background: none; /* Remove background color */
-  border-radius: 12px;
-  padding: 7px 0;
-  font-size: 1.15rem;
-  box-shadow: none; /* Remove box shadow */
-  width: 32px;
-  min-width: 32px;
-  max-width: 32px;
-  margin-right: 16px;
-  box-sizing: border-box;
-  text-align: center;
-  letter-spacing: 0.01em;
+/* Slider Containers */
+.slider-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.matrix-table input[type=range] {
+/* Styled Range Sliders */
+.slider-container input[type="range"] {
   width: 100%;
-  accent-color: initial; /* Remove accent color */
-  background: transparent;
-  margin: 0;
-  height: 2.5em;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
   cursor: pointer;
-  transition: none;
-  padding: 0;
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-/* Chrome, Safari, Edge */
-.matrix-table input[type=range]::-webkit-slider-thumb {
-  background: #fff; /* Neutral thumb */
-  border: 2px solid #b07b8c;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  box-shadow: none;
-  cursor: pointer;
-  margin-top: -6px;
+.slider-container input[type="range"]:hover {
+  background: rgba(176, 123, 140, 0.2);
 }
-.matrix-table input[type=range]::-webkit-slider-runnable-track {
-  height: 6px;
-  background: transparent; /* Remove track color */
-  border-radius: 3px;
+
+.slider-container input[type="range"]:focus {
+  box-shadow: 0 0 0 2px rgba(176, 123, 140, 0.3);
+}
+
+/* Webkit (Chrome, Safari, Edge) */
+.slider-container input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b07b8c, #af1658);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+  transition: all 0.3s ease;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 10px rgba(175, 22, 88, 0.4);
 }
 
 /* Firefox */
-.matrix-table input[type=range]::-moz-range-thumb {
-  background: #fff;
-  border: 2px solid #b07b8c;
-  border-radius: 50%;
-  width: 18px;
+.slider-container input[type="range"]::-moz-range-thumb {
   height: 18px;
-  box-shadow: none;
+  width: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b07b8c, #af1658);
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+  transition: all 0.3s ease;
 }
-.matrix-table input[type=range]::-moz-range-track {
+
+.slider-container input[type="range"]::-moz-range-track {
   height: 6px;
-  background: transparent; /* Remove track color */
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
-}
-
-/* IE/Edge */
-.matrix-table input[type=range]::-ms-thumb {
-  background: #fff;
-  border: 2px solid #b07b8c;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-.matrix-table input[type=range]::-ms-fill-lower,
-.matrix-table input[type=range]::-ms-fill-upper {
-  background: transparent; /* Remove track color */
-  border-radius: 3px;
-}
-
-.matrix-table input[type=range]:focus {
-  outline: none;
-}
-
-.matrix-table input[type=range]:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.score-cell {
-  text-align: right;
-  padding-right: 18px;
-}
-
-@media (max-width: 700px) {
-  .project-box {
-    padding: 1.1rem 0.5rem;
-  }
-  .matrix-table th, .matrix-table td {
-    font-size: 0.98rem;
-    padding: 8px 4px;
-  }
-  .matrix-table .score {
-    font-size: 0.97rem;
-    padding: 4px 0;
-    width: 32px;
-  }
-}
-
-@media (max-width: 500px) {
-  .matrix-table th, .matrix-table td {
-    font-size: 0.92rem;
-    padding: 6px 2px;
-  }
-  .matrix-table .score {
-    font-size: 0.92rem;
-    padding: 4px 0;
-    width: 34px;
-  }
-}
-
-/* Remove table border and add subtle shadow */
-.matrix-table, .matrix-table th, .matrix-table td {
   border: none;
 }
 
-/* Remove table border and add subtle shadow */
-/* Add subtle hover effect for rows */
-.matrix-table tbody tr:hover {
-  background: rgba(176,123,140,0.10);
+/* Slider Value Display */
+.slider-value {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  min-width: 20px;
+  text-align: center;
 }
- effect for rows */
-/* Make sure the table is not wider than its container */matrix-table tbody tr:hover {
-.matrix-table {  background: rgba(176,123,140,0.10);
 
+/* Score Badge */
+.score-container {
+  display: flex;
+  justify-content: center;
+}
 
+.score-badge {
+  padding: 0.5rem 0.8rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  min-width: 50px;
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+}
 
+/* Score Color Coding */
+.score-badge[data-score-level="high"] {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  color: white;
+  border-color: #22c55e;
+  box-shadow: 0 3px 12px rgba(34, 197, 94, 0.3);
+}
 
+.score-badge[data-score-level="medium"] {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: white;
+  border-color: #f59e0b;
+  box-shadow: 0 3px 12px rgba(245, 158, 11, 0.3);
+}
 
-}  overflow-x: auto;  min-width: 0;  max-width: 100%;}
+.score-badge[data-score-level="low"] {
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: white;
+  border-color: #ef4444;
+  box-shadow: 0 3px 12px rgba(239, 68, 68, 0.3);
+}
 
-/* Make sure the table is not wider than its container */
-.matrix-table {
-  max-width: 100%;
-  min-width: 0;
-  overflow-x: auto;
+/* Takeaway Field */
+.takeaway-container {
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+}
+
+.takeaway {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 40px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.takeaway::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+}
+
+.takeaway:focus {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(176, 123, 140, 0.5);
+  box-shadow: 0 0 0 2px rgba(176, 123, 140, 0.1);
+}
+
+/* Score Summary */
+.score-summary {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.score-summary h4 {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.formula-display {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-family: 'Monaco', 'Menlo', monospace;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+  border-radius: 6px;
+  border-left: 3px solid #b07b8c;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .matrix-header,
+  .matrix-container .project-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .project-header,
+  .header-item {
+    text-align: center;
+  }
+  
+  .matrix-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .weighting-toggle {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-box {
+    padding: 1.5rem 1rem;
+  }
+  
+  .matrix-intro {
+    padding: 1rem;
+  }
+  
+  .matrix-intro p {
+    font-size: 1rem;
+  }
+  
+  .matrix-container .project-card {
+    padding: 1rem;
+  }
+  
+  .project-name {
+    font-size: 0.9rem;
+  }
+  
+  .score-badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+  }
 }

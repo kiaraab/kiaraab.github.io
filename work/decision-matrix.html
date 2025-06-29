@@ -21,54 +21,197 @@
             <div class="project-box">
                 <div class="project-title">decision matrix widget</div>
                 <div class="project-subtitle">prioritize project ideas</div>
-                <table class="matrix-table">
-                    <thead>
-                        <tr>
-                            <th>Project</th>
-                            <th>Cost</th>
-                            <th>Impact</th>
-                            <th>Effort</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input class="project-name" type="text" placeholder="Idea A"></td>
-                            <td><input class="cost" type="range" min="1" max="10" value="5"></td>
-                            <td><input class="impact" type="range" min="1" max="10" value="5"></td>
-                            <td><input class="effort" type="range" min="1" max="10" value="5"></td>
-                            <td class="score">5.0</td>
-                        </tr>
-                        <tr>
-                            <td><input class="project-name" type="text" placeholder="Idea B"></td>
-                            <td><input class="cost" type="range" min="1" max="10" value="5"></td>
-                            <td><input class="impact" type="range" min="1" max="10" value="5"></td>
-                            <td><input class="effort" type="range" min="1" max="10" value="5"></td>
-                            <td class="score">5.0</td>
-                        </tr>
-                        <tr>
-                            <td><input class="project-name" type="text" placeholder="Idea C"></td>
-                            <td><input class="cost" type="range" min="1" max="10" value="5"></td>
-                            <td><input class="impact" type="range" min="1" max="10" value="5"></td>
-                            <td><input class="effort" type="range" min="1" max="10" value="5"></td>
-                            <td class="score">5.0</td>
-                        </tr>
-                        <tr>
-                            <td><input class="project-name" type="text" placeholder="Idea D"></td>
-                            <td><input class="cost" type="range" min="1" max="10" value="5"></td>
-                            <td><input class="impact" type="range" min="1" max="10" value="5"></td>
-                            <td><input class="effort" type="range" min="1" max="10" value="5"></td>
-                            <td class="score">5.0</td>
-                        </tr>
-                        <tr>
-                            <td><input class="project-name" type="text" placeholder="Idea E"></td>
-                            <td><input class="cost" type="range" min="1" max="10" value="5"></td>
-                            <td><input class="impact" type="range" min="1" max="10" value="5"></td>
-                            <td><input class="effort" type="range" min="1" max="10" value="5"></td>
-                            <td class="score">5.0</td>
-                        </tr>
-                    </tbody>
-                </table>
+                
+                <!-- Intro paragraph -->
+                <div class="matrix-intro">
+                    <p>This tool helps me evaluate project ideas using a decision matrix. It balances cost, impact, and effort.</p>
+                </div>
+
+                <!-- Weighting Controls -->
+                <div class="matrix-controls">
+                    <div class="weighting-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="custom-weights">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="toggle-label">Custom Weights</span>
+                        <div class="info-tooltip" title="Toggle between equal weights and custom scoring (Impact x2, Effort x-1, Cost x-1)">ℹ️</div>
+                    </div>
+                    <button class="reset-btn" id="reset-matrix">Reset Matrix</button>
+                </div>
+
+                <!-- Matrix Cards Container -->
+                <div class="matrix-container">
+                    <div class="matrix-header">
+                        <div class="header-item project-header">Project</div>
+                        <div class="header-item slider-header">
+                            Cost
+                            <div class="slider-labels">
+                                <span>Low</span>
+                                <span>High</span>
+                            </div>
+                        </div>
+                        <div class="header-item slider-header">
+                            Impact
+                            <div class="slider-labels">
+                                <span>Low</span>
+                                <span>High</span>
+                            </div>
+                        </div>
+                        <div class="header-item slider-header">
+                            Effort
+                            <div class="slider-labels">
+                                <span>Low</span>
+                                <span>High</span>
+                            </div>
+                        </div>
+                        <div class="header-item score-header">Score</div>
+                    </div>
+
+                    <!-- Project Cards -->
+                    <div class="project-card" data-project="1">
+                        <div class="project-name-container">
+                            <input class="project-name" type="text" placeholder="Idea A" data-project="1">
+                        </div>
+                        <div class="slider-container">
+                            <input class="cost" type="range" min="1" max="10" value="5" data-project="1">
+                            <div class="slider-value" data-type="cost">5</div>
+                            <div class="info-tooltip" title="Implementation cost: Low cost = better score">Cost</div>
+                        </div>
+                        <div class="slider-container">
+                            <input class="impact" type="range" min="1" max="10" value="5" data-project="1">
+                            <div class="slider-value" data-type="impact">5</div>
+                            <div class="info-tooltip" title="Expected user/business impact: Higher impact = better score">Impact</div>
+                        </div>
+                        <div class="slider-container">
+                            <input class="effort" type="range" min="1" max="10" value="5" data-project="1">
+                            <div class="slider-value" data-type="effort">5</div>
+                            <div class="info-tooltip" title="Development effort required: Lower effort = better score">Effort</div>
+                        </div>
+                        <div class="score-container">
+                            <div class="score-badge" data-score="5.0">5.0</div>
+                        </div>
+                        <div class="takeaway-container">
+                            <textarea class="takeaway" placeholder="Key takeaway..." data-project="1"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-project="2">
+                        <div class="project-name-container">
+                            <input class="project-name" type="text" placeholder="Idea B" data-project="2">
+                        </div>
+                        <div class="slider-container">
+                            <input class="cost" type="range" min="1" max="10" value="5" data-project="2">
+                            <div class="slider-value" data-type="cost">5</div>
+                            <div class="info-tooltip" title="Implementation cost: Low cost = better score">Cost</div>
+                        </div>
+                        <div class="slider-container">
+                            <input class="impact" type="range" min="1" max="10" value="5" data-project="2">
+                            <div class="slider-value" data-type="impact">5</div>
+                            <div class="info-tooltip" title="Expected user/business impact: Higher impact = better score">Impact</div>
+                        </div>
+                        <div class="slider-container">
+                            <input class="effort" type="range" min="1" max="10" value="5" data-project="2">
+                            <div class="slider-value" data-type="effort">5</div>
+                            <div class="info-tooltip" title="Development effort required: Lower effort = better score">Effort</div>
+                        </div>
+                        <div class="score-container">
+                            <div class="score-badge" data-score="5.0">5.0</div>
+                        </div>
+                        <div class="takeaway-container">
+                            <textarea class="takeaway" placeholder="Key takeaway..." data-project="2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-project="3">
+                        <div class="project-name-container">
+                            <input class="project-name" type="text" placeholder="Idea C" data-project="3">
+                        </div>
+                        <div class="slider-container">
+                            <input class="cost" type="range" min="1" max="10" value="5" data-project="3">
+                            <div class="slider-value" data-type="cost">5</div>
+                            <div class="info-tooltip" title="Implementation cost: Low cost = better score">Cost</div>
+                        </div>
+                        <div class="slider-container">
+                            <input class="impact" type="range" min="1" max="10" value="5" data-project="3">
+                            <div class="slider-value" data-type="impact">5</div>
+                            <div class="info-tooltip" title="Expected user/business impact: Higher impact = better score">Impact</div>
+                        </div>
+                        <div class="slider-container">
+                            <input class="effort" type="range" min="1" max="10" value="5" data-project="3">
+                            <div class="slider-value" data-type="effort">5</div>
+                            <div class="info-tooltip" title="Development effort required: Lower effort = better score">Effort</div>
+                        </div>
+                        <div class="score-container">
+                            <div class="score-badge" data-score="5.0">5.0</div>
+                        </div>
+                        <div class="takeaway-container">
+                            <textarea class="takeaway" placeholder="Key takeaway..." data-project="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-project="4">
+                        <div class="project-name-container">
+                            <input class="project-name" type="text" placeholder="Idea D" data-project="4">
+                        </div>
+                        <div class="slider-container">
+                            <input class="cost" type="range" min="1" max="10" value="5" data-project="4">
+                            <div class="slider-value" data-type="cost">5</div>
+                            <div class="info-tooltip" title="Implementation cost: Low cost = better score">Cost</div>
+                        </div>
+                        <div class="slider-container">
+                            <input class="impact" type="range" min="1" max="10" value="5" data-project="4">
+                            <div class="slider-value" data-type="impact">5</div>
+                            <div class="info-tooltip" title="Expected user/business impact: Higher impact = better score">Impact</div>
+                        </div>
+                        <div class="slider-container">
+                            <input class="effort" type="range" min="1" max="10" value="5" data-project="4">
+                            <div class="slider-value" data-type="effort">5</div>
+                            <div class="info-tooltip" title="Development effort required: Lower effort = better score">Effort</div>
+                        </div>
+                        <div class="score-container">
+                            <div class="score-badge" data-score="5.0">5.0</div>
+                        </div>
+                        <div class="takeaway-container">
+                            <textarea class="takeaway" placeholder="Key takeaway..." data-project="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-project="5">
+                        <div class="project-name-container">
+                            <input class="project-name" type="text" placeholder="Idea E" data-project="5">
+                        </div>
+                        <div class="slider-container">
+                            <input class="cost" type="range" min="1" max="10" value="5" data-project="5">
+                            <div class="slider-value" data-type="cost">5</div>
+                            <div class="info-tooltip" title="Implementation cost: Low cost = better score">Cost</div>
+                        </div>
+                        <div class="slider-container">
+                            <input class="impact" type="range" min="1" max="10" value="5" data-project="5">
+                            <div class="slider-value" data-type="impact">5</div>
+                            <div class="info-tooltip" title="Expected user/business impact: Higher impact = better score">Impact</div>
+                        </div>
+                        <div class="slider-container">
+                            <input class="effort" type="range" min="1" max="10" value="5" data-project="5">
+                            <div class="slider-value" data-type="effort">5</div>
+                            <div class="info-tooltip" title="Development effort required: Lower effort = better score">Effort</div>
+                        </div>
+                        <div class="score-container">
+                            <div class="score-badge" data-score="5.0">5.0</div>
+                        </div>
+                        <div class="takeaway-container">
+                            <textarea class="takeaway" placeholder="Key takeaway..." data-project="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Score Summary -->
+                <div class="score-summary">
+                    <h4>Scoring Formula</h4>
+                    <div class="formula-display" id="formula-display">
+                        Equal weights: (Impact + Effort + (10-Cost)) ÷ 3
+                    </div>
+                </div>
             </div>
         </section>
     </main>
