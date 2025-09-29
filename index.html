@@ -2,47 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Kiara Raab | portfolio</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌺</text></svg>"
-    />
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/contact.css">
-    <link rel="stylesheet" href="assets/css/nav-mobile.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiara's Journal</title>
+    <link rel="icon" href="assets/images/favicon.jpg">
+    <link rel="stylesheet" href="assets/css/auth.css">
 </head>
-<body class="index-page">
-    <div id="header-placeholder"></div>
-    <main>
-        <!-- Intro Section -->
-        <section class="intro-section">
-          <div class="intro-box">
-            <div class="intro-left">
-                <div class="intro-hi">hi, i'm Kiara Raab</div>
-                <div class="intro-location">📍washington, dc<span id="location-diff-intro"></span></div>
-                <div class="intro-bio">
-                    <div class="intro-bullet">• <strong>Data Scientist → Aspiring PM</strong> with expertise in responsible AI implementation</div>
-                    <div class="intro-bullet">• <strong>Responsible AI at PwC:</strong> Led 3 Fortune 500 AI deployments</div>
-                    <div class="intro-bullet">• <strong>Proven Impact:</strong> Reduced model deployment time by 20%</div>
-                </div>
+<body class="auth-page">
+    <main class="auth-container">
+        <div class="tiara-container">
+            <img src="assets/images/tiara.png" alt="Decorative tiara" class="tiara-image">
+        </div>
+        <div class="welcome-text">
+            <h1 class="typing">welcome to kiara's personal archive</h1>
+        </div>
+        <div class="diary-lock">
+            <img src="assets/images/journal.png" alt="Pink diary with heart lock" class="diary-image">
+        </div>
+        <div class="auth-form">
+            <h1>please enter the password ...</h1>
+            <div class="password-input">
+                <input type="text" id="password" placeholder="• • •" autofocus>
             </div>
-          </div>
-          <div class="intro-right">
-            <img class="intro-icon" src="assets/images/profile.jpg" alt="Kiara Raab portrait" loading="lazy" onload="this.classList.add('loaded')">
-          </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section class="work-gallery-container">
-            <div class="work-gallery" id="workGallery">
-                <!-- ...cards will be rendered by JS from Projects.js... -->
-            </div>
-        </section>
+            <div class="error-message" id="errorMessage"></div>
+        </div>
     </main>
-    <div id="footer-placeholder"></div>
-    <script src="assets/js/components.js"></script>
-    <script src="assets/js/home-intro-type.js"></script>
-    <script src="assets/js/time-diff.js"></script>
+    <script src="assets/js/auth.js"></script>
 </body>
 </html>
