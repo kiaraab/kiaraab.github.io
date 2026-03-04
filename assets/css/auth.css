@@ -1,13 +1,10 @@
 /* Authentication Page Styles */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Poiret+One&display=swap');
-
-
 
 :root {
     --primary-color: #333333;
     --secondary-color: #ff9eaf;
-    --background-color: rgba(0, 0, 0, 0.85);
-    --text-color: #ffffff;
+    --background-color: rgba(255, 255, 255, 0.9);
+    --text-color: #333333;
     --input-bg: #ffffff;
     --input-text: #333333;
     --error-color: #FF6B6B;
@@ -25,10 +22,10 @@ body.auth-page {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background-image: url('../images/wallpaper.jpg');
+    background-image: url('../images/background.jpg');
     background-size: cover;
     background-position: center;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Arial', 'Calibri', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,8 +41,7 @@ body.auth-page::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .auth-container {
@@ -92,15 +88,27 @@ body.auth-page::before {
 }
 
 .welcome-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
-    font-style: italic;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-family: 'Arial', 'Calibri', sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 1.5rem;
     color: var(--text-color);
     margin: 0 auto;
     max-width: 90vw;
     line-height: 1.4;
     letter-spacing: 0.02em;
+    visibility: hidden;
+    position: relative;
+}
+
+.welcome-text h1::after {
+    content: "betel's 25th bday gift";
+    visibility: visible;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 @keyframes typing {
@@ -141,9 +149,9 @@ body.auth-page > *:not(.auth-container) {
 
 .diary-lock img {
     transition: transform 0.3s ease;
-    max-width: 300px;
+    max-width: 400px;
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    box-shadow: none;
 }
 
 .diary-lock:hover img {
@@ -161,20 +169,29 @@ body.auth-page > *:not(.auth-container) {
     margin-bottom: 2rem;
 }
 
+.diary-lock::after {
+    content: "from kiara :)";
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Arial', 'Calibri', sans-serif;
+    color: #333;
+    font-size: 1.2rem;
+}
+
 .diary-image {
-    width: 200px;
+    width: 400px;
     height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .auth-form h1 {
     color: var(--text-color);
     font-size: 1rem;
     margin-bottom: 1.2rem;
-    font-weight: 400;
-    font-family: 'Poiret One', cursive;
-    letter-spacing: 0.1em;
+    font-weight: bold;
+    font-family: 'Arial', 'Calibri', sans-serif;
+    letter-spacing: normal;
     opacity: 0.9;
 }
 
@@ -187,7 +204,7 @@ body.auth-page > *:not(.auth-container) {
 
 .password-input input {
     padding: 0.6rem 1rem;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid #333;
     border-radius: 4px;
     background: rgba(255,255,255,0.9);
     font-size: 1rem;

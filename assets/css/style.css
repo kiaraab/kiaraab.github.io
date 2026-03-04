@@ -1,0 +1,65 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Lugrasimo&display=swap');
+
+body {
+    font-family: 'Homemade Apple', cursive;
+    background-image: url('assets/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Lugrasimo', cursive;
+    font-size: 4rem;
+    color: #f5b8a8;
+    text-shadow: 2px 2px 4px #f08080;
+}
+
+#mailbox {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#mailbox img {
+    width: 200px;
+    box-shadow: 10px 10px 20px #8a5a44;
+    border: 2px solid #8a5a44;
+    border-radius: 10px;
+}
+
+#mailbox:hover {
+    transform: scale(1.05);
+}
+
+#coupon-container {
+    position: relative;
+    margin-top: 50px;
+    height: 500px; /* Adjust as needed */
+}
+
+#paper {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    z-index: 1;
+    transition: z-index 0.5s;
+}
+
+#coupon {
+    position: relative;
+    width: 300px;
+    z-index: 2;
+    margin-top: 50px;
+}
