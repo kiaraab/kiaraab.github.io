@@ -1,25 +1,11 @@
-## Serving the Site
+# Betel's 25th Birthday Gift
 
-Any static web server can host these files. During development you can run a quick server with Python:
-
-```bash
-python3 -m http.server
-```
-
-Then visit `http://localhost:8000` in your browser.
-
+This is a small, interactive website created as a 25th birthday gift for Betel from Kiara.
 
 ## Project Structure
 
-- `index.html` - Main landing page introducing Kiara
-- `resume.html` - Detailed résumé with a PDF download link
-- `assets/` - Stylesheets, images, JavaScript, and other resources
-
-Open `index.html` to explore the site in your browser.
-
-## Google Apps Script
-
-`components/Code.gs` handles saving contact form submissions to a spreadsheet
-and sending confirmation emails. The script installs an `onFormSubmit`
-trigger when the spreadsheet is opened. If the trigger is missing, run
-`setupTrigger()` from the Apps Script editor.
+- `index.html`: The main HTML file for the website.
+- `assets/`: Contains the CSS, JavaScript, and image files.
+  - `css/`: Contains the stylesheets.
+  - `js/`: Contains the JavaScript files.
+  - `images/`: Contains the images used in the website.
