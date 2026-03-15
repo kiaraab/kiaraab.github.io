@@ -3,21 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Surprise!</title>
+    <title>happy birthday betel</title>
+    <link rel="icon" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1 class="title">betel's 25th bday gift</h1>
         <div id="mailbox">
-            <img src="assets/images/envelope.PNG" alt="envelope">
+            <img id="envelope-img" src="assets/images/envelope.PNG" alt="envelope">
             <div id="surprise-container">
-                <img id="paper" src="assets/images/paper.PNG" alt="paper">
-                <img id="coupon" src="assets/images/coupon.PNG" alt="coupon">
+                <div id="paper" class="postcard">
+                    <div class="postcard-inner">
+                        <div class="postcard-front">
+                            <img src="assets/images/frontpagepostcard.png" alt="Postcard front">
+                        </div>
+                        <div class="postcard-back">
+                            <img src="assets/images/secondpagepostcard.png" alt="Postcard back">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <p class="subtitle">from kiara :)</p>
+        <h1 class="title">click me!</h1>
+    </div>
+    <audio id="bg-music" src="assets/audio/background.mp3" loop></audio>
+    <div id="music-widget" data-text="i love you by kk slider">
+        <img src="assets/images/kk slider.gif" alt="KK Slider">
     </div>
     <script src="assets/js/main.js"></script>
 </body>

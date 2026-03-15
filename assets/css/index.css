@@ -3,7 +3,7 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
-    font-family: 'Arial', 'Calibri', sans-serif;
+    font-family: 'VT323', monospace;
     overflow: hidden;
 }
 
@@ -24,7 +24,7 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+    background-color: rgba(0, 0, 0, 0.3); /* lighter 30% overlay */
     z-index: 1;
 }
 
@@ -35,72 +35,73 @@ body::before {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.5rem; /* closer spacing between elements */
 }
 
 .title {
-    font-size: 2rem;
-    color: #fff; /* Changed color for better visibility */
-    font-weight: bold;
-    margin: 0;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    position: absolute;
-    top: -80px; /* Adjust as needed */
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.subtitle {
+    position: fixed;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
     font-size: 1.5rem;
-    color: #fff; /* Changed color for better visibility */
-    margin: 0;
-    font-weight: normal;
-    position: absolute;
-    top: 90px; /* Adjust as needed */
-    left: 50%;
-    transform: translateX(-50%);
+    color: #fff;
+    font-weight: normal; /* Changed from bold */
+    font-family: Arial, sans-serif; /* Switched to Arial */
+    text-transform: lowercase;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
 }
 
 #mailbox {
     cursor: pointer;
     position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    /* Set a fixed size to prevent layout shift when image changes */
+    width: 350px;
+    max-width: 80vw;
+    height: 233px; /* Approx 2:3 aspect ratio to contain both images without jump */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.breathing {
+    animation: breathe 2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        scale: 1;
+    }
+    50% {
+        scale: 1.02;
+    }
+}
+
+/* removed transform on parent to avoid moving coupon when envelope scales */
 #mailbox:hover {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-}
-
-@keyframes shake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
-  }
-
-  30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-
-  40%, 60% {
-    transform: translate3d(4px, 0, 0);
-  }
+    /* no transform here; envelope image handles hover */
 }
 
 
 #mailbox img {
-    width: 400px;
-    max-width: 90vw;
+    max-width: 100%;
     height: auto;
     display: block;
-    /* Remove any default borders or shadows */
+    opacity: 1;
     border: none;
     box-shadow: none;
     outline: none;
+}
+#mailbox:hover img {
+    /* no hover effect */
 }
 
 #surprise-container {
@@ -111,29 +112,100 @@ body::before {
     height: 100%;
 }
 
-#paper, #coupon {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    opacity: 0;
-    transition: all 1s ease-in-out;
+/* click pointer & curved arrow */
+
+/* music widget */
+#music-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
 }
 
-#coupon {
-    z-index: 2;
+#music-widget::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 100%;
+    margin-top: 5px;
+    color: white;
+    font-size: 0.7rem;
+    white-space: pre;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    text-transform: lowercase;
+    pointer-events: none;
+    user-select: none;
 }
+
+#music-widget img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: spin 4s linear infinite;
+    animation-play-state: paused;
+}
+
+#music-widget.playing img {
+    animation-play-state: running;
+}
+
+#music-widget.paused {
+    opacity: 0.5;
+    filter: grayscale(40%);
+    transition: opacity 0.2s, filter 0.2s;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+
+/* responsive adjustments */
+@media (max-width: 600px) {
+    .title { font-size: 1.2rem; top: 12%; }
+    .subtitle { font-size: 0.8rem; }
+    #mailbox img { width: 60vw; }
+    #music-widget { width: 60px; height: 60px; }
+    #music-widget img { width: 50px; height: 50px; }
+    #music-widget::after { font-size: 0.6rem; bottom: -15px;}
+    .container { padding: 1rem; }
+}
+
 
 #paper {
-    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    max-width: 90vw;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -50%) scale(0.1);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    pointer-events: none;
+    transition: all 0.4s ease-in-out;
+    z-index: 10;
 }
 
-#coupon.reveal {
+#paper.show-paper {
+    visibility: visible;
     opacity: 1;
-    transform: translateX(-120%) translateY(-20px) rotate(-10deg);
-    filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.5));
-    animation: reveal-shake 0.5s linear 1s 2;
+    top: 20%;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto; /* Allow clicks only when visible */
 }
 
 #paper.fly-out {
@@ -151,10 +223,112 @@ body::before {
     }
 }
 
-@keyframes reveal-shake {
-    0% { transform: translateX(-120%) translateY(-20px) rotate(-10deg); }
-    25% { transform: translateX(-120%) translateY(-20px) rotate(-12deg); }
-    50% { transform: translateX(-120%) translateY(-20px) rotate(-8deg); }
-    75% { transform: translateX(-120%) translateY(-20px) rotate(-12deg); }
-    100% { transform: translateX(-120%) translateY(-20px) rotate(-10deg); }
+
+
+/* --- Flipping Postcard Styles --- */
+.postcard {
+    perspective: 1000px; /* Adds depth for the 3D effect */
+    cursor: pointer;
+}
+
+.postcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.postcard.is-flipped .postcard-inner,
+#paper.is-flipped .postcard-inner {
+    transform: rotateY(180deg);
+}
+
+.postcard-front, .postcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.postcard-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.postcard-back {
+    background-color: #fdf6e4; /* A warm, papery color */
+    color: #5d5d5d;
+    transform: rotateY(180deg);
+    box-sizing: border-box; /* Ensures padding doesn't break layout */
+    font-family: 'Georgia', serif;
+}
+
+.postcard-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.letter-greeting {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+.letter-body {
+    font-size: 1em;
+    line-height: 1.4;
+    margin: 0 0 15px;
+}
+.letter-signoff {
+    font-size: 1.1em;
+    font-style: italic;
+    align-self: flex-end; /* Aligns "Love, Kiara" to the right */
+    text-align: right;
+    margin: 0;
+}
+
+#postcard-click-me {
+    position: absolute;
+    top: -15px;
+    right: -20px;
+    font-size: 1.4rem;
+    color: #fff;
+    background-color: #ff9eaf;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    text-transform: lowercase;
+    transform: rotate(15deg);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    animation: squeeze-bounce 0.8s infinite alternate;
+}
+
+@keyframes squeeze-bounce {
+    0% { transform: rotate(15deg) scale(1); }
+    100% { transform: rotate(15deg) scale(1.15); }
+}
+
+#paper.show-click-me #postcard-click-me {
+    opacity: 1;
+}
+
+.hidden {
+    display: none !important;
 }
