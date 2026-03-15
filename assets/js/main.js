@@ -97,18 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.paper.classList.toggle('is-flipped');
         state.hasFlippedPostcard = !state.hasFlippedPostcard;
 
-        // First time flipping
+        // On the very first flip, hide the instructions permanently and clean up animations.
         if (!state.hasCompletedFlowOnce) {
+            if (elements.titleText) {
+                elements.titleText.classList.add('hidden');
+            }
             elements.postcardInner.classList.remove('breathing');
             elements.paper.classList.remove('show-click-me');
             state.hasCompletedFlowOnce = true;
-        }
-        
-        // Update instructions based on which side is showing
-        if (elements.paper.classList.contains('is-flipped')) {
-            updateTitleText('you can flip it back, or click the envelope to close');
-        } else {
-            updateTitleText('now click the postcard to read it');
         }
     };
 
@@ -144,6 +140,21 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTitleText('click the envelope to open');
         makeUnselectable(elements.titleText);
 
+        // Reduce background music volume by 50%
+        if (elements.bgMusic) {
+            elements.bgMusic.volume = 0.5;
+        }
+
+        // Pause music when navigating away from the tab/app
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && state.isMusicPlaying && elements.bgMusic) {
+                elements.bgMusic.pause();
+                elements.musicWidget.classList.add('paused');
+                elements.musicWidget.classList.remove('playing');
+                state.isMusicPlaying = false;
+            }
+        });
+
         // Attach event listeners
         document.addEventListener('click', handleGlobalClick);
         if (elements.mailbox) {
@@ -154,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (elements.musicWidget && elements.bgMusic) {
             elements.musicWidget.addEventListener('click', handleMusicWidgetClick);
-            }
+        }
     };
 
     init();
