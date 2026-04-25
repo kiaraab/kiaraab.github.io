@@ -4,953 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Da Biddies Newsletter — Preview (WIP)</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --ink: #111110;
-      --ink-muted: #555550;
-      --ink-faint: #999990;
-      --paper: #faf9f6;
-      --paper-warm: #f2f0ea;
-      --rule: #e0ddd5;
-      --preview-h: 46px;
-      --countdown-h: 38px;
-      --nav-h: 56px;
-      --bars-h: calc(var(--preview-h) + var(--countdown-h));
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: Georgia, 'Times New Roman', serif;
-      background: var(--paper);
-      color: var(--ink);
-      line-height: 1.75;
-      font-size: 16px;
-      padding-top: var(--bars-h);
-    }
-
-    a { color: inherit; }
-
-    /* ─── PREVIEW BANNER ─── */
-    .preview-banner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 200;
-      height: var(--preview-h);
-      background: var(--ink);
-      color: var(--paper);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      gap: 16px;
-    }
-    .preview-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex: 1;
-      min-width: 0;
-    }
-    .preview-badge {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      background: var(--paper);
-      color: var(--ink);
-      padding: 3px 8px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .preview-left p {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 12px;
-      color: rgba(250,249,246,0.6);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .preview-feedback-btn {
-      display: inline-flex;
-      align-items: center;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink);
-      background: var(--paper);
-      text-decoration: none;
-      padding: 8px 14px;
-      min-height: 32px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      touch-action: manipulation;
-      transition: background 0.15s;
-    }
-    .preview-feedback-btn:hover { background: var(--paper-warm); }
-
-    /* ─── COUNTDOWN BANNER (Section-specific) ─── */
-    .countdown-banner {
-      background: var(--paper-warm);
-      border: 1px solid var(--rule);
-      padding: 14px 20px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11px;
-    }
-    .cd-label {
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-    }
-    .cd-name { font-weight: 600; color: var(--ink); }
-    .cd-sep { color: var(--rule); }
-    .cd-date { color: var(--ink-muted); }
-    .cd-days { color: var(--ink-faint); font-size: 10px; }
-
-    /* ─── STICKY NAV ─── */
-    .sticky-nav {
-      position: fixed;
-      top: var(--preview-h); /* Adjusted for removed top bar */
-      left: 0;
-      right: 0;
-      z-index: 100;
-      height: var(--nav-h);
-      background: var(--paper);
-      border-bottom: 1px solid var(--rule);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 52px;
-      opacity: 0;
-      transform: translateY(-100%);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    body.scrolled .sticky-nav {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .sticky-nav-title {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--ink);
-      letter-spacing: -0.2px;
-    }
-    .sticky-nav-meta {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-    }
-
-    /* ─── HERO ─── */
-    .hero {
-      min-height: calc(100dvh - var(--preview-h));
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      border-bottom: 1px solid var(--rule);
-      overflow: hidden;
-    }
-    .hero-issue-wrap {
-      position: absolute;
-      top: 28px;
-      right: 52px;
-      text-align: right;
-    }
-    .hero-issue-label {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 4px;
-    }
-    .hero-issue-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      padding: 0;
-      touch-action: manipulation;
-    }
-    .hero-issue-toggle:hover { color: var(--ink-muted); }
-    .hero-issue-chevron {
-      font-size: 14px;
-      transition: transform 0.2s ease;
-      display: inline-block;
-      margin-left: 2px;
-    }
-    .hero-issue-toggle[aria-expanded="true"] .hero-issue-chevron {
-      transform: rotate(180deg);
-    }
-    .hero-issue-dropdown {
-      display: none;
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      background: var(--paper);
-      border: 1px solid var(--rule);
-      padding: 14px 16px;
-      min-width: 200px;
-      z-index: 50;
-      text-align: left;
-    }
-    .hero-issue-dropdown.open { display: block; }
-
-    /* ─── STICKY NAV ISSUE ─── */
-    .sticky-nav-issue { display: flex; align-items: center; gap: 4px; position: relative; }
-    .nav-issue-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      padding: 0;
-      transition: color 0.2s;
-    }
-    .nav-issue-toggle:hover { color: var(--ink); }
-    .nav-issue-chevron { font-size: 14px; transition: transform 0.3s; }
-    .nav-issue-toggle[aria-expanded="true"] .nav-issue-chevron { transform: rotate(180deg); }
-    .nav-issue-dropdown {
-      display: none;
-      position: absolute;
-      top: calc(100% + 12px);
-      right: 0;
-      background: var(--paper);
-      border: 1px solid var(--rule);
-      padding: 14px 16px;
-      min-width: 200px;
-      z-index: 50;
-      text-align: left;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-    .nav-issue-dropdown.open { display: block; }
-    .nav-issue-dropdown p { font-family: sans-serif; font-size: 11px; color: var(--ink-faint); font-style: italic; }
-    .hero-issue-dropdown p {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11.5px;
-      color: var(--ink-faint);
-      font-style: italic;
-      line-height: 1.6;
-    }
-    .hero-center {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 24px 32px;
-    }
-    .hero-title {
-      font-size: clamp(38px, 9vw, 88px);
-      font-weight: 400;
-      letter-spacing: clamp(-1px, -0.03em, -2px);
-      line-height: 1.08;
-      color: var(--ink);
-      min-height: 1.15em;
-    }
-    .cursor {
-      display: inline-block;
-      color: var(--ink-muted);
-      animation: blink 0.75s step-end infinite;
-      margin-left: 3px;
-      font-weight: 300;
-    }
-    .cursor.done { display: none; }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-    .hero-rule {
-      width: 40px;
-      height: 1px;
-      background: var(--rule);
-      margin-top: 36px;
-      opacity: 0;
-      transition: opacity 0.8s ease 0.2s;
-    }
-    .hero-rule.visible { opacity: 1; }
-    .hero-scroll-cue {
-      padding-bottom: 36px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      opacity: 1;
-      transition: opacity 0.5s ease;
-      pointer-events: none;
-    }
-    .hero-scroll-cue.hidden { opacity: 0; }
-    .hero-scroll-cue svg {
-      width: 14px; height: 14px;
-      stroke: var(--ink-faint); fill: none;
-      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
-      animation: nudge 2s ease-in-out infinite;
-    }
-    .hero-scroll-cue span {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 9px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-    }
-    @keyframes nudge {
-      0%, 100% { transform: translateY(0); }
-      55% { transform: translateY(5px); }
-    }
-
-    /* ─── OPENER ─── */
-    .opener {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 44px 52px 0;
-    }
-    .opener-text {
-      font-size: 18px;
-      line-height: 1.85;
-      color: var(--ink-muted);
-      font-style: italic;
-    }
-    .opener-text::first-letter {
-      font-size: 54px;
-      float: left;
-      line-height: 0.82;
-      margin-right: 10px;
-      margin-top: 9px;
-      font-style: normal;
-      color: var(--ink);
-    }
-
-    /* ─── SECTION RULE ─── */
-    .section-rule {
-      max-width: 900px;
-      margin: 52px auto 0;
-      padding: 0 52px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .section-rule span {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      white-space: nowrap;
-    }
-    .section-rule::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--rule);
-    }
-
-    /* ─── STANDARD SECTION ─── */
-    .section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 28px 52px 48px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .section h2 {
-      font-size: 26px;
-      font-weight: 400;
-      margin-bottom: 20px;
-      letter-spacing: -0.3px;
-    }
-    .section p {
-      font-size: 15.5px;
-      color: #3a3a38;
-      margin-bottom: 14px;
-    }
-    .section p:last-child { margin-bottom: 0; }
-
-    /* ─── FRIEND LEDGER (Version 4 Symmetrical) ─── */
-    .friend-ledger {
-      display: flex;
-      flex-direction: column;
-      margin-top: 4px;
-      border-top: 1px solid var(--rule);
-    }
-    .ledger-row {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      border-bottom: 1px solid var(--rule);
-      background: var(--paper);
-      transition: background 0.2s;
-    }
-    .ledger-row:hover { background: #fdfdfb; }
-    .ledger-name-cell {
-      padding: 30px 15px 30px 0;
-      border-right: 1px solid var(--rule);
-      display: flex;
-      align-items: flex-start;
-    }
-    .ledger-name {
-      font-family: Georgia, serif;
-      font-size: 20px;
-      color: var(--ink);
-      letter-spacing: -0.2px;
-      line-height: 1.2;
-    }
-    .ledger-fields {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 24px;
-      padding: 25px 0 25px 40px;
-    }
-    .ledger-field.hidden { display: none; }
-    .ledger-field .field-label {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      display: block;
-      margin-bottom: 6px;
-    }
-    .ledger-field .field-val {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 13px;
-      color: var(--ink-muted);
-      line-height: 1.5;
-      font-style: italic;
-    }
-    .ledger-field .field-val.empty { display: none; }
-
-    /* ─── PROPOSAL ─── */
-    .proposal-section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 28px 52px 64px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .proposal-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 52px;
-      align-items: start;
-    }
-    .proposal-text h2 {
-      font-size: 34px;
-      font-weight: 400;
-      letter-spacing: -0.5px;
-      line-height: 1.15;
-      margin-bottom: 24px;
-    }
-    .proposal-text p {
-      font-size: 15.5px;
-      color: #3a3a38;
-      margin-bottom: 18px;
-      line-height: 1.8;
-    }
-    .proposal-text p:last-of-type { margin-bottom: 0; }
-    .proposal-names {
-      font-size: 19px;
-      font-style: italic;
-      color: var(--ink);
-      margin-top: 28px;
-      display: block;
-    }
-    .proposal-date {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      display: block;
-      margin-top: 6px;
-    }
-    .proposal-comments {
-      margin-top: 28px;
-      border-top: 1px solid var(--rule);
-      padding-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .proposal-comment { display: flex; gap: 12px; align-items: flex-start; }
-    .comment-avatar {
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      background: var(--paper-warm);
-      border: 1px solid var(--rule);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      color: var(--ink-muted);
-      margin-top: 1px;
-    }
-    .comment-body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 13px;
-      color: var(--ink-muted);
-      line-height: 1.6;
-      font-style: italic;
-    }
-    .comment-body .commenter {
-      font-style: normal;
-      font-weight: 600;
-      color: var(--ink);
-      margin-right: 6px;
-    }
-    .proposal-photo-wrap {
-      position: sticky;
-      top: calc(var(--bars-h) + var(--nav-h) + 16px);
-    }
-    .proposal-photo-frame {
-      width: 100%;
-      aspect-ratio: 4/5;
-      background: var(--paper-warm);
-      border: 1px solid var(--rule);
-      overflow: hidden;
-      position: relative;
-      will-change: transform;
-    }
-    .proposal-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .photo-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .photo-placeholder svg {
-      width: 32px; height: 32px;
-      stroke: var(--rule); fill: none;
-      stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round;
-    }
-    .photo-placeholder span {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #ccc;
-    }
-    .photo-caption {
-      margin-top: 10px;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11.5px;
-      color: var(--ink-faint);
-      text-align: center;
-      font-style: italic;
-    }
-
-    /* ─── CURRENTLY INTO ─── */
-    .into-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px 40px;
-      margin-top: 4px;
-    }
-    .into-block h3 {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 14px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .spotify-wrap { border-radius: 12px; overflow: hidden; border: 1px solid var(--rule); }
-    .spotify-placeholder { background: var(--paper-warm); padding: 20px; display: flex; align-items: center; gap: 14px; }
-    .spotify-icon { width: 36px; height: 36px; background: #1DB954; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .spotify-icon svg { width: 18px; height: 18px; fill: white; }
-    .spotify-info { flex: 1; min-width: 0; }
-    .spotify-info .sp-label { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); display: block; margin-bottom: 3px; }
-    .spotify-info .sp-name { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .beli-card { background: var(--paper-warm); border: 1px solid var(--rule); padding: 16px 18px; }
-    .beli-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
-    .beli-name { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
-    .beli-badge { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; letter-spacing: 0.08em; color: #ff6b35; background: #fff3ee; border: 1px solid #ffd5c2; padding: 2px 8px; white-space: nowrap; flex-shrink: 0; }
-    .beli-meta { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: var(--ink-faint); margin-bottom: 8px; }
-    .beli-note { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: var(--ink-muted); line-height: 1.55; font-style: italic; }
-    .beli-link { display: inline-flex; align-items: flex-end; min-height: 44px; margin-top: 10px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 1px; }
-    .beli-link:hover { color: var(--ink); border-color: var(--ink); }
-    .social-wrap { border: 1px solid var(--rule); overflow: hidden; background: var(--paper-warm); }
-    .social-placeholder { padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 120px; text-align: center; }
-    .social-placeholder svg { width: 28px; height: 28px; stroke: var(--rule); fill: none; stroke-width: 1.2; stroke-linecap: round; }
-    .social-placeholder span { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #ccc; }
-    .recipe-block { font-family: 'Helvetica Neue', Arial, sans-serif; }
-    .recipe-block .recipe-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
-    .recipe-block .recipe-note { font-size: 13px; color: var(--ink-muted); line-height: 1.6; font-style: italic; }
-
-    /* ─── MEDIA THUMBS ─── */
-    .media-thumb {
-      width: 60px;
-      height: 80px;
-      object-fit: cover;
-      border: 1px solid var(--rule);
-      margin-top: 12px;
-      display: block;
-      box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
-      transform: rotate(-2deg);
-      transition: transform 0.3s ease;
-    }
-    .media-thumb:hover { transform: rotate(0deg) scale(1.05); }
-    
-    .photo-placeholder-small {
-      width: 100px;
-      height: 75px;
-      background: var(--paper-warm);
-      border: 1px solid var(--rule);
-      margin-top: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      box-shadow: 3px 3px 0px var(--rule);
-      transform: rotate(1deg);
-    }
-    .photo-placeholder-small svg { width: 20px; height: 20px; stroke: #ccc; fill: none; }
-    .photo-placeholder-small::after {
-      content: 'Boston 4/21';
-      position: absolute;
-      bottom: -18px;
-      right: 0;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--ink-faint);
-    }
-
-    .watching-info { flex: 1; }
-    .watching-label { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); display: block; margin-bottom: 2px; }
-    .watching-name { font-family: Georgia, serif; font-size: 16px; font-weight: 600; color: var(--ink); display: block; margin-bottom: 4px; }
-    .watching-meta { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: var(--ink-muted); line-height: 1.4; }
-    .watching-comment { font-style: italic; color: var(--ink-muted); }
-    .netflix-link { display: inline-flex; align-items: center; text-decoration: none; margin-left: 4px; }
-    .watching-poster {
-      width: 100px;
-      height: 140px;
-      object-fit: cover;
-      border: 1px solid var(--rule);
-      flex-shrink: 0;
-    }
-
-    .logo-icon {
-      height: 16px;
-      width: auto;
-      vertical-align: middle;
-      display: inline-block;
-    }
-
-    /* ─── SPOTIFY EMBED ─── */
-    .spotify-embed-container {
-      margin-top: 12px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--rule);
-      background: var(--paper-warm);
-    }
-    .spotify-header {
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .spotify-logo { width: 24px; height: 24px; fill: #1DB954; }
-    .spotify-meta { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); }
-
-    /* ─── IMPORTANT DATES ─── */
-    .dates-layout {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 48px;
-      align-items: start;
-      margin-top: 4px;
-    }
-    .cal-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    .cal-nav-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 15px;
-      color: var(--ink-muted);
-      min-height: 44px;
-      min-width: 44px;
-      touch-action: manipulation;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 2px;
-      transition: color 0.15s;
-    }
-    .cal-nav-btn:hover { color: var(--ink); }
-    .cal-month-label {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-    }
-    .cal-days-header {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      margin-bottom: 4px;
-    }
-    .cal-days-header span {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 9px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      text-align: center;
-      padding: 4px 0 8px;
-    }
-    .cal-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 2px;
-    }
-    .cal-cell {
-      aspect-ratio: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-    }
-    .cal-num {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11px;
-      color: var(--ink-muted);
-      line-height: 1;
-      width: 22px;
-      height: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-    }
-    .cal-cell.today .cal-num {
-      background: var(--ink);
-      color: var(--paper);
-      font-size: 10px;
-    }
-    .cal-cell.empty .cal-num { visibility: hidden; }
-    .cal-event-dots {
-      display: flex;
-      gap: 2px;
-      flex-wrap: wrap;
-      justify-content: center;
-      max-width: 100%;
-    }
-    .cal-event-dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--ink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 7px;
-      color: var(--paper);
-      font-weight: 700;
-      letter-spacing: 0;
-    }
-
-    /* Upcoming birthdays list */
-    .upcoming-section h3 {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 16px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .upcoming-list { list-style: none; }
-    .upcoming-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--rule);
-    }
-    .upcoming-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .upcoming-initial {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      border: 1px solid var(--rule);
-      background: var(--paper-warm);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11px;
-      color: var(--ink-muted);
-      flex-shrink: 0;
-    }
-    .upcoming-info { flex: 1; min-width: 0; }
-    .upcoming-name {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-      display: block;
-      line-height: 1.3;
-    }
-    .upcoming-date-str {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11px;
-      color: var(--ink-faint);
-    }
-    .upcoming-days-str {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11px;
-      color: var(--ink-faint);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    /* ─── SHOUTOUTS ─── */
-    .spotlight-list { display: flex; flex-direction: column; gap: 24px; }
-    .spotlight { display: flex; gap: 18px; align-items: flex-start; }
-    .spotlight-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      border: 1px solid var(--rule);
-      background: var(--paper-warm);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 12px; color: var(--ink-muted);
-      flex-shrink: 0;
-    }
-    .spotlight-body h3 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
-    .spotlight-body p { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13.5px; color: var(--ink-muted); line-height: 1.65; margin: 0; font-style: italic; }
-
-    /* ─── SIGN-OFF ─── */
-    .signoff-text { font-size: 16.5px; color: #3a3a38; max-width: 520px; line-height: 1.85; }
-    .signoff-name { margin-top: 26px; font-size: 21px; font-style: italic; color: var(--ink); }
-
-    /* ─── SUBMIT CTA ─── */
-    .submit-block {
-      margin-top: 40px;
-      padding: 24px 28px;
-      border: 1px solid var(--rule);
-      background: var(--paper-warm);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .submit-block p { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13.5px; color: var(--ink-muted); max-width: 380px; line-height: 1.6; margin: 0; }
-    .submit-btn {
-      display: inline-flex;
-      align-items: center;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      border: 1px solid var(--ink);
-      padding: 12px 22px;
-      min-height: 44px;
-      white-space: nowrap;
-      touch-action: manipulation;
-      transition: background 0.15s, color 0.15s;
-    }
-    .submit-btn:hover { background: var(--ink); color: var(--paper); }
-
-    /* ─── FOOTER ─── */
-    .footer { max-width: 900px; margin: 0 auto; padding: 24px 52px; text-align: center; }
-    .footer p { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.04em; }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 660px) {
-      :root { --preview-h: 42px; --countdown-h: 34px; --nav-h: 50px; }
-
-      .preview-left p { display: none; }
-      .preview-banner { padding: 0 16px; }
-
-      .sticky-nav { padding: 0 20px; }
-      .sticky-nav-title { font-size: 13px; }
-      .sticky-nav-meta { display: none; }
-
-      .hero-issue-wrap { right: 20px; top: 18px; }
-
-      .opener, .section-rule, .section, .proposal-section, .footer { padding-left: 20px; padding-right: 20px; }
-
-      .friend-ledger { border-top: none; }
-      .ledger-row { grid-template-columns: 1fr; border-top: 1px solid var(--rule); }
-      .ledger-name-cell { padding: 20px 0 10px; border-right: none; }
-      .ledger-fields { padding: 0 0 20px; grid-template-columns: 1fr 1fr; gap: 15px; }
-
-      .proposal-layout, .into-grid, .dates-layout { grid-template-columns: 1fr; }
-      .proposal-photo-wrap { position: relative; top: auto; order: -1; }
-      .proposal-photo-frame { aspect-ratio: 3/2; }
-
-      .submit-block { flex-direction: column; align-items: stretch; }
-      .submit-btn { justify-content: center; }
-
-      .cd-label { display: none; }
-      .countdown-bar { font-size: 10px; gap: 5px; }
-    }
-
-    @media (max-width: 420px) {
-      .friend-card.featured .friend-fields { grid-template-columns: 1fr; }
-      .cd-sep, .cd-days { display: none; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/newsletter.css">
 </head>
 <body>
 
-<!-- ══ PREVIEW BANNER ══ -->
-<div class="preview-banner">
-  <div class="preview-left">
-    <span class="preview-badge">Preview</span>
-    <p>Draft — let Kiara know what you think!</p>
-  </div>
-  <a class="preview-feedback-btn" href="mailto:raabkiara2@gmail.com?subject=Newsletter%20feedback&body=Here's%20what%20I%20think%3A%0A%0A">Give feedback ↗</a>
-</div>
+<div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
 
-<!-- ══ STICKY NAV ══ -->
 <nav class="sticky-nav" id="sticky-nav" aria-hidden="true">
   <span class="sticky-nav-title">Da Biddies Newsletter</span>
   <div class="sticky-nav-issue">
+    <button class="theme-toggle" aria-label="Toggle dark mode">
+      <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </button>
     <span class="sticky-nav-meta">Issue No. 1 &nbsp;·&nbsp;</span>
     <button class="nav-issue-toggle" id="nav-issue-toggle" aria-expanded="false">
       <span>April 2026</span>
@@ -963,39 +29,63 @@
 </nav>
 
 <!-- ══ HERO ══ -->
-<section class="hero" id="hero">
-  <div class="hero-issue-wrap">
-    <div class="hero-issue-label">Issue No. 1</div>
-    <button class="hero-issue-toggle" id="issue-toggle" aria-expanded="false">
-      <span>April 2026</span>
-      <span class="hero-issue-chevron">▾</span>
-    </button>
-    <div class="hero-issue-dropdown" id="issue-dropdown">
-      <p>Past issues will be stored here once they're published.</p>
+<div class="hero-wrapper">
+  <section class="hero" id="hero">
+    <div class="hero-issue-wrap">
+      <button class="theme-toggle" aria-label="Toggle dark mode" style="display: inline-flex; margin-bottom: 8px;">
+        <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      </button>
+      <div class="hero-issue-label">Issue No. 1</div>
+      <button class="hero-issue-toggle" id="issue-toggle" aria-expanded="false">
+        <span>April 2026</span>
+        <span class="hero-issue-chevron">▾</span>
+      </button>
+      <div class="hero-issue-dropdown" id="issue-dropdown">
+        <p>Past issues will be stored here once they're published.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="hero-center">
-    <h1 class="hero-title" id="hero-title" aria-label="Da Biddies Newsletter">
-      <span id="hero-typewriter"></span><span class="cursor" id="cursor" aria-hidden="true">|</span>
-    </h1>
-    <div class="hero-rule" id="hero-rule"></div>
-  </div>
+    <div class="hero-center">
+      <div class="hero-glass-box" id="hero-glass">
+        <h1 class="hero-title" id="hero-title" aria-label="Da Biddies Newsletter">
+          <span id="hero-typewriter"></span><span class="cursor" id="cursor" aria-hidden="true">|</span>
+        </h1>
+        <div class="hero-rule" id="hero-rule"></div>
+      </div>
+    </div>
 
-  <div class="hero-scroll-cue" id="hero-scroll-cue" aria-hidden="true">
-    <svg viewBox="0 0 14 8"><polyline points="1 1 7 7 13 1"/></svg>
-    <span>Scroll</span>
-  </div>
+    <div class="hero-scroll-cue" id="hero-scroll-cue" aria-hidden="true">
+      <svg viewBox="0 0 14 8"><polyline points="1 1 7 7 13 1"/></svg>
+      <span>Scroll</span>
+    </div>
+  </section>
+</div>
+
+<!-- ══ PHOTO WALL ══ -->
+<section class="photo-wall" id="photo-wall">
+  <figure class="polaroid-wrapper"><img src="DSC02206.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_0233.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_3319.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_3403.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_3546.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_3555.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_3723.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_4385.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_4391.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_4598.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_4756.jpeg" alt="Memories"></figure>
+  <figure class="polaroid-wrapper"><img src="IMG_5958.jpeg" alt="Memories"></figure>
 </section>
 
 <!-- ══ OPENER ══ -->
-<div class="opener">
+<div class="opener reveal">
   <p class="opener-text">Hiii, I wanted to make a newsletter for a while just so we can keep up on big and small things in our life + things like that. This is the <b>first one</b> pls lmk how this is in the chat or whatever. also wouldnt this be cool if it was physical</p>
 </div>
 
 <!-- ══ THIS MONTH ══ -->
-<div class="section-rule"><span>This month</span></div>
-<div class="section">
+<div class="section-rule reveal"><span>This month</span></div>
+<div class="section reveal">
   <h2>What's been happening</h2>
   <div class="friend-ledger">
 
@@ -1071,8 +161,8 @@
 </div>
 
 <!-- ══ THE BIG NEWS ══ -->
-<div class="section-rule"><span>The big news</span></div>
-<div class="proposal-section" id="proposal-section">
+<div class="section-rule reveal"><span>The big news</span></div>
+<div class="proposal-section reveal" id="proposal-section">
   <div class="proposal-layout">
 
     <div class="proposal-text">
@@ -1113,8 +203,8 @@
 </div>
 
 <!-- ══ CURRENTLY INTO ══ -->
-<div class="section-rule"><span>Currently into</span></div>
-<div class="section">
+<div class="section-rule reveal"><span>Currently into</span></div>
+<div class="section reveal">
   <h2>Things we've enjoyed</h2>
   <div class="into-grid">
 
@@ -1173,8 +263,8 @@
 </div>
 
 <!-- ══ IMPORTANT DATES ══ -->
-<div class="section-rule"><span>Important dates</span></div>
-<div class="section">
+<div class="section-rule reveal"><span>Important dates</span></div>
+<div class="section reveal">
   <h2>Mark your calendars</h2>
   
   <div class="countdown-banner" id="countdown-bar">
@@ -1205,8 +295,8 @@
 </div>
 
 <!-- ══ SHOUTOUTS ══ -->
-<div class="section-rule"><span>Kudos!</span></div>
-<div class="section">
+<div class="section-rule reveal"><span>Kudos!</span></div>
+<div class="section reveal">
   <h2>People worth celebrating</h2>
   <div class="spotlight-list">
     <div class="spotlight">
@@ -1220,8 +310,8 @@
 </div>
 
 <!-- ══ SIGN-OFF ══ -->
-<div class="section-rule"><span>Until next time</span></div>
-<div class="section" style="border-bottom:none;">
+<div class="section-rule reveal"><span>Until next time</span></div>
+<div class="section reveal" style="border-bottom:none;">
   <p class="signoff-text">That's everything I gathered from us this month! If I missed anything ofc send in chat :) but love you guys so much.</p>
   <p class="signoff-name">— Kiara</p>
 
@@ -1236,201 +326,6 @@
   <p>You're getting this because you're someone I actually want to keep up with &nbsp;·&nbsp; April 2026</p>
 </footer>
 
-<script>
-(function () {
-
-  /* ── Birthday data ── */
-  var BDAYS = [
-    { name: 'Kiara',   initial: 'K', month: 2,  day: 2  },
-    { name: 'Isabele', initial: 'I', month: 9,  day: 7  },
-    { name: 'Noemi',   initial: 'N', month: 6,  day: 13 },
-    { name: 'Betel',   initial: 'B', month: 3,  day: 25 },
-    { name: 'Ashlyn',  initial: 'A', month: 9,  day: 28 },
-  ];
-  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  var MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-
-  /* ── Next birthday util ── */
-  function getUpcoming() {
-    var today = new Date(); today.setHours(0,0,0,0);
-    return BDAYS.map(function(b) {
-      var d = new Date(today.getFullYear(), b.month - 1, b.day);
-      if (d < today) d = new Date(today.getFullYear() + 1, b.month - 1, b.day);
-      return { name: b.name, initial: b.initial, date: d, days: Math.ceil((d - today) / 86400000) };
-    }).sort(function(a,b) { return a.days - b.days; });
-  }
-
-  /* ── Countdown bar ── */
-  (function() {
-    var next = getUpcoming()[0];
-    var nameEl = document.getElementById('cd-name');
-    var dateEl = document.getElementById('cd-date');
-    var daysEl = document.getElementById('cd-days');
-    if (!nameEl) return;
-    nameEl.textContent = next.name + '’s birthday';
-    dateEl.textContent = MONTHS_SHORT[next.date.getMonth()] + ' ' + next.date.getDate();
-    daysEl.textContent = next.days === 0 ? 'today!' : next.days + (next.days === 1 ? ' day away' : ' days away');
-  })();
-
-  /* ── Typewriter ── */
-  (function() {
-    var text = 'Da Biddies Newsletter';
-    var tw = document.getElementById('hero-typewriter');
-    var cursor = document.getElementById('cursor');
-    var rule = document.getElementById('hero-rule');
-    var i = 0;
-    function type() {
-      if (i < text.length) {
-        tw.textContent += text[i++];
-        setTimeout(type, i === 1 ? 100 : 62);
-      } else {
-        setTimeout(function() { cursor.classList.add('done'); rule.classList.add('visible'); }, 500);
-      }
-    }
-    if (tw) setTimeout(type, 350);
-  })();
-
-  /* ── Sticky nav ── */
-  (function() {
-    var heroTitle = document.getElementById('hero-title');
-    var stickyNav = document.getElementById('sticky-nav');
-    var scrollCue = document.getElementById('hero-scroll-cue');
-    if (heroTitle && stickyNav) {
-      var obs = new IntersectionObserver(function(entries) {
-        var vis = entries[0].isIntersecting;
-        document.body.classList.toggle('scrolled', !vis);
-        stickyNav.setAttribute('aria-hidden', vis ? 'true' : 'false');
-      }, { threshold: 0.15 });
-      obs.observe(heroTitle);
-    }
-    if (scrollCue) {
-      var done = false;
-      window.addEventListener('scroll', function() {
-        if (!done && window.scrollY > 60) { done = true; scrollCue.classList.add('hidden'); }
-      }, { passive: true });
-    }
-  })();
-
-  /* ── Issue dropdown ── */
-  (function() {
-    var heroToggle = document.getElementById('issue-toggle');
-    var heroDropdown = document.getElementById('issue-dropdown');
-    var navToggle = document.getElementById('nav-issue-toggle');
-    var navDropdown = document.getElementById('nav-issue-dropdown');
-
-    if (heroToggle) {
-      heroToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var open = heroDropdown.classList.toggle('open');
-        this.setAttribute('aria-expanded', open);
-        if (navDropdown) navDropdown.classList.remove('open');
-      });
-    }
-
-    if (navToggle) {
-      navToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var open = navDropdown.classList.toggle('open');
-        this.setAttribute('aria-expanded', open);
-        if (heroDropdown) heroDropdown.classList.remove('open');
-      });
-    }
-
-    document.addEventListener('click', function() {
-      if (heroDropdown) heroDropdown.classList.remove('open');
-      if (navDropdown) navDropdown.classList.remove('open');
-      if (heroToggle) heroToggle.setAttribute('aria-expanded', 'false');
-      if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
-    });
-  })();
-
-  /* ── Calendar ── */
-  (function() {
-    var today = new Date();
-    var state = { year: today.getFullYear(), month: today.getMonth() };
-
-    function bdaysForDate(y, m, d) {
-      return BDAYS.filter(function(b) { return b.month === m + 1 && b.day === d; });
-    }
-
-    function render() {
-      var label = document.getElementById('cal-month-label');
-      var grid = document.getElementById('cal-grid');
-      if (!grid) return;
-      if (label) label.textContent = MONTHS[state.month] + ' ' + state.year;
-
-      var firstDay = new Date(state.year, state.month, 1).getDay();
-      var daysInMonth = new Date(state.year, state.month + 1, 0).getDate();
-      var isCurrentMonth = today.getFullYear() === state.year && today.getMonth() === state.month;
-      var html = '';
-
-      for (var i = 0; i < firstDay; i++) html += '<div class="cal-cell empty"><span class="cal-num">0</span></div>';
-      for (var d = 1; d <= daysInMonth; d++) {
-        var bds = bdaysForDate(state.year, state.month, d);
-        var isToday = isCurrentMonth && today.getDate() === d;
-        html += '<div class="cal-cell' + (isToday ? ' today' : '') + '">';
-        html += '<span class="cal-num">' + d + '</span>';
-        if (bds.length) {
-          html += '<div class="cal-event-dots">';
-          bds.forEach(function(b) { html += '<span class="cal-event-dot" title="' + b.name + '\'s birthday">' + b.initial + '</span>'; });
-          html += '</div>';
-        }
-        html += '</div>';
-      }
-      grid.innerHTML = html;
-    }
-
-    function renderUpcoming() {
-      var list = document.getElementById('upcoming-list');
-      if (!list) return;
-      var upcoming = getUpcoming();
-      list.innerHTML = upcoming.map(function(e) {
-        var ds = e.days === 0 ? 'Today!' : (e.days === 1 ? '1 day away' : e.days + ' days away');
-        return '<li class="upcoming-item">' +
-          '<div class="upcoming-initial">' + e.initial + '</div>' +
-          '<div class="upcoming-info">' +
-            '<span class="upcoming-name">' + e.name + '</span>' +
-            '<span class="upcoming-date-str">Birthday — ' + MONTHS_SHORT[e.date.getMonth()] + ' ' + e.date.getDate() + '</span>' +
-          '</div>' +
-          '<span class="upcoming-days-str">' + ds + '</span>' +
-          '</li>';
-      }).join('');
-    }
-
-    render();
-    renderUpcoming();
-
-    var prev = document.getElementById('cal-prev');
-    var next = document.getElementById('cal-next');
-    if (prev) prev.addEventListener('click', function() {
-      state.month--; if (state.month < 0) { state.month = 11; state.year--; } render();
-    });
-    if (next) next.addEventListener('click', function() {
-      state.month++; if (state.month > 11) { state.month = 0; state.year++; } render();
-    });
-  })();
-
-  /* ── Proposal parallax ── */
-  (function() {
-    var frame = document.getElementById('proposal-photo');
-    var section = document.getElementById('proposal-section');
-    if (!frame || !section) return;
-    var ticking = false;
-    function update() {
-      var rect = section.getBoundingClientRect();
-      var vh = window.innerHeight;
-      var progress = 1 - (rect.bottom / (vh + rect.height));
-      progress = Math.max(0, Math.min(1, progress));
-      var wave = Math.sin(progress * Math.PI);
-      frame.style.transform = 'scale(' + (0.93 + wave * 0.12).toFixed(4) + ')';
-      ticking = false;
-    }
-    window.addEventListener('scroll', function() { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
-    update();
-  })();
-
-})();
-</script>
-
+<script src="assets/js/newsletter.js"></script>
 </body>
 </html>
