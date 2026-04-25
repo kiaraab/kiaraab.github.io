@@ -44,7 +44,7 @@
     </div>
     <div class="hero-center">
       <div class="hero-glass-box" id="hero-glass">
-        <h1 class="hero-title" id="hero-title">Da Biddies Newsletter</h1>
+        <h1 class="hero-title" id="hero-title"><span id="hero-typewriter"></span><span class="cursor" id="cursor">|</span></h1>
         <span class="hero-example-label">example</span>
         <div class="hero-rule" id="hero-rule"></div>
       </div>
@@ -214,6 +214,36 @@
   <div class="social-placeholder" style="border-style: dashed; background: transparent; min-height: 200px;">
     <svg viewBox="0 0 24 24" width="32" stroke="#ccc" fill="none"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     <p style="font-family: sans-serif; font-size: 11px; color: var(--ink-faint); margin-top: 15px; text-transform: uppercase; letter-spacing: 0.2em;">This section is a surprise! You'll see it in the final version.</p>
+  </div>
+</div>
+
+<div class="section-rule"><span>Important dates</span></div>
+<div class="section">
+  <h2>Mark your calendars</h2>
+  <div class="countdown-banner" id="countdown-bar">
+    <span class="cd-label">Next up</span>
+    <span class="cd-name" id="cd-name">—</span>
+    <span class="cd-sep">·</span>
+    <span class="cd-date" id="cd-date"></span>
+    <span class="cd-days" id="cd-days"></span>
+  </div>
+
+  <div class="dates-layout">
+    <div class="calendar-col">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" id="cal-prev">←</button>
+        <span class="cal-month-label" id="cal-month-label">April 2026</span>
+        <button class="cal-nav-btn" id="cal-next">→</button>
+      </div>
+      <div class="cal-days-header">
+        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+      </div>
+      <div id="cal-grid" class="cal-grid"></div>
+    </div>
+    <div class="upcoming-section">
+      <h3>Birthdays</h3>
+      <ul id="upcoming-list" class="upcoming-list"></ul>
+    </div>
   </div>
 </div>
 
