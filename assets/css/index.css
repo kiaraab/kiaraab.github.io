@@ -276,6 +276,8 @@ body::before {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .postcard-back {
@@ -290,6 +292,8 @@ body::before {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .letter-greeting {

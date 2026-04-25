@@ -20,6 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
         isMusicPlaying: false,
         hasFlippedPostcard: false,
         hasCompletedFlowOnce: false,
+        // Dragging state variables
+        isDragging: false,
+        dragStartX: 0,
+        dragStartY: 0,
+        elementStartX: 0,
+        elementStartY: 0,
+        isClick: true,
     };
 
     // --- 3. Core Logic & UI Update Functions ---
@@ -60,6 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.paper.classList.remove('show-paper', 'is-flipped', 'show-click-me');
         if (elements.postcardInner) elements.postcardInner.classList.remove('breathing');
         
+        // Reset inline drag styles so it goes back to the center next time
+        elements.paper.style.left = '';
+        elements.paper.style.top = '';
+        elements.paper.style.transition = '';
+
         state.hasFlippedPostcard = false;
     };
 
@@ -92,6 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /** Handles clicking the postcard to flip it. */
     const handlePostcardClick = (event) => {
+        // Prevent the flip if the user was actively dragging the card
+        if (!state.isClick) return;
+
         event.stopPropagation();
         playSound(sounds.click);
         elements.paper.classList.toggle('is-flipped');
@@ -106,6 +121,52 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.paper.classList.remove('show-click-me');
             state.hasCompletedFlowOnce = true;
         }
+    };
+
+    /** Handles the start of a drag event */
+    const handleDragStart = (e) => {
+        if (!state.isEnvelopeOpen) return;
+        state.isDragging = true;
+        state.isClick = true; // Assume it's a click until they move their finger/mouse
+
+        const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+
+        state.dragStartX = clientX;
+        state.dragStartY = clientY;
+        state.elementStartX = elements.paper.offsetLeft;
+        state.elementStartY = elements.paper.offsetTop;
+
+        elements.paper.style.transition = 'none'; // Disable CSS transition for instant drag tracking
+    };
+
+    /** Handles the movement during a drag event */
+    const handleDragMove = (e) => {
+        if (!state.isDragging) return;
+        
+        // Prevent default scrolling on mobile while dragging the postcard
+        if (e.cancelable && e.type.includes('touch')) e.preventDefault();
+
+        const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+
+        const deltaX = clientX - state.dragStartX;
+        const deltaY = clientY - state.dragStartY;
+
+        // If moved more than 5 pixels, it's definitively a drag, not a click
+        if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+            state.isClick = false;
+        }
+
+        elements.paper.style.left = `${state.elementStartX + deltaX}px`;
+        elements.paper.style.top = `${state.elementStartY + deltaY}px`;
+    };
+
+    /** Handles the end of a drag event */
+    const handleDragEnd = () => {
+        if (!state.isDragging) return;
+        state.isDragging = false;
+        elements.paper.style.transition = ''; // Re-enable CSS transitions
     };
 
     /** Handles toggling the music widget. */
@@ -162,6 +223,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (elements.paper) {
             elements.paper.addEventListener('click', handlePostcardClick);
+            
+            // Mouse drag events
+            elements.paper.addEventListener('mousedown', handleDragStart);
+            document.addEventListener('mousemove', handleDragMove);
+            document.addEventListener('mouseup', handleDragEnd);
+
+            // Touch drag events for mobile
+            elements.paper.addEventListener('touchstart', handleDragStart, { passive: true });
+            document.addEventListener('touchmove', handleDragMove, { passive: false });
+            document.addEventListener('touchend', handleDragEnd);
         }
         if (elements.musicWidget && elements.bgMusic) {
             elements.musicWidget.addEventListener('click', handleMusicWidgetClick);

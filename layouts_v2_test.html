@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layout Explorations V2 — Image Focus</title>
+  <style>
+    :root {
+      --ink: #111110;
+      --ink-muted: #555550;
+      --ink-faint: #999990;
+      --paper: #faf9f6;
+      --paper-warm: #f2f0ea;
+      --rule: #e0ddd5;
+    }
+
+    body { font-family: Georgia, serif; background: var(--paper); color: var(--ink); line-height: 1.6; padding: 60px 20px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    h1 { text-align: center; margin-bottom: 80px; font-weight: 400; border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
+    .version-label { font-family: sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink-faint); margin-bottom: 30px; display: block; }
+    .section-preview { margin-bottom: 150px; }
+
+    /* Shared Styles */
+    .field-label { font-family: sans-serif; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); margin-bottom: 4px; display: block; }
+    .field-val { font-size: 14px; font-style: italic; color: var(--ink-muted); }
+    .name { font-size: 24px; margin-bottom: 15px; display: block; }
+    .img-placeholder { background: var(--paper-warm); border: 1px solid var(--rule); display: flex; align-items: center; justify-content: center; }
+
+    /* 11. THE FILM STRIP */
+    .v11-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+    .v11-card { text-align: center; }
+    .v11-img { aspect-ratio: 1; margin-bottom: 15px; border: 8px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+    /* 12. THE POLAROID WALL */
+    .v12-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
+    .v12-card { width: 200px; background: white; padding: 15px 15px 40px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transform: rotate(-2deg); }
+    .v12-card:nth-child(even) { transform: rotate(3deg); }
+    .v12-img { aspect-ratio: 1; margin-bottom: 15px; }
+    .v12-name { font-family: 'Brush Script MT', cursive; font-size: 20px; text-align: center; }
+
+    /* 13. NARRATIVE SPREAD */
+    .v13-grid { display: grid; gap: 60px; }
+    .v13-row { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center; border-bottom: 1px solid var(--rule); padding-bottom: 40px; }
+    .v13-img { aspect-ratio: 4/3; }
+
+    /* 14. THE CONTACT SHEET */
+    .v14-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+    .v14-card { background: var(--paper); padding: 40px; display: grid; grid-template-columns: 120px 1fr; gap: 30px; }
+    .v14-img { height: 160px; }
+
+    /* 15. THE MAGAZINE TEASE */
+    .v15-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--rule); }
+    .v15-card { background: var(--paper); padding: 20px; position: relative; overflow: hidden; height: 350px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .v15-img { position: absolute; top: 0; left: 0; width: 100%; height: 60%; opacity: 0.8; }
+    .v15-name { font-weight: 700; z-index: 2; border-top: 1px solid var(--ink); padding-top: 10px; }
+
+    /* 16. THE FLOATING MASONRY */
+    .v16-grid { columns: 3; column-gap: 30px; }
+    .v16-card { break-inside: avoid; margin-bottom: 30px; border: 1px solid var(--rule); padding: 20px; background: white; }
+    .v16-img { width: 100%; height: auto; margin-bottom: 15px; }
+
+    /* 17. TABBED LEDGER */
+    .v17-grid { display: flex; flex-direction: column; border: 1px solid var(--rule); }
+    .v17-row { display: grid; grid-template-columns: 60px 200px 1fr 200px; align-items: stretch; border-bottom: 1px solid var(--rule); }
+    .v17-initial { background: var(--paper-warm); display: flex; align-items: center; justify-content: center; font-size: 24px; border-right: 1px solid var(--rule); }
+    .v17-name-cell { padding: 20px; display: flex; align-items: center; border-right: 1px solid var(--rule); }
+    .v17-fields { padding: 20px; border-right: 1px solid var(--rule); }
+    .v17-img-cell { padding: 10px; display: flex; align-items: center; justify-content: center; }
+
+    /* 18. ART GALLERY STYLE */
+    .v18-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+    .v18-card { border: 1px solid var(--rule); background: white; padding: 20px; }
+    .v18-img-wrap { padding: 20px; background: #eee; margin-bottom: 20px; border: 1px inset rgba(0,0,0,0.1); }
+    .v18-info { text-align: center; }
+
+    /* 19. VERTICAL CHRONICLE */
+    .v19-grid { max-width: 600px; margin: 0 auto; position: relative; }
+    .v19-grid::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--rule); }
+    .v19-card { margin-bottom: 80px; position: relative; width: 45%; }
+    .v19-card:nth-child(even) { margin-left: 55%; }
+    .v19-dot { position: absolute; top: 20px; left: 111%; width: 10px; height: 10px; background: var(--ink); border-radius: 50%; }
+    .v19-card:nth-child(even) .v19-dot { left: -14%; }
+
+    /* 20. BOLD TYPOGRAPHIC MESH */
+    .v20-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--ink); border: 2px solid var(--ink); }
+    .v20-card { background: var(--paper); padding: 30px; }
+    .v20-card:first-child { grid-column: span 2; grid-row: span 2; }
+    .v20-name { font-size: 48px; line-height: 1; margin-bottom: 20px; text-transform: uppercase; }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Visual Layout Explorations</h1>
+
+  <!-- V11 -->
+  <div class="section-preview">
+    <span class="version-label">11. The Film Strip (Symmetrical)</span>
+    <div class="v11-grid">
+      <div class="v11-card"><div class="img-placeholder v11-img">Trip</div><span class="name">Ashlyn</span></div>
+      <div class="v11-card"><div class="img-placeholder v11-img">Book</div><span class="name">Betel</span></div>
+      <div class="v11-card"><div class="img-placeholder v11-img">Win</div><span class="name">Isabele</span></div>
+      <div class="v11-card"><div class="img-placeholder v11-img">Goal</div><span class="name">Kiara</span></div>
+      <div class="v11-card"><div class="img-placeholder v11-img">Brain</div><span class="name">Noemi</span></div>
+    </div>
+  </div>
+
+  <!-- V12 -->
+  <div class="section-preview">
+    <span class="version-label">12. The Polaroid Wall</span>
+    <div class="v12-grid">
+      <div class="v12-card"><div class="img-placeholder v12-img"></div><div class="v12-name">Kiara</div></div>
+      <div class="v12-card"><div class="img-placeholder v12-img"></div><div class="v12-name">Noemi</div></div>
+      <div class="v12-card"><div class="img-placeholder v12-img"></div><div class="v12-name">Ashlyn</div></div>
+    </div>
+  </div>
+
+  <!-- V13 -->
+  <div class="section-preview">
+    <span class="version-label">13. The Narrative Spread (Editorial Style)</span>
+    <div class="v13-grid">
+      <div class="v13-row">
+        <div class="img-placeholder v13-img">Boston Trip</div>
+        <div class="v13-text">
+          <span class="name">Kiara</span>
+          <span class="field-label">The Big Win</span>
+          <p class="field-val">"I did the Boston trip in 1 day, flew in at 7am and left at 8pm. Proud I toughed through it."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V14 -->
+  <div class="section-preview">
+    <span class="version-label">14. The Contact Sheet</span>
+    <div class="v14-grid">
+      <div class="v14-card">
+        <div class="img-placeholder v14-img">Photo</div>
+        <div>
+          <span class="name">Isabele</span>
+          <span class="field-val">"Focusing on new projects."</span>
+        </div>
+      </div>
+      <div class="v14-card">
+        <div class="img-placeholder v14-img">Photo</div>
+        <div><span class="name">Betel</span><span class="field-val">"Enjoying the weather."</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V15 -->
+  <div class="section-preview">
+    <span class="version-label">15. The Magazine Tease</span>
+    <div class="v15-grid">
+      <div class="v15-card"><div class="img-placeholder v15-img"></div><span class="v15-name">Kiara</span><span class="field-label">Win</span><span class="field-val">Boston in a day</span></div>
+      <div class="v15-card"><div class="img-placeholder v15-img"></div><span class="v15-name">Ashlyn</span><span class="field-label">Goal</span><span class="field-val">NYC trip</span></div>
+      <div class="v15-card"><div class="img-placeholder v15-img"></div><span class="v15-name">Noemi</span><span class="field-label">Brain</span><span class="field-val">Learning</span></div>
+      <div class="v15-card"><div class="img-placeholder v15-img"></div><span class="v15-name">Betel</span><span class="field-label">Trip</span><span class="field-val">Hiking</span></div>
+      <div class="v15-card"><div class="img-placeholder v15-img"></div><span class="v15-name">Isabele</span><span class="field-label">Win</span><span class="field-val">Promotion</span></div>
+    </div>
+  </div>
+
+  <!-- V17 -->
+  <div class="section-preview">
+    <span class="version-label">17. The Visual Ledger (Tabbed)</span>
+    <div class="v17-grid">
+      <div class="v17-row">
+        <div class="v17-initial">K</div>
+        <div class="v17-name-cell"><span class="name" style="margin:0;">Kiara</span></div>
+        <div class="v17-fields">
+          <span class="field-label">Win</span>
+          <span class="field-val">Boston in a day. Tiring but worth it.</span>
+        </div>
+        <div class="v17-img-cell"><div class="img-placeholder" style="width:100%; height:100%;">Boston</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
