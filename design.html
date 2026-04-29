@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Options — Da Biddies Newsletter</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:#1a1a1a;}
+
+.picker{position:fixed;top:0;left:0;right:0;z-index:9999;background:#111;color:#fff;
+  display:flex;align-items:center;gap:8px;padding:9px 16px;
+  font-family:monospace;font-size:12px;border-bottom:1px solid #333;}
+.picker strong{color:#888;margin-right:4px;}
+.picker a{color:#fff;text-decoration:none;padding:3px 10px;border:1px solid #444;border-radius:2px;}
+.picker a:hover{background:#333;}
+.design-block{padding-top:36px;}
+.design-tag{background:#e8ff00;color:#111;font-family:monospace;font-size:10px;font-weight:bold;
+  padding:6px 16px;letter-spacing:0.15em;display:block;position:sticky;top:36px;z-index:50;}
+
+/* ═══════════════════════════════════════════════════════
+   DESIGN A — BROADSHEET
+   Big editorial newspaper. Each section is its own "article."
+   Ledger = ink-stamped table. Engagement = pull-quote spread.
+   Watching = horizontal poster strip. Kudos = letter cards.
+   Font: Georgia + tight Helvetica caps.
+   Palette: newsprint cream / black / vermillion red.
+═══════════════════════════════════════════════════════ */
+.da{
+  --bg:#f5f0e4;--ink:#111;--red:#c0321a;--muted:#555;--faint:#999;--rule:#ccc;
+  background:var(--bg);color:var(--ink);
+  font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.7;
+}
+
+/* HERO */
+.da .hero{
+  border-bottom:3px solid var(--ink);
+  padding:56px 8% 48px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;
+}
+.da .hero-masthead{
+  font-family:'Helvetica Neue',Arial,sans-serif;
+  font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);
+  border-top:1px solid var(--ink);padding-top:8px;margin-bottom:16px;
+}
+.da .hero h1{
+  font-size:clamp(52px,6vw,84px);font-weight:700;line-height:0.92;letter-spacing:-2px;
+  text-transform:uppercase;
+}
+.da .hero-right{
+  border-left:1px solid var(--rule);padding-left:40px;
+  display:flex;flex-direction:column;justify-content:flex-end;gap:14px;
+}
+.da .hero-issue{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+}
+.da .hero-intro{font-size:15px;line-height:1.65;color:var(--muted);}
+.da .hero-dateline{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;letter-spacing:0.15em;
+  text-transform:uppercase;color:var(--red);border-top:1px solid var(--rule);padding-top:10px;
+}
+
+/* SECTION DIVIDERS */
+.da .rule{
+  display:flex;align-items:center;gap:0;
+  border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);
+  padding:5px 8%;font-family:'Helvetica Neue',Arial,sans-serif;
+  font-size:9px;letter-spacing:0.25em;text-transform:uppercase;font-weight:700;
+  color:var(--ink);
+}
+.da .rule span{background:var(--ink);color:var(--bg);padding:3px 10px;}
+
+/* PHOTO WALL — columns strip */
+.da .photo-strip{
+  display:flex;gap:0;overflow:hidden;height:260px;
+}
+.da .photo-strip img{
+  flex:1;min-width:0;object-fit:cover;display:block;filter:grayscale(15%);
+}
+
+/* LEDGER — proper ink-ruled table */
+.da .section{padding:44px 8%;}
+.da .section h2{
+  font-size:13px;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--red);margin-bottom:22px;font-weight:700;
+}
+.da table{width:100%;border-collapse:collapse;}
+.da th{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:9px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--faint);padding:8px 12px;
+  border-bottom:2px solid var(--ink);text-align:left;
+}
+.da td{
+  padding:13px 12px;font-size:14px;border-bottom:1px solid var(--rule);vertical-align:top;
+}
+.da td:first-child{font-weight:700;font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;}
+
+/* ENGAGEMENT — full-bleed pull-quote spread */
+.da .engagement{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+}
+.da .engagement-photo{height:480px;overflow:hidden;}
+.da .engagement-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.da .engagement-text{
+  padding:52px 48px;border-left:1px solid var(--rule);
+  display:flex;flex-direction:column;justify-content:center;gap:20px;
+}
+.da .eng-eyebrow{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:9px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--red);
+}
+.da .eng-headline{font-size:36px;font-weight:700;line-height:1.05;letter-spacing:-1px;}
+.da .eng-body{font-size:14px;line-height:1.7;color:var(--muted);}
+.da .eng-names{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;letter-spacing:0.15em;
+  text-transform:uppercase;border-top:1px solid var(--rule);padding-top:14px;
+}
+.da .eng-comments{margin-top:20px;display:flex;flex-direction:column;gap:10px;}
+.da .eng-comment{font-size:13px;line-height:1.5;padding-left:12px;border-left:2px solid var(--red);}
+.da .eng-who{font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:2px;}
+
+/* WATCHING — horizontal poster row */
+.da .poster-row{display:flex;gap:0;overflow-x:auto;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+.da .poster-item{flex:0 0 180px;border-right:1px solid var(--rule);}
+.da .poster-item img{width:100%;height:260px;object-fit:cover;display:block;}
+.da .poster-info{padding:12px 14px;border-top:1px solid var(--rule);}
+.da .poster-label{font-family:'Helvetica Neue',Arial,sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:3px;}
+.da .poster-name{font-size:14px;font-weight:700;display:block;}
+.da .poster-by{font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;color:var(--muted);font-style:italic;}
+
+/* LISTENING */
+.da .listening-row{display:flex;gap:0;border-top:1px solid var(--rule);}
+.da .listening-item{
+  flex:1;padding:24px;border-right:1px solid var(--rule);
+}
+.da .listening-item:last-child{border-right:none;}
+.da .track-num{font-family:'Helvetica Neue',Arial,sans-serif;font-size:9px;color:var(--faint);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;}
+.da .track-name{font-size:18px;font-weight:700;letter-spacing:-0.5px;margin-bottom:2px;}
+.da .track-artist{font-size:13px;color:var(--muted);margin-bottom:6px;}
+.da .track-by{font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);}
+
+/* EATING */
+.da .eating-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule);}
+.da .eat-item{padding:24px;border-right:1px solid var(--rule);}
+.da .eat-item:last-child{border-right:none;}
+.da .eat-name{font-size:20px;font-weight:700;letter-spacing:-0.5px;}
+.da .eat-meta{font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;color:var(--red);letter-spacing:0.1em;text-transform:uppercase;margin:4px 0 8px;}
+.da .eat-note{font-size:14px;font-style:italic;color:var(--muted);}
+.da .eat-who{font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;color:var(--faint);margin-top:6px;letter-spacing:0.08em;text-transform:uppercase;}
+
+/* KUDOS — letter cards */
+.da .kudos-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--rule);}
+.da .kudos-card{padding:28px 24px;border-right:1px solid var(--rule);}
+.da .kudos-card:last-child{border-right:none;}
+.da .kudos-initial{font-size:48px;font-weight:700;line-height:1;color:var(--rule);letter-spacing:-2px;}
+.da .kudos-name{font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;margin:8px 0 12px;}
+.da .kudos-quote{font-size:14px;font-style:italic;line-height:1.55;margin-bottom:6px;}
+.da .kudos-from{font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;}
+
+/* SIGNOFF */
+.da .signoff{
+  padding:52px 8%;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;align-items:baseline;
+}
+.da .signoff-text{font-size:14px;font-style:italic;color:var(--muted);max-width:440px;}
+.da .signoff-logo{font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:-1px;}
+
+
+/* ═══════════════════════════════════════════════════════
+   DESIGN B — GROUP CHAT
+   Feels like scrolling through a group chat that became
+   a page. Each person's info is a "message bubble." The
+   engagement section is a pin in the chat. Watching looks
+   like forwarded links. Kudos are @mentions.
+   Font: system-ui / Inter-like. Palette: white + warm grey + teal.
+═══════════════════════════════════════════════════════ */
+.db{
+  --bg:#f0f0f0;--surface:#fff;--ink:#1c1c1e;--teal:#0a7a6a;--green:#34c759;
+  --muted:#6c6c70;--faint:#aeaeb2;--rule:#e5e5ea;--bubble-k:#dce8ff;--bubble-other:#fff;
+  background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+  font-size:16px;line-height:1.5;
+}
+
+/* HERO — app header style */
+.db .hero{
+  background:var(--surface);border-bottom:1px solid var(--rule);
+  padding:40px 20px 32px;text-align:center;
+  position:relative;
+}
+.db .hero-status{
+  font-size:11px;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;
+  font-weight:600;margin-bottom:8px;
+}
+.db .hero h1{font-size:clamp(26px,5vw,44px);font-weight:700;letter-spacing:-0.5px;}
+.db .hero-sub{font-size:13px;color:var(--muted);margin-top:6px;}
+.db .hero-avatars{
+  display:flex;justify-content:center;gap:8px;margin-top:20px;
+}
+.db .av{
+  width:40px;height:40px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:16px;font-weight:700;color:#fff;
+  box-shadow:0 0 0 3px var(--surface);
+}
+.db .av-k{background:#ff6b96;}
+.db .av-b{background:#ff9f0a;}
+.db .av-n{background:#a855f7;}
+.db .av-i{background:#34c759;}
+.db .av-a{background:#0a84ff;}
+
+/* PHOTO WALL — polaroid scatter */
+.db .section{padding:32px 20px;background:var(--bg);}
+.db .section-header{
+  text-align:center;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:20px;font-weight:600;
+}
+.db .polaroid-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+}
+.db .polaroid{
+  background:#fff;padding:8px 8px 28px;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+  transform:rotate(var(--r,0deg));
+}
+.db .polaroid:nth-child(odd){--r:-1.2deg;}
+.db .polaroid:nth-child(even){--r:1.5deg;}
+.db .polaroid img{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
+
+/* LEDGER — chat message bubbles per person */
+.db .chat-feed{display:flex;flex-direction:column;gap:20px;padding:28px 20px;background:var(--bg);}
+.db .chat-msg{display:flex;gap:12px;align-items:flex-start;max-width:88%;}
+.db .chat-msg.right{flex-direction:row-reverse;align-self:flex-end;}
+.db .chat-av{
+  width:36px;height:36px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;
+}
+.db .chat-bubble{
+  background:var(--bubble-other);border-radius:18px;border-top-left-radius:4px;
+  padding:12px 16px;box-shadow:0 1px 3px rgba(0,0,0,.1);min-width:200px;
+}
+.db .chat-msg.right .chat-bubble{
+  background:var(--bubble-k);border-top-left-radius:18px;border-top-right-radius:4px;
+}
+.db .chat-name{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em;}
+.db .chat-field{margin-bottom:8px;}
+.db .chat-field:last-child{margin-bottom:0;}
+.db .chat-label{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;}
+.db .chat-val{font-size:14px;color:var(--ink);margin-top:1px;}
+
+/* ENGAGEMENT — pinned message */
+.db .pin-wrap{margin:0 20px 28px;background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.1);}
+.db .pin-img{width:100%;height:340px;object-fit:cover;object-position:top;display:block;}
+.db .pin-body{padding:24px;}
+.db .pin-tag{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.db .pin-title{font-size:24px;font-weight:700;letter-spacing:-0.5px;margin-bottom:10px;}
+.db .pin-text{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:16px;}
+.db .pin-reactions{display:flex;flex-wrap:wrap;gap:8px;padding-top:14px;border-top:1px solid var(--rule);}
+.db .pin-react{
+  background:var(--bg);border-radius:20px;padding:7px 14px;
+  font-size:13px;display:flex;gap:8px;align-items:flex-start;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+.db .pin-react-who{font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;}
+.db .pin-react-text{font-size:13px;color:var(--ink);font-style:italic;}
+.db .pin-react-av{
+  width:28px;height:28px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;
+}
+
+/* WATCHING — forwarded link cards */
+.db .fwd-list{display:flex;flex-direction:column;gap:10px;padding:0 20px 28px;}
+.db .fwd-card{
+  background:var(--surface);border-radius:12px;overflow:hidden;
+  display:flex;gap:0;box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+.db .fwd-poster{width:80px;height:100px;object-fit:cover;flex-shrink:0;}
+.db .fwd-info{padding:14px 16px;flex:1;}
+.db .fwd-label{font-size:10px;color:var(--teal);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px;}
+.db .fwd-name{font-size:15px;font-weight:700;margin-bottom:4px;}
+.db .fwd-who{font-size:12px;color:var(--muted);}
+
+/* LISTENING — track list (iMessage style) */
+.db .track-list{padding:0 20px 28px;display:flex;flex-direction:column;gap:6px;}
+.db .track-row{
+  background:var(--surface);border-radius:12px;padding:14px 16px;
+  display:flex;align-items:center;gap:14px;box-shadow:0 1px 3px rgba(0,0,0,.06);
+}
+.db .track-num-badge{
+  width:32px;height:32px;border-radius:8px;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:var(--muted);flex-shrink:0;
+}
+.db .track-info{flex:1;}
+.db .track-title{font-size:15px;font-weight:600;}
+.db .track-artist{font-size:13px;color:var(--muted);}
+.db .track-sender{font-size:11px;color:var(--teal);font-weight:700;margin-top:2px;}
+
+/* EATING */
+.db .eat-list{padding:0 20px 28px;display:flex;flex-direction:column;gap:10px;}
+.db .eat-card{
+  background:var(--surface);border-radius:12px;padding:16px 18px;
+  box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+.db .eat-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;}
+.db .eat-name{font-size:17px;font-weight:700;}
+.db .eat-badge{font-size:11px;font-weight:600;color:var(--teal);}
+.db .eat-meta-b{font-size:12px;color:var(--muted);margin-bottom:5px;}
+.db .eat-note-b{font-size:14px;font-style:italic;color:var(--ink);}
+
+/* KUDOS — @mention chips */
+.db .mention-list{padding:0 20px 28px;display:flex;flex-direction:column;gap:14px;}
+.db .mention-card{
+  background:var(--surface);border-radius:16px;padding:18px 20px;
+  box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+.db .mention-handle{font-size:17px;font-weight:700;color:var(--teal);margin-bottom:8px;}
+.db .mention-quote{font-size:14px;font-style:italic;line-height:1.55;margin-bottom:4px;}
+.db .mention-from{font-size:11px;color:var(--faint);font-weight:600;}
+
+/* SIGNOFF */
+.db .signoff{
+  margin:0 20px 40px;background:var(--teal);color:#fff;
+  border-radius:20px;padding:32px 28px;text-align:center;
+}
+.db .signoff-text{font-size:15px;line-height:1.65;opacity:.9;}
+.db .signoff-logo{font-size:22px;font-weight:700;margin-bottom:10px;}
+
+
+/* ═══════════════════════════════════════════════════════
+   DESIGN C — MINIMAL ART BOOK
+   Very quiet. Lots of air. Everything is understated.
+   Hero: small, left-aligned, almost nothing.
+   Photo wall: one horizontal scroll strip, uncropped.
+   Ledger: stacked vertical entries, one person per block.
+   Engagement: full-page image with overlaid text only.
+   Watching: tiny text list, no posters.
+   Kudos: centered italic block quotes, large.
+   Font: Georgia + tracked caps. Palette: off-white / warm black / rust.
+═══════════════════════════════════════════════════════ */
+.dc{
+  --bg:#f8f6f2;--ink:#1a1714;--rust:#9b3a2a;--muted:#7a746c;--faint:#c8c0b4;--rule:#e2ddd6;
+  background:var(--bg);color:var(--ink);
+  font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.8;
+}
+
+/* HERO — whisper */
+.dc .hero{
+  padding:80px 12% 72px;
+  border-bottom:1px solid var(--rule);
+}
+.dc .hero-issue{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:9px;letter-spacing:0.4em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:28px;display:block;
+}
+.dc .hero h1{
+  font-size:clamp(32px,4vw,54px);font-weight:400;letter-spacing:-1px;
+  color:var(--ink);margin-bottom:24px;
+}
+.dc .hero-intro{
+  max-width:400px;font-size:14px;color:var(--muted);line-height:1.8;
+  border-left:1px solid var(--rule);padding-left:20px;
+}
+
+/* PHOTO WALL — one tall strip, overflow scroll */
+.dc .photo-strip-wrap{
+  overflow-x:auto;padding:40px 12%;
+  border-bottom:1px solid var(--rule);
+}
+.dc .photo-strip{display:flex;gap:8px;width:max-content;}
+.dc .photo-strip img{height:300px;width:auto;display:block;}
+
+/* LEDGER — stacked vertical cards, spare */
+.dc .ledger-intro{
+  padding:48px 12% 0;
+}
+.dc .ledger-intro h2{
+  font-size:10px;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:40px;
+}
+.dc .person-block{
+  border-top:1px solid var(--rule);padding:36px 12%;
+}
+.dc .person-name{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;letter-spacing:0.25em;
+  text-transform:uppercase;color:var(--rust);margin-bottom:20px;font-weight:700;
+}
+.dc .person-fields{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;}
+.dc .person-field{margin-bottom:18px;}
+.dc .field-label{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--faint);display:block;margin-bottom:4px;
+}
+.dc .field-val{font-size:14px;color:var(--ink);line-height:1.6;}
+
+/* ENGAGEMENT — full bleed image + text overlay */
+.dc .engagement{position:relative;overflow:hidden;}
+.dc .engagement img{width:100%;height:600px;object-fit:cover;object-position:top;display:block;filter:brightness(.7);}
+.dc .engagement-over{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:48px 12%;
+  background:linear-gradient(transparent,rgba(26,23,20,.92));
+  color:#f8f6f2;
+}
+.dc .eng-eyebrow{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:9px;letter-spacing:0.35em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:12px;display:block;
+}
+.dc .eng-h{font-size:clamp(32px,4vw,52px);font-weight:400;letter-spacing:-1px;margin-bottom:16px;}
+.dc .eng-body{font-size:14px;line-height:1.7;opacity:.8;max-width:480px;}
+.dc .comments-below{padding:32px 12%;border-bottom:1px solid var(--rule);}
+.dc .dc-comment{
+  margin-bottom:16px;
+  font-size:14px;font-style:italic;color:var(--muted);line-height:1.65;
+  padding-left:20px;border-left:1px solid var(--rust);
+}
+.dc .dc-commenter{font-style:normal;font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--rust);display:block;margin-bottom:3px;}
+
+/* ENJOYED — text-list style, no images */
+.dc .enjoyed{padding:48px 12%;border-bottom:1px solid var(--rule);}
+.dc .enjoyed-h{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:9px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:28px;display:block;
+}
+.dc .enjoyed-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;}
+.dc .enjoyed-col-head{
+  font-size:20px;font-weight:400;letter-spacing:-0.5px;margin-bottom:20px;
+  border-bottom:1px solid var(--rule);padding-bottom:10px;
+}
+.dc .enjoyed-item{margin-bottom:18px;}
+.dc .enjoyed-title{font-size:15px;font-weight:700;}
+.dc .enjoyed-meta{font-size:13px;color:var(--muted);font-style:italic;}
+.dc .enjoyed-who{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--rust);margin-top:2px;
+}
+
+/* KUDOS — centered large italic quotes */
+.dc .kudos{padding:72px 12%;border-bottom:1px solid var(--rule);}
+.dc .kudos h2{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:9px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:60px;text-align:center;
+}
+.dc .kudos-item{
+  max-width:600px;margin:0 auto 56px;text-align:center;
+}
+.dc .kudos-recipient{
+  font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--rust);margin-bottom:16px;
+}
+.dc .kudos-text{font-size:21px;font-weight:400;font-style:italic;line-height:1.45;letter-spacing:-0.3px;margin-bottom:10px;}
+.dc .kudos-from{font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--faint);}
+
+/* SIGNOFF */
+.dc .signoff{
+  padding:60px 12%;display:flex;align-items:baseline;justify-content:space-between;
+}
+.dc .signoff-text{font-size:14px;font-style:italic;color:var(--muted);max-width:400px;line-height:1.7;}
+.dc .signoff-name{
+  font-size:11px;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:0.25em;
+  text-transform:uppercase;color:var(--faint);
+}
+</style>
+</head>
+<body>
+
+<div class="picker">
+  <strong>Pick a design:</strong>
+  <a href="#da">A — Broadsheet</a>
+  <a href="#db">B — Group Chat</a>
+  <a href="#dc">C — Art Book</a>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     DESIGN A — BROADSHEET
+═══════════════════════════════════════════ -->
+<div id="da" class="design-block">
+<span class="design-tag">DESIGN A — BROADSHEET &nbsp;(newspaper grid, poster strip, ruled sections)</span>
+<div class="da">
+
+  <div class="hero">
+    <div>
+      <div class="hero-masthead">A monthly dispatch · Group newsletter</div>
+      <h1>Da Biddies Newsletter</h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-issue">Issue No. 1 · April 2026</div>
+      <div class="hero-intro">Hiii, I wanted to make a newsletter for a while just so we can keep up on big and small things in our life. This is the first one — pls lmk how this is.</div>
+      <div class="hero-dateline">April 27, 2026 · Vol. 1</div>
+    </div>
+  </div>
+
+  <div class="rule"><span>Photo Wall</span></div>
+  <div class="photo-strip">
+    <img src="assets/images/april/IMG_3319.jpeg" alt="">
+    <img src="assets/images/april/IMG_3403.jpeg" alt="">
+    <img src="assets/images/april/IMG_3546.jpeg" alt="">
+    <img src="assets/images/april/IMG_4385.jpeg" alt="">
+    <img src="assets/images/april/IMG_4391.jpeg" alt="">
+    <img src="assets/images/april/IMG_4598.jpeg" alt="">
+  </div>
+
+  <div class="rule"><span>This Month</span></div>
+  <div class="section">
+    <h2>What's Been Happening</h2>
+    <table>
+      <thead><tr>
+        <th>Name</th><th>Trip or place</th><th>Brain space</th><th>Win</th><th>Goal</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Betel</td><td>Virginia Beach in June</td><td>Witch Hat Atelier</td><td>New job at Maxim!</td><td>Cottage garden (scared of insects)</td></tr>
+        <tr><td>Noemi</td><td>Chicago for birthday in June</td><td>—</td><td>50% bodyweight pull-ups!</td><td>Full bodyweight soon</td></tr>
+        <tr><td>Isabele</td><td>Chicago (in March)</td><td>Clearing out her photos</td><td>100 on physics quiz!</td><td>Increasing fiber intake</td></tr>
+        <tr><td>Kiara</td><td>Boston — product mgmt conference</td><td>Blink (Malcolm Gladwell)</td><td>Did the whole trip in 1 day</td><td>—</td></tr>
+        <tr><td>Ashlyn</td><td colspan="4" style="color:#999;font-style:italic;">Response pending</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="rule"><span>The Big News</span></div>
+  <div class="engagement">
+    <div class="engagement-photo">
+      <img src="assets/images/april/Proposal Picture.jpeg" alt="Betel and Carter engaged">
+    </div>
+    <div class="engagement-text">
+      <div class="eng-eyebrow">April 2026 · Ladew Topiary Gardens</div>
+      <div class="eng-headline">She said yes.</div>
+      <div class="eng-body">Betel &amp; Carter got engaged this month. The proposal happened at the beautiful Ladew Topiary Gardens — a perfect, serene backdrop. The celebration continued with an intimate dinner at Citron in Baltimore. We are so, so happy for them.</div>
+      <div class="eng-names">Betel &amp; Carter · Engaged April 2026</div>
+      <div class="eng-comments">
+        <div class="eng-comment"><div class="eng-who">Kiara</div>"Oh my God I'm so glad I can finally breathe omg."</div>
+        <div class="eng-comment"><div class="eng-who">Betel</div>"A bunch of liars in my lifeeee!! Jk. I love you guys, you all know me so well."</div>
+        <div class="eng-comment"><div class="eng-who">Noemi</div>"crying bc it was so beautiful and I felt so much love being there"</div>
+        <div class="eng-comment"><div class="eng-who">Isabele</div>"overwhelmed with pride and love lol"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"><span>Watching</span></div>
+  <div class="poster-row">
+    <div class="poster-item">
+      <img src="https://m.media-amazon.com/images/M/MV5BMzA1NzBiMzUtZTA1Zi00YTVjLTkxZWYtZTIyYzFhMzVjZmQ1XkEyXkFqcGc@._V1_.jpg" alt="">
+      <div class="poster-info"><span class="poster-label">Series</span><span class="poster-name">Arrested Development</span><span class="poster-by">Kiara</span></div>
+    </div>
+    <div class="poster-item">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Witch_Hat_Atelier_vol1.jpg/250px-Witch_Hat_Atelier_vol1.jpg" alt="">
+      <div class="poster-info"><span class="poster-label">Anime</span><span class="poster-name">Witch Hat Atelier</span><span class="poster-by">Betel</span></div>
+    </div>
+    <div class="poster-item">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/The_Residence_%28TV_series%29.jpg/250px-The_Residence_%28TV_series%29.jpg" alt="">
+      <div class="poster-info"><span class="poster-label">Series</span><span class="poster-name">The Residence</span><span class="poster-by">Betel</span></div>
+    </div>
+    <div class="poster-item">
+      <img src="https://m.media-amazon.com/images/M/MV5BMzk2YjJiNzMtZjk2Mi00ZGU5LWI1ZTUtNjIwMGI2NjZiMTVjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="">
+      <div class="poster-info"><span class="poster-label">Series</span><span class="poster-name">One Tree Hill</span><span class="poster-by">Noemi</span></div>
+    </div>
+    <div class="poster-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRANTXHBvWgTA7f1tY316O7TY8WJgeCg1oHp6fAH_UXz1n8l4Aj4hxCQ6iOTSpMk47ApcEPg&s=10" alt="">
+      <div class="poster-info"><span class="poster-label">Movies</span><span class="poster-name">Tinker Bell</span><span class="poster-by">Betel</span></div>
+    </div>
+  </div>
+
+  <div class="rule"><span>Listening</span></div>
+  <div class="listening-row">
+    <div class="listening-item"><div class="track-num">01</div><div class="track-name">E85</div><div class="track-artist">Don Toliver</div><div class="track-by">Kiara</div></div>
+    <div class="listening-item"><div class="track-num">02</div><div class="track-name">Swim</div><div class="track-artist">BTS</div><div class="track-by">Betel</div></div>
+    <div class="listening-item"><div class="track-num">03</div><div class="track-name">Tuition</div><div class="track-artist">Don Toliver</div><div class="track-by">Noemi</div></div>
+    <div class="listening-item"><div class="track-num">04</div><div class="track-name">Rotten Mango</div><div class="track-artist">Podcast · Stephanie Soo</div><div class="track-by">Isabele</div></div>
+  </div>
+
+  <div class="rule"><span>Eating</span></div>
+  <div class="eating-cols">
+    <div class="eat-item"><div class="eat-name">Mezeh</div><div class="eat-meta">Maryland · Mediterranean · Betel</div><div class="eat-note">"Mezeh!!!"</div></div>
+    <div class="eat-item"><div class="eat-name">Baan Siam</div><div class="eat-meta">DC · Thai · Isabele</div><div class="eat-note">"food was yummy and staff was nice"</div></div>
+    <div class="eat-item"><div class="eat-name">Pho</div><div class="eat-meta">Noemi's pick</div><div class="eat-note">"it's so yummy"</div></div>
+  </div>
+
+  <div class="rule"><span>Kudos!</span></div>
+  <div class="kudos-cols">
+    <div class="kudos-card"><div class="kudos-initial">K</div><div class="kudos-name">Kiara</div><div class="kudos-quote">"prettiest nails and cutest party favours"</div><div class="kudos-from">— Betel</div><div class="kudos-quote" style="margin-top:10px;">"for trying to keep us connected"</div><div class="kudos-from">— Noemi</div></div>
+    <div class="kudos-card"><div class="kudos-initial">A</div><div class="kudos-name">Ashlyn</div><div class="kudos-quote">"for getting us champagne/soju (you knew champagne bloats me)"</div><div class="kudos-from">— Betel</div><div class="kudos-quote" style="margin-top:10px;">"fully functioning human after a full work shift"</div><div class="kudos-from">— Isabele</div></div>
+    <div class="kudos-card"><div class="kudos-initial">I</div><div class="kudos-name">Bele</div><div class="kudos-quote">"you are doing so well at work, go easy on yourself on hard days"</div><div class="kudos-from">— Betel</div></div>
+    <div class="kudos-card"><div class="kudos-initial">N</div><div class="kudos-name">Noemi</div><div class="kudos-quote">"I'm so proud of you!"</div><div class="kudos-from">— Betel</div></div>
+  </div>
+
+  <div class="signoff">
+    <div class="signoff-text">That's everything I gathered from us this month! If I missed anything ofc send in chat :) but love you guys so much.</div>
+    <div class="signoff-logo">Da Biddies</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     DESIGN B — GROUP CHAT
+═══════════════════════════════════════════ -->
+<div id="db" class="design-block">
+<span class="design-tag">DESIGN B — GROUP CHAT &nbsp;(chat bubbles per person, forwarded links, mention kudos)</span>
+<div class="db">
+
+  <div class="hero">
+    <div class="hero-status">● 5 members · Issue No. 1</div>
+    <h1>Da Biddies Newsletter</h1>
+    <div class="hero-sub">April 2026 · a lil dispatch for us</div>
+    <div class="hero-avatars">
+      <div class="av av-k">K</div>
+      <div class="av av-b">B</div>
+      <div class="av av-n">N</div>
+      <div class="av av-i">I</div>
+      <div class="av av-a">A</div>
+    </div>
+    <p style="font-size:14px;color:#6c6c70;margin-top:20px;max-width:360px;margin-left:auto;margin-right:auto;line-height:1.6;">Hiii, I wanted to make a newsletter for a while just so we can keep up on big and small things in our life. This is the first one!</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">Photo Wall</div>
+    <div class="polaroid-grid">
+      <div class="polaroid"><img src="assets/images/april/IMG_3319.jpeg" alt=""></div>
+      <div class="polaroid"><img src="assets/images/april/IMG_3403.jpeg" alt=""></div>
+      <div class="polaroid"><img src="assets/images/april/IMG_3546.jpeg" alt=""></div>
+      <div class="polaroid"><img src="assets/images/april/IMG_4385.jpeg" alt=""></div>
+      <div class="polaroid"><img src="assets/images/april/IMG_4391.jpeg" alt=""></div>
+      <div class="polaroid"><img src="assets/images/april/IMG_4598.jpeg" alt=""></div>
+      <div class="polaroid"><img src="assets/images/april/IMG_4756.jpeg" alt=""></div>
+      <div class="polaroid"><img src="assets/images/april/IMG_5958.jpeg" alt=""></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">What's Been Happening</div>
+    <div class="chat-feed">
+      <div class="chat-msg">
+        <div class="chat-av av-b">B</div>
+        <div class="chat-bubble">
+          <div class="chat-name">Betel</div>
+          <div class="chat-field"><div class="chat-label">Trip</div><div class="chat-val">Virginia Beach in June with the Eden girls</div></div>
+          <div class="chat-field"><div class="chat-label">Brain space</div><div class="chat-val">Witch Hat Atelier 🥰</div></div>
+          <div class="chat-field"><div class="chat-label">Win</div><div class="chat-val">I got a job!!! At Maxim, a health care agency</div></div>
+          <div class="chat-field"><div class="chat-label">Goal</div><div class="chat-val">Figuring out this gardening thing — I want a cottage garden but insects scare me!</div></div>
+        </div>
+      </div>
+      <div class="chat-msg">
+        <div class="chat-av av-n">N</div>
+        <div class="chat-bubble">
+          <div class="chat-name">Noemi</div>
+          <div class="chat-field"><div class="chat-label">Trip</div><div class="chat-val">Chicago in June for my birthday! Really excited for that.</div></div>
+          <div class="chat-field"><div class="chat-label">Win</div><div class="chat-val">I can do 50% of my body weight in pull ups!!</div></div>
+          <div class="chat-field"><div class="chat-label">Goal</div><div class="chat-val">Full body weight soon.</div></div>
+        </div>
+      </div>
+      <div class="chat-msg">
+        <div class="chat-av av-i">I</div>
+        <div class="chat-bubble">
+          <div class="chat-name">Isabele</div>
+          <div class="chat-field"><div class="chat-label">Trip</div><div class="chat-val">went to Chicago! (in march)</div></div>
+          <div class="chat-field"><div class="chat-label">Brain space</div><div class="chat-val">needing to clear out my photos on google/cameras</div></div>
+          <div class="chat-field"><div class="chat-label">Win</div><div class="chat-val">i got 100 on my physics quiz!</div></div>
+          <div class="chat-field"><div class="chat-label">Goal</div><div class="chat-val">increasing my fiber intake :,)</div></div>
+        </div>
+      </div>
+      <div class="chat-msg right">
+        <div class="chat-av av-k">K</div>
+        <div class="chat-bubble">
+          <div class="chat-name">Kiara</div>
+          <div class="chat-field"><div class="chat-label">Trip</div><div class="chat-val">I went to Boston for a product management conference on 4/21</div></div>
+          <div class="chat-field"><div class="chat-label">Brain space</div><div class="chat-val">read Blink and loved it!</div></div>
+          <div class="chat-field"><div class="chat-label">Win</div><div class="chat-val">did the boston trip in 1 day, flew in at 7am and left at 8pm</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="section-header" style="padding-top:20px;">The Big News 📌</div>
+    <div class="pin-wrap">
+      <img class="pin-img" src="assets/images/april/Proposal Picture.jpeg" alt="Betel and Carter engaged">
+      <div class="pin-body">
+        <div class="pin-tag">Pinned · April 2026</div>
+        <div class="pin-title">Betel &amp; Carter — Engaged! 💍</div>
+        <div class="pin-text">The proposal happened at the beautiful Ladew Topiary Gardens. Carter got down on one knee and Betel said yes. The celebration continued at Citron in Baltimore. We are so, so happy for them.</div>
+        <div class="pin-reactions">
+          <div class="pin-react">
+            <div class="pin-react-av av-k">K</div>
+            <div><div class="pin-react-who">Kiara</div><div class="pin-react-text">"Oh my God I'm so glad I can finally breathe omg."</div></div>
+          </div>
+          <div class="pin-react">
+            <div class="pin-react-av av-b">B</div>
+            <div><div class="pin-react-who">Betel</div><div class="pin-react-text">"A bunch of liars in my lifeeee!! I love you guys so much."</div></div>
+          </div>
+          <div class="pin-react">
+            <div class="pin-react-av av-n">N</div>
+            <div><div class="pin-react-who">Noemi</div><div class="pin-react-text">"crying bc it was so beautiful and I felt so much love being there"</div></div>
+          </div>
+          <div class="pin-react">
+            <div class="pin-react-av av-i">I</div>
+            <div><div class="pin-react-who">Isabele</div><div class="pin-react-text">"overwhelmed with pride and love lol"</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="section-header" style="padding-top:20px;">Watching 📺</div>
+    <div class="fwd-list">
+      <div class="fwd-card"><img class="fwd-poster" src="https://m.media-amazon.com/images/M/MV5BMzA1NzBiMzUtZTA1Zi00YTVjLTkxZWYtZTIyYzFhMzVjZmQ1XkEyXkFqcGc@._V1_.jpg" alt=""><div class="fwd-info"><div class="fwd-label">Series · Netflix</div><div class="fwd-name">Arrested Development</div><div class="fwd-who">Kiara's watching</div></div></div>
+      <div class="fwd-card"><img class="fwd-poster" src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Witch_Hat_Atelier_vol1.jpg/250px-Witch_Hat_Atelier_vol1.jpg" alt=""><div class="fwd-info"><div class="fwd-label">Anime · Crunchyroll</div><div class="fwd-name">Witch Hat Atelier</div><div class="fwd-who">Betel's watching</div></div></div>
+      <div class="fwd-card"><img class="fwd-poster" src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/The_Residence_%28TV_series%29.jpg/250px-The_Residence_%28TV_series%29.jpg" alt=""><div class="fwd-info"><div class="fwd-label">Series · Netflix</div><div class="fwd-name">The Residence</div><div class="fwd-who">Betel's watching</div></div></div>
+      <div class="fwd-card"><img class="fwd-poster" src="https://m.media-amazon.com/images/M/MV5BMzk2YjJiNzMtZjk2Mi00ZGU5LWI1ZTUtNjIwMGI2NjZiMTVjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt=""><div class="fwd-info"><div class="fwd-label">Series · Hulu / HBO</div><div class="fwd-name">One Tree Hill</div><div class="fwd-who">Noemi's watching</div></div></div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="section-header" style="padding-top:20px;">Listening 🎵</div>
+    <div class="track-list">
+      <div class="track-row"><div class="track-num-badge">01</div><div class="track-info"><div class="track-title">E85</div><div class="track-artist">Don Toliver</div><div class="track-sender">Kiara added this</div></div></div>
+      <div class="track-row"><div class="track-num-badge">02</div><div class="track-info"><div class="track-title">Swim</div><div class="track-artist">BTS</div><div class="track-sender">Betel added this</div></div></div>
+      <div class="track-row"><div class="track-num-badge">03</div><div class="track-info"><div class="track-title">Tuition</div><div class="track-artist">Don Toliver</div><div class="track-sender">Noemi added this</div></div></div>
+      <div class="track-row"><div class="track-num-badge">04</div><div class="track-info"><div class="track-title">Rotten Mango</div><div class="track-artist">Podcast · Stephanie Soo</div><div class="track-sender">Isabele added this</div></div></div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="section-header" style="padding-top:20px;">Eating 🍜</div>
+    <div class="eat-list">
+      <div class="eat-card"><div class="eat-top"><span class="eat-name">Mezeh</span><span class="eat-badge">Betel's pick</span></div><div class="eat-meta-b">Maryland · Mediterranean</div><div class="eat-note-b">"Mezeh!!!"</div></div>
+      <div class="eat-card"><div class="eat-top"><span class="eat-name">Baan Siam</span><span class="eat-badge">Isabele's pick</span></div><div class="eat-meta-b">DC · Thai · 425 I St NW</div><div class="eat-note-b">"food was yummy and staff was nice"</div></div>
+      <div class="eat-card"><div class="eat-top"><span class="eat-name">Pho</span><span class="eat-badge">Noemi's pick</span></div><div class="eat-note-b">"it's so yummy"</div></div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="section-header" style="padding-top:20px;">Kudos!</div>
+    <div class="mention-list">
+      <div class="mention-card"><div class="mention-handle">@Kiara</div><div class="mention-quote">"prettiest nails and cutest party favours"</div><div class="mention-from">— Betel</div><div class="mention-quote" style="margin-top:8px;">"for trying to get us to stay more connected with this newsletter"</div><div class="mention-from">— Noemi</div></div>
+      <div class="mention-card"><div class="mention-handle">@Ashlyn</div><div class="mention-quote">"for getting us champagne/soju (you knew champagne bloats me)"</div><div class="mention-from">— Betel</div><div class="mention-quote" style="margin-top:8px;">"at Betel's engagement she was a fully functioning human after a shift at work"</div><div class="mention-from">— Isabele</div></div>
+      <div class="mention-card"><div class="mention-handle">@Bele</div><div class="mention-quote">"you are doing so well at work, go easy on yourself on hard days"</div><div class="mention-from">— Betel</div></div>
+      <div class="mention-card"><div class="mention-handle">@Noemi</div><div class="mention-quote">"I'm so proud of you!"</div><div class="mention-from">— Betel</div></div>
+    </div>
+  </div>
+
+  <div class="signoff">
+    <div class="signoff-logo">Da Biddies Newsletter</div>
+    <div class="signoff-text">That's everything I gathered from us this month! If I missed anything ofc send in chat :) but love you guys so much.</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     DESIGN C — ART BOOK
+═══════════════════════════════════════════ -->
+<div id="dc" class="design-block">
+<span class="design-tag">DESIGN C — ART BOOK &nbsp;(quiet, airy, full-bleed photo, large italic quotes)</span>
+<div class="dc">
+
+  <div class="hero">
+    <span class="hero-issue">Issue No. 1 &nbsp;·&nbsp; April 2026</span>
+    <h1>Da Biddies Newsletter</h1>
+    <div class="hero-intro">Hiii, I wanted to make a newsletter for a while just so we can keep up on big and small things in our life. This is the first one — pls lmk how this is.</div>
+  </div>
+
+  <div class="photo-strip-wrap">
+    <div class="photo-strip">
+      <img src="assets/images/april/DSC02206.jpeg" alt="">
+      <img src="assets/images/april/IMG_0233.jpeg" alt="">
+      <img src="assets/images/april/IMG_3319.jpeg" alt="">
+      <img src="assets/images/april/IMG_3403.jpeg" alt="">
+      <img src="assets/images/april/IMG_3546.jpeg" alt="">
+      <img src="assets/images/april/IMG_3555.jpeg" alt="">
+      <img src="assets/images/april/IMG_4385.jpeg" alt="">
+      <img src="assets/images/april/IMG_4391.jpeg" alt="">
+    </div>
+  </div>
+
+  <div class="ledger-intro">
+    <h2>What's Been Happening</h2>
+  </div>
+
+  <div class="person-block">
+    <div class="person-name">Betel</div>
+    <div class="person-fields">
+      <div class="person-field"><span class="field-label">Trip or place</span><div class="field-val">Virginia Beach in June with the Eden girls</div></div>
+      <div class="person-field"><span class="field-label">Brain space</span><div class="field-val">Witch Hat Atelier</div></div>
+      <div class="person-field"><span class="field-label">Win, big or small</span><div class="field-val">I got a job! At Maxim, a health care agency</div></div>
+      <div class="person-field"><span class="field-label">Goal in progress</span><div class="field-val">Figuring out this gardening thing — I want a cottage garden but insects scare me!</div></div>
+    </div>
+  </div>
+
+  <div class="person-block">
+    <div class="person-name">Noemi</div>
+    <div class="person-fields">
+      <div class="person-field"><span class="field-label">Trip or place</span><div class="field-val">Chicago in June for my birthday! Really excited for that.</div></div>
+      <div class="person-field"><span class="field-label">Win, big or small</span><div class="field-val">I can do 50% of my body weight in pull ups!!</div></div>
+      <div class="person-field"><span class="field-label">Goal in progress</span><div class="field-val">Full body weight soon.</div></div>
+    </div>
+  </div>
+
+  <div class="person-block">
+    <div class="person-name">Isabele</div>
+    <div class="person-fields">
+      <div class="person-field"><span class="field-label">Trip or place</span><div class="field-val">went to Chicago! (in march)</div></div>
+      <div class="person-field"><span class="field-label">Brain space</span><div class="field-val">needing to clear out my photos on google/cameras</div></div>
+      <div class="person-field"><span class="field-label">Win, big or small</span><div class="field-val">i got 100 on my physics quiz!</div></div>
+      <div class="person-field"><span class="field-label">Goal in progress</span><div class="field-val">increasing my fiber intake :,)</div></div>
+    </div>
+  </div>
+
+  <div class="person-block">
+    <div class="person-name">Kiara</div>
+    <div class="person-fields">
+      <div class="person-field"><span class="field-label">Trip or place</span><div class="field-val">Boston for a product management conference</div></div>
+      <div class="person-field"><span class="field-label">Brain space</span><div class="field-val">Read Blink and loved it</div></div>
+      <div class="person-field"><span class="field-label">Win, big or small</span><div class="field-val">Did the whole trip in one day</div></div>
+    </div>
+  </div>
+
+  <div class="engagement">
+    <img src="assets/images/april/Proposal Picture.jpeg" alt="Betel and Carter engaged">
+    <div class="engagement-over">
+      <span class="eng-eyebrow">April 2026 · Ladew Topiary Gardens</span>
+      <div class="eng-h">She said yes.</div>
+      <div class="eng-body">Betel &amp; Carter got engaged this month at the beautiful Ladew Topiary Gardens. The celebration continued with an intimate dinner at Citron in Baltimore. We are so happy for them.</div>
+    </div>
+  </div>
+  <div class="comments-below">
+    <div class="dc-comment"><span class="dc-commenter">Kiara</span>"Oh my God I'm so glad I can finally breathe omg."</div>
+    <div class="dc-comment"><span class="dc-commenter">Betel</span>"A bunch of liars in my lifeeee!! Jk. I love you guys, you all know me so well. I felt so loved."</div>
+    <div class="dc-comment"><span class="dc-commenter">Noemi</span>"crying bc it was so beautiful and I felt so much love being there"</div>
+    <div class="dc-comment"><span class="dc-commenter">Isabele</span>"overwhelmed with pride and love lol"</div>
+  </div>
+
+  <div class="enjoyed">
+    <span class="enjoyed-h">Things We've Enjoyed</span>
+    <div class="enjoyed-grid">
+      <div>
+        <div class="enjoyed-col-head">Watching</div>
+        <div class="enjoyed-item"><div class="enjoyed-title">Arrested Development</div><div class="enjoyed-meta">Series · Netflix</div><div class="enjoyed-who">Kiara</div></div>
+        <div class="enjoyed-item"><div class="enjoyed-title">Witch Hat Atelier</div><div class="enjoyed-meta">Anime · Crunchyroll</div><div class="enjoyed-who">Betel</div></div>
+        <div class="enjoyed-item"><div class="enjoyed-title">The Residence</div><div class="enjoyed-meta">Series · Netflix</div><div class="enjoyed-who">Betel</div></div>
+        <div class="enjoyed-item"><div class="enjoyed-title">One Tree Hill</div><div class="enjoyed-meta">Series · Hulu / HBO</div><div class="enjoyed-who">Noemi</div></div>
+        <div class="enjoyed-item"><div class="enjoyed-title">Age of Attraction</div><div class="enjoyed-meta">Series</div><div class="enjoyed-who">Isabele</div></div>
+      </div>
+      <div>
+        <div class="enjoyed-col-head">Listening</div>
+        <div class="enjoyed-item"><div class="enjoyed-title">E85</div><div class="enjoyed-meta">Don Toliver</div><div class="enjoyed-who">Kiara</div></div>
+        <div class="enjoyed-item"><div class="enjoyed-title">Swim</div><div class="enjoyed-meta">BTS</div><div class="enjoyed-who">Betel</div></div>
+        <div class="enjoyed-item"><div class="enjoyed-title">Tuition</div><div class="enjoyed-meta">Don Toliver</div><div class="enjoyed-who">Noemi</div></div>
+        <div class="enjoyed-item"><div class="enjoyed-title">Rotten Mango</div><div class="enjoyed-meta">Podcast · Stephanie Soo</div><div class="enjoyed-who">Isabele</div></div>
+      </div>
+      <div>
+        <div class="enjoyed-col-head">Eating</div>
+        <div class="enjoyed-item"><div class="enjoyed-title">Mezeh</div><div class="enjoyed-meta">Maryland · Mediterranean</div><div class="enjoyed-who">Betel</div></div>
+        <div class="enjoyed-item"><div class="enjoyed-title">Baan Siam</div><div class="enjoyed-meta">DC · Thai</div><div class="enjoyed-who">Isabele</div></div>
+        <div class="enjoyed-item"><div class="enjoyed-title">Pho</div><div class="enjoyed-meta">"it's so yummy"</div><div class="enjoyed-who">Noemi</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kudos">
+    <h2>Kudos</h2>
+    <div class="kudos-item">
+      <div class="kudos-recipient">Kiara</div>
+      <div class="kudos-text">"prettiest nails and cutest party favours"</div>
+      <div class="kudos-from">— Betel</div>
+      <div class="kudos-text" style="margin-top:20px;">"for trying to get us to stay more connected with this newsletter"</div>
+      <div class="kudos-from">— Noemi</div>
+    </div>
+    <div class="kudos-item">
+      <div class="kudos-recipient">Ashlyn</div>
+      <div class="kudos-text">"for getting us champagne/soju (you knew champagne bloats me)"</div>
+      <div class="kudos-from">— Betel</div>
+      <div class="kudos-text" style="margin-top:20px;">"at Betel's engagement she was a fully functioning human after a shift at work"</div>
+      <div class="kudos-from">— Isabele</div>
+    </div>
+    <div class="kudos-item">
+      <div class="kudos-recipient">Bele</div>
+      <div class="kudos-text">"you are doing so well at work, go easy on yourself on hard days"</div>
+      <div class="kudos-from">— Betel</div>
+    </div>
+    <div class="kudos-item">
+      <div class="kudos-recipient">Noemi</div>
+      <div class="kudos-text">"I'm so proud of you!"</div>
+      <div class="kudos-from">— Betel</div>
+    </div>
+  </div>
+
+  <div class="signoff">
+    <div class="signoff-text">That's everything I gathered from us this month! If I missed anything ofc send in chat :) but love you guys so much.</div>
+    <div class="signoff-name">Da Biddies · April 2026</div>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>
