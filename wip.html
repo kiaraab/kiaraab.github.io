@@ -13,7 +13,7 @@
       --ink-muted: #555550;
       --ink-faint: #999;
       --paper: #faf9f6;
-      --paper-warm: #e3d6bf;
+      --paper-warm: #fdf0f4;
       --rule: #ddd;
       --red: #933b5b;
       --nav-h: 56px;
@@ -31,8 +31,9 @@
       --c-noemi-bg:  #f3efe9; --c-noemi-dot:  #9f9679;
     }
 
-    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
-    .hero, .page-slide { scroll-snap-align: start; }
+    html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+    .hero, .page-slide { scroll-snap-align: start; scroll-margin-top: calc(var(--nav-h) + 24px); }
+    .page-slide { padding-bottom: 48px; }
     .slide-dates { background: #eef4ee; }
     .slide-kudos { background: #f8eef2; }
 
@@ -120,7 +121,7 @@
     .progress-wrap.visible { opacity: 1; }
     .progress-bar {
       height: 100%;
-      background: var(--ink);
+      background: var(--red);
       width: 0%;
       transition: width 0.1s linear;
     }
@@ -279,6 +280,17 @@
       transition: opacity 0.8s ease 0.2s;
     }
     .hero-rule.visible { opacity: 1; }
+    .hero-dateline {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: lowercase;
+      color: var(--accent-mauve);
+      margin-top: 14px;
+      opacity: 0;
+      transition: opacity 0.8s ease 0.6s;
+    }
+    .hero-dateline.visible { opacity: 1; }
     .hero-scroll-cue {
       padding-bottom: 36px;
       display: flex;
@@ -307,6 +319,7 @@
       0%, 100% { transform: translateY(0); }
       55% { transform: translateY(5px); }
     }
+
 
     /* ─── OPENER ─── */
     .opener {
@@ -338,8 +351,8 @@
       display: flex;
       align-items: stretch;
       gap: 0;
-      border-top: 2px solid var(--ink);
-      border-bottom: 1px solid var(--ink);
+      border-top: 2px solid var(--red);
+      border-bottom: 1px solid var(--red);
     }
     .section-rule span {
       font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -347,8 +360,8 @@
       letter-spacing: 0.25em;
       text-transform: uppercase;
       font-weight: 700;
-      color: var(--paper);
-      background: var(--ink);
+      color: #fff;
+      background: var(--red);
       padding: 5px 14px;
       white-space: nowrap;
       display: flex;
@@ -547,7 +560,7 @@
     /* ─── CURRENTLY INTO ─── */
     .into-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 28px 40px;
       margin-top: 4px;
     }
@@ -630,6 +643,44 @@
       color: var(--ink-faint);
     }
 
+    /* ─── PHOTO LIGHTBOX ─── */
+    .lb-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .lb-overlay.open { opacity: 1; pointer-events: all; }
+    .lb-img {
+      max-width: 92vw;
+      max-height: 92dvh;
+      object-fit: contain;
+      border-radius: 2px;
+      pointer-events: none;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    .lb-close {
+      position: absolute;
+      top: 18px; right: 22px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .lb-close:hover { color: #fff; }
+
     /* ─── PHOTO WALL ─── */
     .photo-wall-wrap {
       max-width: 1200px;
@@ -665,9 +716,17 @@
     .meta-uploader { font-weight: 600; color: var(--ink); }
     .meta-sep { color: var(--rule); }
 
-    .watching-grid { display: flex; gap: 0; overflow-x: auto; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .watching-wrap { flex: 0 0 160px; border-right: 1px solid var(--rule); display: block; margin-bottom: 0; }
-    .watching-wrap:last-child { border-right: none; }
+    .watching-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--rule);
+    }
+    .watching-wrap {
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      display: block;
+    }
+    .watching-wrap:nth-child(3n) { border-right: none; }
     .watching-info { padding: 10px 12px; }
     .watching-label { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--red); display: block; margin-bottom: 3px; }
     .watching-name { font-family: Georgia, serif; font-size: 14px; font-weight: 700; color: var(--ink); display: block; margin-bottom: 3px; letter-spacing: -0.3px; }
@@ -676,10 +735,10 @@
     .netflix-link { display: inline-flex; align-items: center; text-decoration: none; margin-left: 4px; }
     .watching-poster {
       width: 100%;
-      height: 220px;
-      object-fit: cover;
+      height: 130px;
+      object-fit: contain;
+      background: var(--paper-warm);
       display: block;
-      flex-shrink: 0;
     }
 
     .logo-icon {
@@ -693,6 +752,7 @@
     /* ─── LISTENING STACK (V1) ─── */
     .sp-stack-item { margin-bottom: 16px; }
     .sp-stack-item:last-child { margin-bottom: 0; }
+    .sp-iframe { display: block; overflow: hidden; border: none; }
     .sp-attr {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 11px;
@@ -1013,10 +1073,10 @@
       .into-grid { grid-template-columns: 1fr; }
       .into-block:first-child { grid-column: 1; }
       .sp-iframe { height: 80px !important; }
-      .watching-grid { display: grid; grid-template-columns: repeat(3, 1fr); overflow-x: unset; border: none; }
-      .watching-wrap { flex: none; border-right: none; border-bottom: 1px solid var(--rule); }
-      .watching-wrap:nth-child(3n) { border-right: none; }
-      .watching-poster { width: 100%; height: auto; aspect-ratio: 2/3; }
+      .watching-grid { grid-template-columns: repeat(2, 1fr); }
+      .watching-wrap:nth-child(3n) { border-right: 1px solid var(--rule); }
+      .watching-wrap:nth-child(2n) { border-right: none; }
+      .watching-poster { height: auto; aspect-ratio: 2/3; }
       .watching-info { padding: 8px 10px; }
       .watching-name { font-size: 11px; }
       .watching-label, .watching-meta, .watching-comment { font-size: 9px; line-height: 1.3; }
@@ -1051,7 +1111,7 @@
   <span class="sticky-nav-title">Da Biddies Newsletter</span>
   <div class="sticky-nav-issue">
     <button class="nav-issue-toggle" id="nav-issue-toggle" aria-expanded="false">
-      <span>Issue No. 1 &nbsp;·&nbsp; April 2026</span>
+      <span>Volume 1 &nbsp;·&nbsp; May 2026</span>
       <span class="nav-issue-chevron">▾</span>
     </button>
     <div class="nav-issue-dropdown" id="nav-issue-dropdown">
@@ -1065,7 +1125,7 @@
 <section class="hero" id="hero">
   <div class="hero-issue-wrap">
     <button class="hero-issue-toggle" id="issue-toggle" aria-expanded="false">
-      <span>Issue No. 1 &nbsp;·&nbsp; April 2026</span>
+      <span>Volume 1 &nbsp;·&nbsp; May 2026</span>
       <span class="hero-issue-chevron">▾</span>
     </button>
     <div class="hero-issue-dropdown" id="issue-dropdown">
@@ -1079,6 +1139,7 @@
       <span id="hero-typewriter"></span><span class="cursor" id="cursor" aria-hidden="true">|</span>
     </h1>
     <div class="hero-rule" id="hero-rule"></div>
+    <p class="hero-dateline" id="hero-dateline" aria-hidden="true">may 1 &nbsp;·&nbsp; volume 1</p>
   </div>
 
   <div class="hero-scroll-cue" id="hero-scroll-cue" aria-hidden="true">
@@ -1370,53 +1431,58 @@
       </div>
 
       <div class="watching-wrap">
-        <div class="watching-poster" style="background:var(--paper-warm); display:flex; align-items:center; justify-content:center; font-size:10px; font-family:'Helvetica Neue',Arial,sans-serif; color:var(--ink-faint); text-align:center; padding:8px; flex-shrink:0;">Age of<br>Attraction</div>
+        <img class="watching-poster" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScxaEtc0PvlsltTlpMTg8s_hvBOLbU2otdLrCKzU86dmnHcEmJBmgtzwu4IS-luMWe8uNZ3vIy4FsgO1VFffSXG_p0n83VUmeemPYigYQ&s=10" alt="Age of Attraction poster">
         <div class="watching-info">
           <span class="watching-label">Series</span>
           <span class="watching-name">Age of Attraction</span>
           <div class="watching-meta">
             <span class="watching-comment">Isabele's pick</span>
+            <a class="netflix-link" href="https://www.netflix.com/title/81779095?source=35&fromWatch=true" target="_blank" aria-label="Watch on Netflix">
+              <img class="logo-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/500px-Netflix_icon.svg.png?_=20220806170125" alt="Netflix logo">
+            </a>
           </div>
           <p style="font-size:11px; color:var(--ink-muted); font-style:italic; margin-top:5px; font-family:'Helvetica Neue',Arial,sans-serif; line-height:1.4;">"if you want to feel smart and that ur life isnt actually so bad, watch it"</p>
         </div>
       </div>
 
       </div><!-- /.watching-grid -->
-
-      <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--rule);">
-        <p style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px;">Also obsessed with</p>
-        <p style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:13px; color:var(--ink-muted); font-style:italic; line-height:1.6;">iPad games & Mario Party on Switch <span style="font-style:normal; color:var(--ink-faint);">— Noemi</span></p>
-        <p style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:13px; color:var(--ink-muted); font-style:italic; line-height:1.6; margin-top:6px;">five toe shoes (pls don't judge her) <span style="font-style:normal; color:var(--ink-faint);">— Isabele</span></p>
-      </div>
     </div>
 
     <div class="into-block">
       <h3>Listening</h3>
 
       <div class="sp-stack-item">
-        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3B4cjvGlPvyBLNG3AzEgkZ?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3B4cjvGlPvyBLNG3AzEgkZ?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         <p class="sp-attr">Kiara's added: <a href="https://open.spotify.com/track/3B4cjvGlPvyBLNG3AzEgkZ" target="_blank">E85 — Don Toliver</a></p>
       </div>
 
       <div class="sp-stack-item">
-        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4g5eopb54XIaV2ciooY3St?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4g5eopb54XIaV2ciooY3St?utm_source=generator" width="100%" height="152" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         <p class="sp-attr">Betel's added: <a href="https://open.spotify.com/track/4g5eopb54XIaV2ciooY3St" target="_blank">Swim — BTS</a></p>
       </div>
 
       <div class="sp-stack-item">
-        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1ssugRY8Q2XYgyZWVHfBF4?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1ssugRY8Q2XYgyZWVHfBF4?utm_source=generator" width="100%" height="152" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         <p class="sp-attr">Noemi's added: <a href="https://open.spotify.com/track/1ssugRY8Q2XYgyZWVHfBF4" target="_blank">Tuition — Don Toliver</a></p>
       </div>
 
       <div class="sp-stack-item">
-        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2Ejyg4CavumEr7lFUkk9aF?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2Ejyg4CavumEr7lFUkk9aF?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         <p class="sp-attr">Ashlyn's added: <a href="https://open.spotify.com/track/2Ejyg4CavumEr7lFUkk9aF" target="_blank">Rendezvous (feat. Yeat) — Don Toliver</a></p>
       </div>
 
       <div class="sp-stack-item" style="border-top:1px solid var(--rule); padding-top:14px;">
-        <p class="sp-attr" style="font-style:italic; color:var(--ink-muted);">Isabele's added: <strong style="font-style:normal;">Rotten Mango</strong> (podcast) — "are we surprised? no. like literally everything she's released.. i've listened to and loved"</p>
+        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/show/2DZwvzn6Z3xCFZrwZGDrbj?utm_source=generator" width="100%" height="352" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <p class="sp-attr">Isabele's added: <a href="https://open.spotify.com/show/2DZwvzn6Z3xCFZrwZGDrbj" target="_blank">Rotten Mango</a> — "are we surprised? no. like literally everything she's released.. i've listened to and loved"</p>
       </div>
 
+    </div>
+
+    <div class="into-block">
+      <h3>Obsessed with</h3>
+      <p style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:13px; color:var(--ink-muted); font-style:italic; line-height:1.7;">iPad games &amp; Mario Party on Switch <span style="font-style:normal; color:var(--ink-faint);">— Noemi</span></p>
+      <p style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:13px; color:var(--ink-muted); font-style:italic; line-height:1.7; margin-top:8px;">five toe shoes (pls don't judge her) <span style="font-style:normal; color:var(--ink-faint);">— Isabele</span></p>
+      <p style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:13px; color:var(--ink-muted); font-style:italic; line-height:1.7; margin-top:8px;">the Tinker Bell movies <span style="font-style:normal; color:var(--ink-faint);">— Betel</span></p>
     </div>
 
     <div class="into-block">
@@ -1565,7 +1631,7 @@
 
 <!-- ══ FOOTER ══ -->
 <footer class="footer">
-  <p>You're getting this because you're someone I actually want to keep up with &nbsp;·&nbsp; April 2026</p>
+  <p>You're getting this because you're someone I actually want to keep up with &nbsp;·&nbsp; May 2026</p>
 </footer>
 </div><!-- /slide 8 -->
 
@@ -1619,6 +1685,7 @@
     var tw = document.getElementById('hero-typewriter');
     var cursor = document.getElementById('cursor');
     var rule = document.getElementById('hero-rule');
+    var dateline = document.getElementById('hero-dateline');
     var i = 0;
     function type() {
       if (i < text.length) {
@@ -1628,7 +1695,11 @@
           : Math.floor(Math.random() * 80) + 35;
         setTimeout(type, delay);
       } else {
-        setTimeout(function() { cursor.classList.add('done'); rule.classList.add('visible'); }, 600);
+        setTimeout(function() {
+          cursor.classList.add('done');
+          rule.classList.add('visible');
+          if (dateline) dateline.classList.add('visible');
+        }, 600);
       }
     }
     if (tw) setTimeout(type, 400);
@@ -1695,10 +1766,32 @@
     }
     var wall = document.getElementById('photo-wall');
     if (!wall) return;
+
+    /* build lightbox */
+    var lb = document.createElement('div');
+    lb.className = 'lb-overlay';
+    var lbImg = document.createElement('img');
+    lbImg.className = 'lb-img';
+    var lbClose = document.createElement('button');
+    lbClose.className = 'lb-close';
+    lbClose.textContent = 'close ✕';
+    lb.appendChild(lbImg);
+    lb.appendChild(lbClose);
+    document.body.appendChild(lb);
+    function closeLb() { lb.classList.remove('open'); lbImg.src = ''; }
+    lb.addEventListener('click', closeLb);
+    lbClose.addEventListener('click', function(e) { e.stopPropagation(); closeLb(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLb(); });
+
     files.forEach(function(fname) {
       var img = document.createElement('img');
       img.src = 'assets/images/april/' + fname;
       img.alt = '';
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', function() {
+        lbImg.src = img.src;
+        lb.classList.add('open');
+      });
       wall.appendChild(img);
     });
   })();
@@ -1857,138 +1950,6 @@
   });
 })();
 
-</script>
-<script>
-(function() {
-  // export image feature removed
-  if (false) {
-  var exportBtn = document.getElementById('export-image-btn');
-  var exportStatus = document.getElementById('export-status');
-  if (!exportBtn) return;
-
-  exportBtn.addEventListener('click', async function() {
-    exportBtn.disabled = true;
-    exportStatus.textContent = 'Creating your image... (this takes a sec)';
-
-    try {
-      // 1. Generate the canvas
-      var canvas = await html2canvas(document.body, {
-        useCORS: true,
-        allowTaint: false,
-        scrollY: -window.scrollY,
-        scale: window.devicePixelRatio || 2, // Crisper on retina displays
-        logging: false,
-        ignoreElements: function(el) {
-          // Skip interactive/fixed elements that shouldn't be in the photo
-          return el.tagName === 'IFRAME' ||
-                 el.classList.contains('sticky-nav') ||
-                 el.classList.contains('progress-wrap') ||
-                 el.classList.contains('save-block'); // hide the buttons in the screenshot
-        }
-      });
-
-      // 2. Convert to an image URL
-      var imgDataUrl = canvas.toDataURL('image/png');
-
-      // 3. Try Mobile Native Share first
-      canvas.toBlob(async function(blob) {
-        var file = new File([blob], 'da-biddies-newsletter.png', { type: 'image/png' });
-
-        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-          try {
-            await navigator.share({
-              files: [file],
-              title: 'Da Biddies Newsletter'
-            });
-            exportStatus.textContent = '';
-          } catch (shareError) {
-            // User cancelled or Safari blocked the async share -> Fallback to Modal
-            showImageModal(imgDataUrl);
-          }
-        } else {
-          // Desktop or unsupported mobile -> Fallback to Modal or Direct Download
-          if (/Mobi|Android/i.test(navigator.userAgent)) {
-            showImageModal(imgDataUrl);
-          } else {
-            // Desktop automatic download
-            var a = document.createElement('a');
-            a.href = imgDataUrl;
-            a.download = 'da-biddies-newsletter.png';
-            a.click();
-            exportStatus.textContent = '';
-          }
-        }
-      }, 'image/png');
-
-    } catch (e) {
-      exportStatus.textContent = 'Oops, something went wrong. Try PDF instead!';
-    }
-
-    exportBtn.disabled = false;
-  });
-
-  // --- Modal Fallback System ---
-  function showImageModal(dataUrl) {
-    exportStatus.textContent = ''; // clear status
-    
-    // Create an overlay background
-    var overlay = document.createElement('div');
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100vw';
-    overlay.style.height = '100vh';
-    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
-    overlay.style.zIndex = '9999';
-    overlay.style.display = 'flex';
-    overlay.style.flexDirection = 'column';
-    overlay.style.alignItems = 'center';
-    overlay.style.padding = '20px';
-    overlay.style.overflowY = 'auto';
-
-    // Create the instruction text
-    var instructions = document.createElement('p');
-    instructions.textContent = "✨ Long-press the image below to save to Camera Roll! ✨";
-    instructions.style.color = 'white';
-    instructions.style.fontFamily = 'sans-serif';
-    instructions.style.fontSize = '14px';
-    instructions.style.textAlign = 'center';
-    instructions.style.marginBottom = '15px';
-    instructions.style.marginTop = '40px';
-
-    // Create the image element
-    var img = document.createElement('img');
-    img.src = dataUrl;
-    img.style.maxWidth = '100%';
-    img.style.height = 'auto';
-    img.style.borderRadius = '8px';
-    img.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
-
-    // Create a close button
-    var closeBtn = document.createElement('button');
-    closeBtn.textContent = 'Close';
-    closeBtn.style.marginTop = '20px';
-    closeBtn.style.marginBottom = '40px';
-    closeBtn.style.padding = '12px 24px';
-    closeBtn.style.backgroundColor = 'white';
-    closeBtn.style.color = 'black';
-    closeBtn.style.border = 'none';
-    closeBtn.style.borderRadius = '4px';
-    closeBtn.style.fontSize = '14px';
-    closeBtn.style.fontWeight = 'bold';
-    closeBtn.style.cursor = 'pointer';
-
-    closeBtn.onclick = function() {
-      document.body.removeChild(overlay);
-    };
-
-    overlay.appendChild(instructions);
-    overlay.appendChild(img);
-    overlay.appendChild(closeBtn);
-    document.body.appendChild(overlay);
-  }
-  } // end if(false)
-})();
 </script>
 </body>
 </html>
