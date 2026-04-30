@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -27,12 +27,12 @@
       --c-ashlyn-bg: #f0e8ed; --c-ashlyn-dot: #b5728a;
       --c-betel-bg:  #f5eaee; --c-betel-dot:  #933b5b;
       --c-isabele-bg:#edf3ef; --c-isabele-dot:#aabaae;
-      --c-kiara-bg:  #f5eaee; --c-kiara-dot:  #b5728a;
+      --c-kiara-bg:  #fce8ef; --c-kiara-dot:  #933b5b;
       --c-noemi-bg:  #f3efe9; --c-noemi-dot:  #9f9679;
     }
 
-    html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
-    .hero, .page-slide { scroll-snap-align: start; scroll-margin-top: calc(var(--nav-h) + 24px); }
+    html { scroll-behavior: smooth; }
+    .hero, .page-slide { scroll-margin-top: calc(var(--nav-h) + 24px); }
     .page-slide { padding-bottom: 48px; }
     .slide-dates { background: #eef4ee; }
     .slide-kudos { background: #f8eef2; }
@@ -557,35 +557,145 @@
       font-style: italic;
     }
 
-    /* ─── CURRENTLY INTO ─── */
-    .into-grid {
+    /* ─── CURRENTLY INTO — BENTO LAYOUT ─── */
+    .bento-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px 40px;
-      margin-top: 4px;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-areas:
+        "watching watching feed"
+        "listening eats    feed";
+      gap: 14px;
+      margin-top: 20px;
+      align-items: start;
     }
-    .into-block:first-child { grid-column: 1 / -1; }
-    .into-block h3 {
+    .bt-watching  { grid-area: watching; }
+    .bt-feed      { grid-area: feed; }
+    .bt-listening { grid-area: listening; }
+    .bt-eats      { grid-area: eats; }
+    .bento-tile {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .bt-label {
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--red);
-      margin-bottom: 14px;
-      padding-bottom: 8px;
+      padding: 12px 14px 10px;
       border-bottom: 1px solid var(--rule);
+      flex-shrink: 0;
     }
-    .spotify-wrap { border-radius: 12px; overflow: hidden; border: 1px solid var(--rule); }
-    .spotify-placeholder { background: var(--paper-warm); padding: 20px; display: flex; align-items: center; gap: 14px; }
-    .spotify-icon { width: 36px; height: 36px; background: #1DB954; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .spotify-icon svg { width: 18px; height: 18px; fill: white; }
-    .spotify-info { flex: 1; min-width: 0; }
-    .spotify-info .sp-label { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); display: block; margin-bottom: 3px; }
-    .spotify-info .sp-name { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .beli-card { background: var(--paper-warm); border: 1px solid var(--rule); padding: 16px 18px; }
-    .beli-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
-    .beli-name { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
-    .beli-badge { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; letter-spacing: 0.08em; color: #ff6b35; background: #fff3ee; border: 1px solid #ffd5c2; padding: 2px 8px; white-space: nowrap; flex-shrink: 0; }
+    /* poster strip */
+    .bt-watching-body { display: flex; flex-direction: column; }
+    .poster-strip { display: flex; gap: 12px; padding: 14px; overflow-x: auto; flex-shrink: 0; }
+    .poster-strip::-webkit-scrollbar { height: 4px; }
+    .poster-strip::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+    .poster-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      background: none; border: 2px solid transparent; border-radius: 6px;
+      cursor: pointer; flex-shrink: 0; padding: 4px; transition: border-color 0.15s;
+    }
+    .poster-btn:hover { border-color: var(--rule); }
+    .poster-btn.active { border-color: var(--accent-rose); }
+    .poster-btn img { width: 60px; height: 90px; object-fit: cover; border-radius: 4px; display: block; }
+    .poster-name {
+      font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 9px; font-weight: 600;
+      color: var(--ink); width: 68px; text-align: center;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.2;
+    }
+    .poster-who { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 8px; color: var(--ink-faint); width: 68px; text-align: center; }
+    .bt-watching .pill-panel { margin: 0 14px 14px; border-radius: 8px; }
+    /* show cards (always visible) */
+    .show-cards { display: flex; overflow-x: auto; padding: 14px 14px 18px; gap: 10px; }
+    .show-cards::-webkit-scrollbar { height: 4px; }
+    .show-cards::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+    .show-card { display: flex; flex-direction: column; flex-shrink: 0; width: 86px; }
+    .show-poster { width: 86px; height: 128px; object-fit: cover; border-radius: 5px; display: block; box-shadow: 0 5px 14px rgba(0,0,0,0.22), 0 2px 5px rgba(0,0,0,0.12); }
+    .show-info { padding: 7px 2px 0; }
+    .show-name { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; font-weight: 600; color: var(--ink); display: block; line-height: 1.25; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .show-footer { display: flex; align-items: center; justify-content: space-between; }
+    .show-who { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 9px; color: var(--ink-faint); }
+    /* song items (always visible) */
+    .song-stack { display: flex; flex-direction: column; }
+    .song-item { border-bottom: 1px solid var(--rule); }
+    .song-item:last-child { border-bottom: none; }
+    .song-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px 8px; }
+    .song-embed { padding: 0 12px 12px; }
+    /* eat items (always visible) */
+    .eat-stack { display: flex; flex-direction: column; }
+    .eat-item { padding: 11px 14px; border-bottom: 1px solid var(--rule); }
+    .eat-item:last-child { border-bottom: none; }
+    .eat-header { display: flex; align-items: baseline; gap: 6px; margin-bottom: 3px; }
+
+    /* song list */
+    .song-list { display: flex; flex-direction: column; }
+    .song-row {
+      display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+      border: none; background: none; border-bottom: 1px solid var(--rule);
+      cursor: pointer; text-align: left; width: 100%; transition: background 0.15s;
+    }
+    .song-row:hover, .song-row.active { background: var(--paper-warm); }
+    .song-icon { font-size: 13px; flex-shrink: 0; }
+    .song-meta { flex: 1; min-width: 0; }
+    .song-title { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+    .song-by { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; color: var(--ink-faint); display: block; }
+    .song-caret { font-size: 10px; color: var(--ink-faint); flex-shrink: 0; transition: transform 0.2s; }
+    .song-row.active .song-caret { transform: rotate(180deg); }
+    .bt-listening .pill-panel { margin: 0; border-radius: 0; border: none; border-bottom: 1px solid var(--rule); background: var(--paper-warm); padding: 12px 14px; }
+    /* eat list */
+    .eat-list { display: flex; flex-direction: column; }
+    .eat-row {
+      display: flex; align-items: center; padding: 10px 14px; gap: 0;
+      border: none; background: none; border-bottom: 1px solid var(--rule);
+      cursor: pointer; text-align: left; width: 100%; transition: background 0.15s;
+    }
+    .eat-row:hover, .eat-row.active { background: var(--paper-warm); }
+    .eat-name { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 600; color: var(--ink); }
+    .eat-who { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; color: var(--ink-faint); }
+    .eat-caret { font-size: 10px; color: var(--ink-faint); flex-shrink: 0; transition: transform 0.2s; }
+    .eat-row.active .eat-caret { transform: rotate(180deg); }
+    .bt-eats .pill-panel { margin: 0; border-radius: 0; border: none; border-bottom: 1px solid var(--rule); background: var(--paper-warm); padding: 12px 14px; }
+    /* bento-panel: replaces pill-panel — always visible, no accordion */
+    .bento-panel { background: transparent; }
+    .song-list .song-header { padding: 10px 14px 8px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--rule); }
+    .song-list .bento-panel { padding: 12px 14px; background: var(--paper-warm); border-bottom: 1px solid var(--rule); }
+    .song-list .bento-panel:last-of-type { border-bottom: none; }
+    .eat-list .eat-header { padding: 10px 14px 3px; display: flex; align-items: baseline; gap: 6px; }
+    .eat-list .bento-panel { padding: 2px 14px 12px; border-bottom: 1px solid var(--rule); }
+    .eat-list .bento-panel:last-of-type { border-bottom: none; }
+    /* feed tile */
+    .bt-feed-link { display: block; }
+    .bt-feed-link img { width: 100%; height: auto; display: block; }
+    /* obsessed sub-section */
+    .bt-obsessed-label {
+      font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 9px;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--red);
+      padding: 10px 14px 8px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .bt-obsessed-pills { padding: 10px 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+    /* pill-panel base (used for watching expand panels + obsessed statics) */
+    .pill-panel { margin-top: 12px; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; background: #fff; }
+    .pill-panel-watch { display: flex; gap: 14px; padding: 14px; align-items: flex-start; }
+    .pill-panel-watch img { width: 64px; height: 96px; object-fit: contain; flex-shrink: 0; background: var(--paper-warm); border-radius: 4px; }
+    .pill-panel-info { flex: 1; }
+    /* pill (used for obsessed statics) */
+    .pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px;
+      color: var(--accent-rose); background: #fff;
+      border: 1px solid var(--accent-mauve); border-radius: 20px; padding: 6px 14px;
+      cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s;
+      white-space: nowrap; line-height: 1.3;
+    }
+    .pill:hover { background: var(--paper-warm); }
+    .pill.active { background: var(--accent-rose); color: #fff; border-color: var(--accent-rose); }
+    .pill-static { cursor: default; color: var(--ink-muted); border-color: var(--rule); }
+    .pill-static:hover { background: #fff; }
+    /* shared utility classes */
     .beli-meta { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: var(--ink-faint); margin-bottom: 8px; }
     .beli-note { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: var(--ink-muted); line-height: 1.55; font-style: italic; }
     .beli-link { display: inline-flex; align-items: flex-end; min-height: 44px; margin-top: 10px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 1px; }
@@ -595,13 +705,26 @@
     .beli-map-container { margin-top: 10px; border: 1px solid var(--rule); overflow: hidden; display: none; }
     .beli-map-container.open { display: block; }
     .beli-map-el { width: 100%; height: 220px; }
-    .social-wrap { border: 1px solid var(--rule); overflow: hidden; background: var(--paper-warm); }
-    .social-placeholder { padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 120px; text-align: center; }
-    .social-placeholder svg { width: 28px; height: 28px; stroke: var(--rule); fill: none; stroke-width: 1.2; stroke-linecap: round; }
-    .social-placeholder span { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #ccc; }
-    .recipe-block { font-family: 'Helvetica Neue', Arial, sans-serif; }
-    .recipe-block .recipe-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
-    .recipe-block .recipe-note { font-size: 13px; color: var(--ink-muted); line-height: 1.6; font-style: italic; }
+    /* responsive bento */
+    @media (max-width: 660px) {
+      .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "watching watching"
+          "listening eats"
+          "feed      feed";
+      }
+    }
+    @media (max-width: 420px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "watching"
+          "listening"
+          "eats"
+          "feed";
+      }
+    }
 
     /* ─── MEDIA THUMBS ─── */
     .media-thumb {
@@ -1351,195 +1474,119 @@
 <div class="section-rule"><span>Currently into</span></div>
 <div class="section">
   <h2>Things we've enjoyed</h2>
-  <div class="into-grid">
+  <div class="bento-grid">
 
-    <div class="into-block">
-      <h3>Watching</h3>
-
-      <div class="watching-grid">
-      <div class="watching-wrap">
-        <img class="watching-poster" src="https://m.media-amazon.com/images/M/MV5BMzA1NzBiMzUtZTA1Zi00YTVjLTkxZWYtZTIyYzFhMzVjZmQ1XkEyXkFqcGc@._V1_.jpg" alt="Arrested Development poster">
-        <div class="watching-info">
-          <span class="watching-label">Series</span>
-          <span class="watching-name">Arrested Development</span>
-          <div class="watching-meta">
-            <span class="watching-comment">Kiara's watching</span>
-            <a class="netflix-link" href="https://www.netflix.com/title/70140358?source=35&fromWatch=true" target="_blank" aria-label="Watch on Netflix">
-              <img class="logo-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/500px-Netflix_icon.svg.png?_=20220806170125" alt="Netflix logo">
-            </a>
-          </div>
+    <!-- WATCHING tile — 2 cols wide -->
+    <div class="bento-tile bt-watching">
+      <div class="bt-label">Watching</div>
+      <div class="show-cards">
+        <div class="show-card">
+          <a href="https://www.netflix.com/title/70140358?source=35&fromWatch=true" target="_blank"><img src="https://m.media-amazon.com/images/M/MV5BMzA1NzBiMzUtZTA1Zi00YTVjLTkxZWYtZTIyYzFhMzVjZmQ1XkEyXkFqcGc@._V1_.jpg" alt="Arrested Development" class="show-poster"></a>
+          <div class="show-info"><span class="show-name">Arrested Development</span><div class="show-footer"><span class="show-who">Kiara</span><a href="https://www.netflix.com/title/70140358?source=35&fromWatch=true" target="_blank"><img class="logo-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/500px-Netflix_icon.svg.png?_=20220806170125" alt="Netflix"></a></div></div>
+        </div>
+        <div class="show-card">
+          <a href="https://www.crunchyroll.com/series/GT00258001/witch-hat-atelier" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Witch_Hat_Atelier_vol1.jpg/250px-Witch_Hat_Atelier_vol1.jpg" alt="Witch Hat Atelier" class="show-poster"></a>
+          <div class="show-info"><span class="show-name">Witch Hat Atelier</span><div class="show-footer"><span class="show-who">Betel</span><a href="https://www.crunchyroll.com/series/GT00258001/witch-hat-atelier" target="_blank"><img class="logo-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROfQX7B766poqHirN-xz6-W5xK1X4tv9F2oQ&s" alt="Crunchyroll"></a></div></div>
+        </div>
+        <div class="show-card">
+          <a href="https://www.netflix.com/watch/81005297?source=35" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/The_Residence_%28TV_series%29.jpg/250px-The_Residence_%28TV_series%29.jpg" alt="The Residence" class="show-poster"></a>
+          <div class="show-info"><span class="show-name">The Residence</span><div class="show-footer"><span class="show-who">Betel</span><a href="https://www.netflix.com/watch/81005297?source=35" target="_blank"><img class="logo-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/500px-Netflix_icon.svg.png?_=20220806170125" alt="Netflix"></a></div></div>
+        </div>
+        <div class="show-card">
+          <a href="https://www.hulu.com/series/0fbd443f-25a6-4053-8dcb-a512e175583e" target="_blank"><img src="https://m.media-amazon.com/images/M/MV5BMzk2YjJiNzMtZjk2Mi00ZGU5LWI1ZTUtNjIwMGI2NjZiMTVjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="One Tree Hill" class="show-poster"></a>
+          <div class="show-info"><span class="show-name">One Tree Hill</span><div class="show-footer"><span class="show-who">Noemi</span><a href="https://www.hulu.com/series/0fbd443f-25a6-4053-8dcb-a512e175583e" target="_blank"><img class="logo-icon" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/hulu-icon.png" alt="Hulu"></a></div></div>
+        </div>
+        <div class="show-card">
+          <a href="https://www.disneyplus.com/browse/entity-30b0a5b5-865d-451e-ba08-2395d35acc76?distributionPartner=google" target="_blank"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRANTXHBvWgTA7f1tY316O7TY8WJgeCg1oHp6fAH_UXz1n8l4Aj4hxCQ6iOTSpMk47ApcEPg&s=10" alt="Tinker Bell" class="show-poster"></a>
+          <div class="show-info"><span class="show-name">Tinker Bell</span><div class="show-footer"><span class="show-who">Betel</span><a href="https://www.disneyplus.com/browse/entity-30b0a5b5-865d-451e-ba08-2395d35acc76?distributionPartner=google" target="_blank"><img class="logo-icon" src="https://assets-prd.ignimgs.com/2024/04/05/disney-plus-logo-button-replacement-1712328257121.jpg" alt="Disney+"></a></div></div>
+        </div>
+        <div class="show-card">
+          <a href="https://www.netflix.com/title/81779095?source=35&fromWatch=true" target="_blank"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScxaEtc0PvlsltTlpMTg8s_hvBOLbU2otdLrCKzU86dmnHcEmJBmgtzwu4IS-luMWe8uNZ3vIy4FsgO1VFffSXG_p0n83VUmeemPYigYQ&s=10" alt="Age of Attraction" class="show-poster"></a>
+          <div class="show-info"><span class="show-name">Age of Attraction</span><div class="show-footer"><span class="show-who">Isabele</span><a href="https://www.netflix.com/title/81779095?source=35&fromWatch=true" target="_blank"><img class="logo-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/500px-Netflix_icon.svg.png?_=20220806170125" alt="Netflix"></a></div></div>
         </div>
       </div>
-
-      <div class="watching-wrap">
-        <img class="watching-poster" src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Witch_Hat_Atelier_vol1.jpg/250px-Witch_Hat_Atelier_vol1.jpg" alt="Witch Hat Atelier poster">
-        <div class="watching-info">
-          <span class="watching-label">Anime Series</span>
-          <span class="watching-name">Witch Hat Atelier</span>
-          <div class="watching-meta">
-            <span class="watching-comment">Betel's watching</span>
-            <a class="netflix-link" href="https://www.crunchyroll.com/series/GT00258001/witch-hat-atelier" target="_blank" aria-label="Watch on Crunchyroll">
-              <img class="logo-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROfQX7B766poqHirN-xz6-W5xK1X4tv9F2oQ&s" alt="Crunchyroll logo">
-            </a>
-          </div>
         </div>
-      </div>
 
-      <div class="watching-wrap">
-        <img class="watching-poster" src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7b/The_Residence_%28TV_series%29.jpg/250px-The_Residence_%28TV_series%29.jpg" alt="The Residence poster">
-        <div class="watching-info">
-          <span class="watching-label">Series</span>
-          <span class="watching-name">The Residence</span>
-          <div class="watching-meta">
-            <span class="watching-comment">Betel's watching</span>
-            <a class="netflix-link" href="https://www.netflix.com/watch/81005297?source=35" target="_blank" aria-label="Watch on Netflix">
-              <img class="logo-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/500px-Netflix_icon.svg.png?_=20220806170125" alt="Netflix logo">
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="watching-wrap">
-        <img class="watching-poster" src="https://m.media-amazon.com/images/M/MV5BMzk2YjJiNzMtZjk2Mi00ZGU5LWI1ZTUtNjIwMGI2NjZiMTVjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="One Tree Hill poster">
-        <div class="watching-info">
-          <span class="watching-label">Series</span>
-          <span class="watching-name">One Tree Hill</span>
-          <div class="watching-meta">
-            <span class="watching-comment">Noemi's watching</span>
-            <a class="netflix-link" href="https://www.hulu.com/series/0fbd443f-25a6-4053-8dcb-a512e175583e" target="_blank" aria-label="Watch on Hulu">
-              <img class="logo-icon" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/hulu-icon.png" alt="Hulu logo">
-            </a>
-            <a class="netflix-link" href="https://www.hbomax.com/shows/one-tree-hill/7ba20260-6073-4aa2-a7d0-d558fae52ef7" target="_blank" aria-label="Watch on HBO Max" style="margin-left:4px;">
-              <img class="logo-icon" src="https://static.cdn.turner.com/styles/scale_792/s3/images/2025-05/hbo-max-logo.jpg?itok=v7Dk_88s" alt="HBO Max logo">
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="watching-wrap">
-        <img class="watching-poster" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRANTXHBvWgTA7f1tY316O7TY8WJgeCg1oHp6fAH_UXz1n8l4Aj4hxCQ6iOTSpMk47ApcEPg&s=10" alt="Tinker Bell movies">
-        <div class="watching-info">
-          <span class="watching-label">Movies · Currently obsessed</span>
-          <span class="watching-name">Tinker Bell</span>
-          <div class="watching-meta">
-            <span class="watching-comment">Betel's obsessed</span>
-            <a class="netflix-link" href="https://www.disneyplus.com/browse/entity-30b0a5b5-865d-451e-ba08-2395d35acc76?distributionPartner=google" target="_blank" aria-label="Watch on Disney+">
-              <img class="logo-icon" src="https://assets-prd.ignimgs.com/2024/04/05/disney-plus-logo-button-replacement-1712328257121.jpg" alt="Disney+ logo">
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="watching-wrap">
-        <img class="watching-poster" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScxaEtc0PvlsltTlpMTg8s_hvBOLbU2otdLrCKzU86dmnHcEmJBmgtzwu4IS-luMWe8uNZ3vIy4FsgO1VFffSXG_p0n83VUmeemPYigYQ&s=10" alt="Age of Attraction poster">
-        <div class="watching-info">
-          <span class="watching-label">Series</span>
-          <span class="watching-name">Age of Attraction</span>
-          <div class="watching-meta">
-            <span class="watching-comment">Isabele's pick</span>
-            <a class="netflix-link" href="https://www.netflix.com/title/81779095?source=35&fromWatch=true" target="_blank" aria-label="Watch on Netflix">
-              <img class="logo-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/500px-Netflix_icon.svg.png?_=20220806170125" alt="Netflix logo">
-            </a>
-          </div>
-          <p style="font-size:11px; color:var(--ink-muted); font-style:italic; margin-top:5px; font-family:'Helvetica Neue',Arial,sans-serif; line-height:1.4;">"if you want to feel smart and that ur life isnt actually so bad, watch it"</p>
-        </div>
-      </div>
-
-      </div><!-- /.watching-grid -->
+    <!-- FEED tile — right col, spans both rows -->
+    <div class="bento-tile bt-feed">
+      <div class="bt-label">From the feed</div>
+      <a href="https://www.instagram.com/p/DXPXS7CDvUz/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="bt-feed-link">
+        <img src="assets/images/april/Betel's Post.png" alt="Betel's Instagram Post">
+      </a>
     </div>
 
-    <div class="into-block">
-      <h3>Listening</h3>
-
-      <div class="sp-stack-item">
-        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3B4cjvGlPvyBLNG3AzEgkZ?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <p class="sp-attr">Kiara's added: <a href="https://open.spotify.com/track/3B4cjvGlPvyBLNG3AzEgkZ" target="_blank">E85 — Don Toliver</a></p>
-      </div>
-
-      <div class="sp-stack-item">
-        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4g5eopb54XIaV2ciooY3St?utm_source=generator" width="100%" height="152" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <p class="sp-attr">Betel's added: <a href="https://open.spotify.com/track/4g5eopb54XIaV2ciooY3St" target="_blank">Swim — BTS</a></p>
-      </div>
-
-      <div class="sp-stack-item">
-        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1ssugRY8Q2XYgyZWVHfBF4?utm_source=generator" width="100%" height="152" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <p class="sp-attr">Noemi's added: <a href="https://open.spotify.com/track/1ssugRY8Q2XYgyZWVHfBF4" target="_blank">Tuition — Don Toliver</a></p>
-      </div>
-
-      <div class="sp-stack-item">
-        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2Ejyg4CavumEr7lFUkk9aF?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <p class="sp-attr">Ashlyn's added: <a href="https://open.spotify.com/track/2Ejyg4CavumEr7lFUkk9aF" target="_blank">Rendezvous (feat. Yeat) — Don Toliver</a></p>
-      </div>
-
-      <div class="sp-stack-item" style="border-top:1px solid var(--rule); padding-top:14px;">
-        <iframe class="sp-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/show/2DZwvzn6Z3xCFZrwZGDrbj?utm_source=generator" width="100%" height="352" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <p class="sp-attr">Isabele's added: <a href="https://open.spotify.com/show/2DZwvzn6Z3xCFZrwZGDrbj" target="_blank">Rotten Mango</a> — "are we surprised? no. like literally everything she's released.. i've listened to and loved"</p>
-      </div>
-
-    </div>
-
-    <div class="into-block">
-      <h3>Obsessed with</h3>
-      <p style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:13px; color:var(--ink-muted); font-style:italic; line-height:1.7;">iPad games &amp; Mario Party on Switch <span style="font-style:normal; color:var(--ink-faint);">— Noemi</span></p>
-      <p style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:13px; color:var(--ink-muted); font-style:italic; line-height:1.7; margin-top:8px;">five toe shoes (pls don't judge her) <span style="font-style:normal; color:var(--ink-faint);">— Isabele</span></p>
-      <p style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:13px; color:var(--ink-muted); font-style:italic; line-height:1.7; margin-top:8px;">the Tinker Bell movies <span style="font-style:normal; color:var(--ink-faint);">— Betel</span></p>
-    </div>
-
-    <div class="into-block">
-      <h3>Eating</h3>
-      <div class="beli-card" style="margin-bottom:14px;">
-        <div class="beli-top">
-          <span class="beli-name">Mezeh</span>
-          <span class="beli-badge">Betel's pick</span>
+    <!-- LISTENING tile -->
+    <div class="bento-tile bt-listening">
+      <div class="bt-label">Listening</div>
+      <div class="song-list">
+        <div class="song-header"><span class="song-icon">&#9835;</span>
+          <span class="song-meta"><span class="song-title">E85</span><span class="song-by">Don Toliver &middot; Kiara</span></span></div>
+        <div class="bento-panel" id="s-e85">
+          <iframe class="sp-iframe" style="border-radius:6px" src="https://open.spotify.com/embed/track/3B4cjvGlPvyBLNG3AzEgkZ?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
-        <p class="beli-meta">Maryland · Mediterranean</p>
-        <p class="beli-note">"Mezeh!!!"</p>
-        <a href="https://www.mezeh.com" target="_blank" class="beli-link">mezeh.com ↗</a>
-      </div>
-      <div class="beli-card" style="margin-bottom:14px;">
-        <div class="beli-top">
-          <span class="beli-name">Pho</span>
-          <span class="beli-badge">Noemi's pick</span>
+        <div class="song-header"><span class="song-icon">&#9835;</span>
+          <span class="song-meta"><span class="song-title">Swim</span><span class="song-by">BTS &middot; Betel</span></span></div>
+        <div class="bento-panel" id="s-swim">
+          <iframe class="sp-iframe" style="border-radius:6px" src="https://open.spotify.com/embed/track/4g5eopb54XIaV2ciooY3St?utm_source=generator" width="100%" height="80" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
-        <p class="beli-note">"it's so yummy"</p>
-      </div>
-      <div class="beli-card" style="margin-bottom:14px;">
-        <div class="beli-top">
-          <span class="beli-name">Smothered Chicken</span>
-          <span class="beli-badge">Ashlyn made it</span>
+        <div class="song-header"><span class="song-icon">&#9835;</span>
+          <span class="song-meta"><span class="song-title">Tuition</span><span class="song-by">Don Toliver &middot; Noemi</span></span></div>
+        <div class="bento-panel" id="s-tuition">
+          <iframe class="sp-iframe" style="border-radius:6px" src="https://open.spotify.com/embed/track/1ssugRY8Q2XYgyZWVHfBF4?utm_source=generator" width="100%" height="80" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
-        <p class="beli-meta">Homemade · Southern</p>
-        <p class="beli-note">"I made smothered chicken last week (very southern of me) but it was tooo good and easy I need to make it more!"</p>
-      </div>
-      <div class="beli-card">
-        <div class="beli-top">
-          <span class="beli-name">Baan Siam</span>
-          <span class="beli-badge">Isabele's pick</span>
+        <div class="song-header"><span class="song-icon">&#9835;</span>
+          <span class="song-meta"><span class="song-title">Rendezvous (feat. Yeat)</span><span class="song-by">Don Toliver &middot; Ashlyn</span></span></div>
+        <div class="bento-panel" id="s-rendezvous">
+          <iframe class="sp-iframe" style="border-radius:6px" src="https://open.spotify.com/embed/track/2Ejyg4CavumEr7lFUkk9aF?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
-        <p class="beli-meta">DC · Thai &nbsp;·&nbsp; 425 I St NW, Washington DC</p>
-        <p class="beli-note">"food was yummy and staff was nice"</p>
-        <button class="beli-map-btn" id="baan-siam-map-btn">
-          <svg viewBox="0 0 16 16" style="width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;flex-shrink:0;"><path d="M8 1C5.79 1 4 2.79 4 5c0 3 4 9 4 9s4-6 4-9c0-2.21-1.79-4-4-4z"/><circle cx="8" cy="5" r="1.3"/></svg>
-          Show on map
-        </button>
-        <div class="beli-map-container" id="baan-siam-map-wrap">
-          <div class="beli-map-el" id="baan-siam-map"></div>
+        <div class="song-header"><span class="song-icon">&#127897;</span>
+          <span class="song-meta"><span class="song-title">Rotten Mango</span><span class="song-by">Podcast &middot; Isabele</span></span></div>
+        <div class="bento-panel" id="s-mango">
+          <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;color:var(--ink-muted);font-style:italic;line-height:1.4;margin-bottom:8px;">"are we surprised? no. like literally everything she's released.. i've listened to and loved"</p>
+          <iframe class="sp-iframe" style="border-radius:6px" src="https://open.spotify.com/embed/show/2DZwvzn6Z3xCFZrwZGDrbj?utm_source=generator" width="100%" height="152" frameBorder="0" scrolling="no" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
       </div>
     </div>
 
-    <div class="into-block">
-      <h3>From the feed</h3>
-      <div class="social-wrap">
-        <a href="https://www.instagram.com/p/DXPXS7CDvUz/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" style="display:block; text-decoration:none;">
-          <img src="assets/images/april/Betel's Post.png" alt="Betel's Instagram Post" style="width:100%; height:auto; display:block;">
-        </a>
+    <!-- EATING + OBSESSED tile -->
+    <div class="bento-tile bt-eats">
+      <div class="bt-label">Eating</div>
+      <div class="eat-list">
+        <div class="eat-header"><span class="eat-name">Mezeh</span><span class="eat-who">Betel</span></div>
+        <div class="bento-panel" id="e-mezeh">
+          <p class="beli-meta">Maryland &middot; Mediterranean</p>
+          <p class="beli-note">"Mezeh!!!"</p>
+          <a href="https://www.mezeh.com" target="_blank" class="beli-link" style="min-height:unset;margin-top:6px;">mezeh.com &#8599;</a>
+        </div>
+        <div class="eat-header"><span class="eat-name">Pho</span><span class="eat-who">Noemi</span></div>
+        <div class="bento-panel" id="e-pho">
+          <p class="beli-note">"it's so yummy"</p>
+        </div>
+        <div class="eat-header"><span class="eat-name">Smothered Chicken</span><span class="eat-who">Ashlyn</span></div>
+        <div class="bento-panel" id="e-chicken">
+          <p class="beli-meta">Homemade &middot; Southern</p>
+          <p class="beli-note">"I made smothered chicken last week (very southern of me) but it was tooo good and easy I need to make it more!"</p>
+        </div>
+        <div class="eat-header"><span class="eat-name">Baan Siam</span><span class="eat-who">Isabele</span></div>
+        <div class="bento-panel" id="e-baan">
+          <p class="beli-meta">DC &middot; Thai &middot; 425 I St NW</p>
+          <p class="beli-note">"food was yummy and staff was nice"</p>
+          <button class="beli-map-btn" id="baan-siam-map-btn" style="margin-top:8px;">
+            <svg viewBox="0 0 16 16" style="width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;flex-shrink:0;"><path d="M8 1C5.79 1 4 2.79 4 5c0 3 4 9 4 9s4-6 4-9c0-2.21-1.79-4-4-4z"/><circle cx="8" cy="5" r="1.3"/></svg>
+            Show on map
+          </button>
+          <div class="beli-map-container" id="baan-siam-map-wrap"><div class="beli-map-el" id="baan-siam-map"></div></div>
+        </div>
+      </div>
+      <div class="bt-obsessed-label">Obsessed with</div>
+      <div class="bt-obsessed-pills">
+        <span class="pill pill-static">iPad games &amp; Mario Party &mdash; Noemi</span>
+        <span class="pill pill-static">five toe shoes &mdash; Isabele</span>
       </div>
     </div>
 
   </div>
 </div>
-
 </div><!-- /slide 5 -->
 
 <!-- ══ SLIDE 6: IMPORTANT DATES ══ -->
@@ -1793,6 +1840,24 @@
         lb.classList.add('open');
       });
       wall.appendChild(img);
+    });
+  })();
+
+  /* ── Bento accordion (Currently Into) ── */
+  (function() {
+    document.querySelectorAll('[data-expand]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var id = btn.dataset.expand;
+        var panel = document.getElementById(id);
+        if (!panel) return;
+        var isOpen = !panel.hidden;
+        var tile = btn.closest('.bento-tile');
+        if (tile) {
+          tile.querySelectorAll('.pill-panel').forEach(function(p) { p.hidden = true; });
+          tile.querySelectorAll('[data-expand]').forEach(function(p) { p.classList.remove('active'); });
+        }
+        if (!isOpen) { panel.hidden = false; btn.classList.add('active'); }
+      });
     });
   })();
 
