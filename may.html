@@ -470,41 +470,14 @@
       flex-direction: column;
       gap: 14px;
     }
-    .proposal-comment { display: flex; gap: 12px; align-items: flex-start; }
-    .comment-avatar {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 16px; font-weight: 700;
-      color: #fff;
-      margin-top: 2px;
-    }
-    .comment-bubble {
-      flex: 1;
-      background: var(--paper-warm);
-      border-radius: 16px;
-      border-top-left-radius: 4px;
-      padding: 12px 16px;
-      position: relative;
-    }
-    .comment-bubble::before {
-      content: '';
-      position: absolute;
-      left: -7px; top: 14px;
-      border-style: solid;
-      border-width: 6px 8px 6px 0;
-      border-color: transparent var(--paper-warm) transparent transparent;
-    }
+    .proposal-comment { display: flex; gap: 10px; align-items: flex-start; }
+    .person-dot { display: block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+    .comment-bubble { flex: 1; }
     .comment-bubble .commenter {
       display: block;
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-style: normal; font-weight: 700; font-size: 11px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--ink); margin-bottom: 4px;
+      font-size: 15px; font-weight: 700; font-style: normal;
+      color: var(--ink); margin-bottom: 3px;
     }
     .comment-bubble p {
       font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -1093,16 +1066,8 @@
     .spotlight-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--rule); margin-top: 4px; }
     .spotlight { display: block; padding: 28px 22px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .spotlight:nth-child(4n) { border-right: none; }
-    .spotlight-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 18px; font-weight: 700;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-    .spotlight-body h3 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); margin: 8px 0 12px; }
+    .spotlight-name-row { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+    .spotlight-body h3 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 17px; font-weight: 700; color: var(--ink); margin: 0; letter-spacing: -0.2px; }
     .spotlight-body p { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: var(--ink-muted); line-height: 1.55; margin: 0 0 6px; font-style: italic; }
 
     /* ─── SIGN-OFF ─── */
@@ -1435,23 +1400,23 @@
 
       <div class="proposal-comments">
         <div class="proposal-comment">
-          <div class="comment-avatar" style="background:var(--c-kiara-dot);">K</div>
+          <span class="person-dot" style="background:var(--c-kiara-dot)"></span>
           <div class="comment-bubble"><span class="commenter">Kiara</span><p>Oh my God I'm so glad I can finally breathe omg.</p></div>
         </div>
         <div class="proposal-comment">
-          <div class="comment-avatar" style="background:var(--c-betel-dot);">B</div>
+          <span class="person-dot" style="background:var(--c-betel-dot)"></span>
           <div class="comment-bubble"><span class="commenter">Betel</span><p>A bunch of liars in my lifeeee!! Jk. I love you guys, you all know me so well. I felt so loved. Thank you for every part you played, for traveling far and driving even further. I love you.</p></div>
         </div>
         <div class="proposal-comment">
-          <div class="comment-avatar" style="background:var(--c-noemi-dot);">N</div>
+          <span class="person-dot" style="background:var(--c-noemi-dot)"></span>
           <div class="comment-bubble"><span class="commenter">Noemi</span><p>crying bc it was so beautiful and I felt so much love being there</p></div>
         </div>
         <div class="proposal-comment">
-          <div class="comment-avatar" style="background:var(--c-isabele-dot);">I</div>
+          <span class="person-dot" style="background:var(--c-isabele-dot)"></span>
           <div class="comment-bubble"><span class="commenter">Isabele</span><p>overwhelmed with pride and love lol</p></div>
         </div>
         <div class="proposal-comment">
-          <div class="comment-avatar" style="background:var(--c-ashlyn-dot);">A</div>
+          <span class="person-dot" style="background:var(--c-ashlyn-dot)"></span>
           <div class="comment-bubble"><span class="commenter">Ashlyn</span><p>OH MY GOSH the most beautiful event to happen in my 2026 I love them so much and they deserve EVERYTHING and more ❤️</p></div>
         </div>
       </div>
@@ -1631,33 +1596,29 @@
   <h2>People worth celebrating</h2>
   <div class="spotlight-list">
     <div class="spotlight">
-      <div class="spotlight-avatar" style="background:var(--c-kiara-dot);">K</div>
       <div class="spotlight-body">
-        <h3>Kiara</h3>
+        <div class="spotlight-name-row"><span class="person-dot" style="background:var(--c-kiara-dot)"></span><h3>Kiara</h3></div>
         <p>"prettiest nails and cutest party favours" <span style="font-style:normal; color:var(--ink-faint); font-size:12px;">— Betel</span></p>
         <p style="margin-top:8px;">"for trying to get us to stay more connected with this newsletter" <span style="font-style:normal; color:var(--ink-faint); font-size:12px;">— Noemi</span></p>
         <p style="margin-top:8px;">"for thinking and creating this newsletter, this is so cool!!" <span style="font-style:normal; color:var(--ink-faint); font-size:12px;">— Ashlyn</span></p>
       </div>
     </div>
     <div class="spotlight">
-      <div class="spotlight-avatar" style="background:var(--c-ashlyn-dot);">A</div>
       <div class="spotlight-body">
-        <h3>Ashlyn</h3>
+        <div class="spotlight-name-row"><span class="person-dot" style="background:var(--c-ashlyn-dot)"></span><h3>Ashlyn</h3></div>
         <p>"for getting us champagne/soju (you knew champagne bloats me)" <span style="font-style:normal; color:var(--ink-faint); font-size:12px;">— Betel</span></p>
         <p style="margin-top:8px;">"at Betel's engagement she was a fully functioning human after a shift at work" <span style="font-style:normal; color:var(--ink-faint); font-size:12px;">— Isabele</span></p>
       </div>
     </div>
     <div class="spotlight">
-      <div class="spotlight-avatar" style="background:var(--c-isabele-dot);">I</div>
       <div class="spotlight-body">
-        <h3>Bele</h3>
+        <div class="spotlight-name-row"><span class="person-dot" style="background:var(--c-isabele-dot)"></span><h3>Bele</h3></div>
         <p>"you are doing so well at work, go easy on yourself on hard days" <span style="font-style:normal; color:var(--ink-faint); font-size:12px;">— Betel</span></p>
       </div>
     </div>
     <div class="spotlight">
-      <div class="spotlight-avatar" style="background:var(--c-noemi-dot);">N</div>
       <div class="spotlight-body">
-        <h3>Noemi</h3>
+        <div class="spotlight-name-row"><span class="person-dot" style="background:var(--c-noemi-dot)"></span><h3>Noemi</h3></div>
         <p>"I'm so proud of you!" <span style="font-style:normal; color:var(--ink-faint); font-size:12px;">— Betel</span></p>
       </div>
     </div>
